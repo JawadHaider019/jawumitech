@@ -114,23 +114,23 @@ export default function About() {
       
       <div className="flex flex-col lg:flex-row gap-16 items-center">
         {/* Founder Avatar & Social */}
-        <div className="flex-shrink-0 lg:w-2/5">
-          <div className="flex flex-col items-center">
-            <div className="relative mb-8 group">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#ADF802] to-[#8BC400] rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-              <div className="relative w-100 h-100 sm:w-80 sm:h-80 rounded-2xl bg-gradient-to-br from-[#ADF802] to-[#8BC400] flex items-center justify-center text-6xl font-bold text-black shadow-2xl shadow-[#ADF802]/30 overflow-hidden border-4 border-white/10">
-                <Image
-                  src="/founder.png"
-                  alt="Jawad Haider - Founder"
-                  width={256}
-                  height={256}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
+       <div className="flex-shrink-0 w-full lg:w-2/5">
+  <div className="flex flex-col items-center">
+    <div className="relative mb-6 lg:mb-8 group w-full max-w-xs sm:max-w-sm md:max-w-md">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#ADF802] to-[#8BC400] rounded-2xl lg:rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+      <div className="relative w-full aspect-square max-w-xs sm:max-w-sm md:max-w-md rounded-xl lg:rounded-2xl bg-gradient-to-br from-[#ADF802] to-[#8BC400] flex items-center justify-center text-4xl sm:text-5xl lg:text-6xl font-bold text-black shadow-xl lg:shadow-2xl shadow-[#ADF802]/30 overflow-hidden border-2 sm:border-3 lg:border-4 border-white/10">
+        <Image
+          src="/founder.png"
+          alt="Jawad Haider - Founder"
+          width={320}
+          height={320}
+          className="w-full h-full object-cover"
+          priority
+        />
+      </div>
+    </div>
+  </div>
+</div>
         {/* Founder Info */}
         <div className="flex-1 lg:w-3/5">
           <div className="mb-8">

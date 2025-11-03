@@ -118,7 +118,7 @@ export default function About() {
           <div className="flex flex-col items-center">
             <div className="relative mb-8 group">
               <div className="absolute inset-0 bg-gradient-to-br from-[#ADF802] to-[#8BC400] rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-              <div className="relative w-100 h-100 rounded-2xl bg-gradient-to-br from-[#ADF802] to-[#8BC400] flex items-center justify-center text-6xl font-bold text-black shadow-2xl shadow-[#ADF802]/30 overflow-hidden border-4 border-white/10">
+              <div className="relative w-100 h-100 sm:w-80 sm:h-80 rounded-2xl bg-gradient-to-br from-[#ADF802] to-[#8BC400] flex items-center justify-center text-6xl font-bold text-black shadow-2xl shadow-[#ADF802]/30 overflow-hidden border-4 border-white/10">
                 <Image
                   src="/founder.png"
                   alt="Jawad Haider - Founder"

@@ -58,7 +58,7 @@ export function Navbar() {
           {/* CTA Button */}
           <div className="hidden md:block">
                <a
-              href="https://wa.me/03205917168"
+              href="https://wa.me/923205917168"
               target="_blank"
               rel="noopener noreferrer"
              className="flex px-4 py-3 bg-[#ADF802] text-black font-semibold rounded-full text-center mt-4"
@@ -95,7 +95,7 @@ export function Navbar() {
             ))}
            
                       <a
-              href="https://wa.me/03205917168"
+              href="https://wa.me/923205917168"
               target="_blank"
               rel="noopener noreferrer"
              className="flex w-40 px-4 py-3 bg-[#ADF802] text-black font-semibold rounded-full text-center mt-4"

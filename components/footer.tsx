@@ -80,7 +80,7 @@ export function Footer() {
             <h3 className="font-semibold mb-4 text-[#ADF802]">Contact</h3>
             <div className="flex flex-col gap-4 text-sm text-gray-400">
              <p>jawadhaider@jawumitech.com</p>
-             <p>+923205917168</p>
+             <p>+923291927168</p>
             </div>
           </div>
         </div>

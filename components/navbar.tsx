@@ -56,7 +56,7 @@ export function Navbar() {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden md:block mb-5">
                <a
               href="https://wa.me/923291927168"
               target="_blank"

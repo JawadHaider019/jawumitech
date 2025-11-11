@@ -389,6 +389,11 @@ export default function Home() {
               role: "Organic Beauty Products Founder",
               text: "As someone who's not very tech-savvy, I was worried about managing an online store. But JawumiTech made it so simple - the admin panel they built lets me handle orders, track inventory, and communicate with customers all in one place. It just works.",
             },
+              {
+              name: "Muhammad Ahmad",
+  role: "Founder of Natural & Healthy Products",
+  text: "As someone focused on natural and healthy foods, I was worried about managing an online store. But JawumiTech made it so simple — the website and admin panel let me manage orders, track products, and connect with customers all in one place. It just works.",
+},
             {
               name: "Kevin Martinez",
               role: "Multi-store Owner",

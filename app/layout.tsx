@@ -72,6 +72,14 @@ export const metadata: Metadata = {
     canonical: "https://jawumitech.com",
   },
   category: "technology",
+  // Add Google verification here
+  verification: {
+    google: "c0876b0e7a2b01c2",
+  },
+  // Alternative method using other field
+  other: {
+    'google-site-verification': 'c0876b0e7a2b01c2',
+  }
 }
 
 export default function RootLayout({
@@ -82,6 +90,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        {/* Google Site Verification */}
+        <meta name="google-site-verification" content="c0876b0e7a2b01c2" />
+        
         {/* Preload critical resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

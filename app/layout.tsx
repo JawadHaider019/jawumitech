@@ -11,6 +11,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jawumitech.com'), // Added this line
   title: {
     default: "Jawumi Tech - Custom Software, Web & POS Development",
     template: "%s | Jawumi Tech"
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     description: "Professional software development services including web apps, POS systems, mobile apps, and custom business solutions.",
     images: [
       {
-        url: "/og-image.jpg", // Make sure this file exists in public folder
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Jawumi Tech - Software Development Services",
@@ -93,7 +94,6 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ADF802" />
         <meta name="msapplication-TileColor" content="#ADF802" />
-        {/* Removed browserconfig.xml - file doesn't exist */}
         
         {/* Structured Data for Software Development Company */}
         <script
@@ -105,7 +105,7 @@ export default function RootLayout({
               "name": "Jawumi Tech",
               "description": "Custom software development company specializing in web applications, POS systems, mobile apps, and business automation solutions.",
               "url": "https://jawumitech.com",
-              "logo": "https://jawumitech.com/logo.png", // Make sure this file exists
+              "logo": "https://jawumitech.com/logo.png",
               "founder": {
                 "@type": "Person",
                 "name": "Jawad Haider",

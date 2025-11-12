@@ -61,13 +61,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Jawumi Tech - Software Development Company",
-    description: "Custom software, web apps, POS systems, and mobile app development services.",
-    creator: "@jawumitech",
-    images: ["/og-image.jpg"],
-  },
   alternates: {
     canonical: "https://jawumitech.com",
   },

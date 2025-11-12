@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     description: "Professional software development services including web apps, POS systems, mobile apps, and custom business solutions.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.jpg", // Make sure this file exists in public folder
         width: 1200,
         height: 630,
         alt: "Jawumi Tech - Software Development Services",
@@ -65,7 +65,6 @@ export const metadata: Metadata = {
     canonical: "https://jawumitech.com",
   },
   category: "technology",
-  // REMOVED duplicate verification fields
 }
 
 export default function RootLayout({
@@ -76,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        {/* Google Site Verification - ONLY ONE INSTANCE */}
+        {/* Google Site Verification */}
         <meta name="google-site-verification" content="c0876b0e7a2b01c2" />
         
         {/* Preload critical resources */}
@@ -94,7 +93,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ADF802" />
         <meta name="msapplication-TileColor" content="#ADF802" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
+        {/* Removed browserconfig.xml - file doesn't exist */}
         
         {/* Structured Data for Software Development Company */}
         <script
@@ -106,14 +105,14 @@ export default function RootLayout({
               "name": "Jawumi Tech",
               "description": "Custom software development company specializing in web applications, POS systems, mobile apps, and business automation solutions.",
               "url": "https://jawumitech.com",
-              "logo": "https://jawumitech.com/logo.png",
+              "logo": "https://jawumitech.com/logo.png", // Make sure this file exists
               "founder": {
                 "@type": "Person",
                 "name": "Jawad Haider",
                 "jobTitle": "Founder & Developer",
                 "url": "https://jawumitech.com/about"
               },
-                            "contactPoint": {
+              "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+92-329-1927168",
                 "contactType": "customer service",

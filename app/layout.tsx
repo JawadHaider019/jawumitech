@@ -65,14 +65,7 @@ export const metadata: Metadata = {
     canonical: "https://jawumitech.com",
   },
   category: "technology",
-  // Add Google verification here
-  verification: {
-    google: "c0876b0e7a2b01c2",
-  },
-  // Alternative method using other field
-  other: {
-    'google-site-verification': 'c0876b0e7a2b01c2',
-  }
+  // REMOVED duplicate verification fields
 }
 
 export default function RootLayout({
@@ -83,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        {/* Google Site Verification */}
+        {/* Google Site Verification - ONLY ONE INSTANCE */}
         <meta name="google-site-verification" content="c0876b0e7a2b01c2" />
         
         {/* Preload critical resources */}
@@ -114,12 +107,13 @@ export default function RootLayout({
               "description": "Custom software development company specializing in web applications, POS systems, mobile apps, and business automation solutions.",
               "url": "https://jawumitech.com",
               "logo": "https://jawumitech.com/logo.png",
-              "sameAs": [
-                "https://twitter.com/jawumitech",
-                "https://linkedin.com/company/jawumitech",
-                "https://github.com/jawumitech"
-              ],
-              "contactPoint": {
+              "founder": {
+                "@type": "Person",
+                "name": "Jawad Haider",
+                "jobTitle": "Founder & Developer",
+                "url": "https://jawumitech.com/about"
+              },
+                            "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+92-329-1927168",
                 "contactType": "customer service",

@@ -1,0 +1,21 @@
+{
+  "name": "Jawumi Tech - Software Development",
+  "short_name": "Jawumi Tech",
+  "description": "Custom software solutions, web applications, POS systems, and mobile apps development",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ADF802",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

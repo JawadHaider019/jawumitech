@@ -117,12 +117,15 @@ export default function About() {
             <div className="absolute inset-0 bg-gradient-to-br from-[#ADF802] to-[#8BC400] rounded-2xl lg:rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
             <div className="relative w-full aspect-square rounded-xl lg:rounded-2xl bg-gradient-to-br from-[#ADF802] to-[#8BC400] flex items-center justify-center text-4xl lg:text-6xl font-bold text-black shadow-xl lg:shadow-2xl shadow-[#ADF802]/30 overflow-hidden border-2 sm:border-3 lg:border-4 border-white/10">
               <Image
-                src="/founder.png"
+                src="/founder.webp"
                 alt="Jawad Haider - Founder"
                 width={400}
                 height={400}
                 className="w-full h-full object-cover"
                 priority
+                loading="eager"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               />
             </div>
           </div>

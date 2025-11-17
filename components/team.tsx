@@ -6,27 +6,35 @@ import { ChevronLeft, ChevronRight, Star, Sparkles } from "lucide-react"
 
 const teamMembers = [
   {
+    name: "Jawad Haider",
+    position: "Founder / CEO",
+    image: "/team/jawadfounder.webp",
+    description: "Leads the vision and direction of the company while also contributing as a full stack developer. Guides the team, ensures technical standards, and focuses on building high-quality products.",
+    skills: ["Full Stack Development", "Team Leadership", "Product Strategy"]
+  },
+  {
     name: "Aqib Mansoor",
     position: "Full Stack Developer",
-    image: "/team/aqibdev.png",
-    description: "Specialized in building scalable web applications. Passionate about creating smooth user experiences and delivering high-quality projects.",
-    skills: ["React", "Node.js", "TypeScript", "AWS"]
+    image: "/team/aqibdev.webp",
+    description: "Specialized in building scalable web applications. Passionate about creating smooth user experiences and delivering reliable, high-quality projects.",
+    skills: ["Full Stack Development", "Web Applications", "UX Focus"]
   },
   {
     name: "Haseeb Ur Rehman",
     position: "Software Developer",
-    image: "/team/haseebdev.png",
-    description: "Experienced in developing custom software and business solutions. Focused on creating efficient and reliable applications that simplify operations.",
-    skills: ["Python", "Django", "PostgreSQL", "Docker"]
+    image: "/team/Haseebdev.webp",
+    description: "Develops custom software solutions and business applications. Focused on efficiency, reliability, and simplifying daily operations for clients.",
+    skills: ["Custom Software", "Business Applications", "System Integration"]
   },
   {
     name: "Muhammad Jamshaid",
     position: "Project Manager",
-    image: "/team/jamshaiddev.png",
-    description: "Skilled in managing projects and coordinating teams. Ensures timely delivery of high-quality work while keeping communication clear and organized.",
-    skills: ["Agile", "Scrum", "JIRA", "Team Leadership"]
+    image: "/team/jamshaidDev.webp",
+    description: "Manages projects from planning to delivery. Coordinates the team, ensures timely execution, and maintains clear communication with clients.",
+    skills: ["Agile", "Scrum", "Team Coordination", "Project Delivery"]
   }
 ]
+
 
 export function Team() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -91,14 +99,10 @@ export function Team() {
 
   return (
     <div className="relative mx-4 sm:mx-6 lg:mx-8 xl:mx-20 my-16 sm:my-24">
-   
-
       <div className="text-center mb-16 sm:mb-20 relative z-10">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#ADF802]/10 to-[#ADF802]/5 border border-[#ADF802]/20 mb-6 backdrop-blur-sm">
-          <div className="w-2 h-2 bg-[#ADF802] rounded-full" >
-          </div>
+          <div className="w-2 h-2 bg-[#ADF802] rounded-full"></div>
           <span className="text-[#ADF802] text-sm font-medium tracking-wide">MEET THE TEAM</span>
-          
         </div>
         
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent">
@@ -199,11 +203,16 @@ export function Team() {
                                   width={400}
                                   height={500}
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                  // Optimized loading props
+                                  priority={index === 0} // Load first image immediately
+                                  loading={index === 0 ? "eager" : "lazy"}
+                                  placeholder="blur"
+                                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                                 />
                                 
                                 {/* Overlay Content */}
                                 <div className="absolute bottom-0 left-0 right-0 p-0 z-30">
-                                  <div className="bg-gradient-to-t from-black/80 to-transparent p-4  backdrop-blur-sm">
+                                  <div className="bg-gradient-to-t from-black/80 to-transparent p-4 backdrop-blur-sm">
                                     <h3 className="text-xl lg:text-2xl font-bold text-white mb-2 group-hover:text-[#ADF802] transition-colors duration-300">
                                       {member.name}
                                     </h3>

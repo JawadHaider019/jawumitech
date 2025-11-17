@@ -4,8 +4,8 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import {  Target, Zap, Users, Code2, Shield, Rocket , Mail, Github, Linkedin, ExternalLink, GraduationCap, Award, Clock } from "lucide-react"
 import { StatsCounter } from "@/components/stats-counter"
-import { AnimatedDivider } from "@/components/animated-divider"
 import Image from "next/image"
+import { Team } from "@/components/team"
 
 export default function About() {
   const skills = [
@@ -52,9 +52,6 @@ export default function About() {
   },
 ]
 
-
-
-
   const technicalExpertise = [
     { category: "Frontend", technologies: "React, Next.js, TypeScript, Tailwind CSS, Vue.js" },
     { category: "Backend", technologies: "Node.js, Python, Express, FastAPI, REST & GraphQL" },
@@ -78,7 +75,7 @@ export default function About() {
         </div>
       </section>
 
-      <AnimatedDivider />
+  
 {/* Story Section */}
 <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   {/* Main Story */}
@@ -165,6 +162,8 @@ export default function About() {
   </div>
 </div>
 
+
+
   {/* Values */}
   <div className="mb-20">
     <div className="text-center mb-16">
@@ -194,6 +193,9 @@ export default function About() {
       })}
     </div>
   </div>
+
+{/* Team Section */}
+<Team/>
 
   {/* Skills */}
   <div className="mb-16">
@@ -259,7 +261,6 @@ export default function About() {
         </div>
       </section>
 
-      <AnimatedDivider />
 
       <Footer />
     </main>

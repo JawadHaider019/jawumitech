@@ -2,15 +2,26 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X ,ArrowRight} from "lucide-react"
+import { Menu, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     setIsMounted(true)
+    
+    // Check if mobile on mount and resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768) // md breakpoint
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   const navLinks = [
@@ -30,16 +41,29 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {/* Logo - Changes based on screen size */}
           <Link href="/" className="flex items-center gap-2 group">
-            <Image 
-              src="/logojt.png" 
-              alt="JG Logo" 
-              width={180} 
-              height={90}  
-              className="w-auto h-14 object-contain"  
-              priority
-            />
+            {isMounted && isMobile ? (
+              // Mobile logo
+              <Image 
+                src="/iconjt.png" 
+                alt="JG Logo" 
+                width={40} 
+                height={40}  
+                className="w-auto h-12 object-contain"  
+                priority
+              />
+            ) : (
+              // Desktop logo
+              <Image 
+                src="/logojt.png" 
+                alt="JG Logo" 
+                width={150} 
+                height={70}  
+                className="w-auto h-12 object-contain"  
+                priority
+              />
+            )}
           </Link>
 
           {/* Desktop Menu */}
@@ -57,15 +81,14 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:block mb-5">
-               <a
+            <a
               href="https://wa.me/923291927168"
               target="_blank"
               rel="noopener noreferrer"
-             className="flex px-4 py-3 bg-[#ADF802] text-black font-semibold rounded-full text-center mt-4"
+              className="flex px-4 py-3 bg-[#ADF802] text-black font-semibold rounded-full text-center mt-4"
             >
-            Lets Connect
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-               
+              Lets Connect
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
 
@@ -94,15 +117,14 @@ export function Navbar() {
               </Link>
             ))}
            
-                      <a
+            <a
               href="https://wa.me/923291927168"
               target="_blank"
               rel="noopener noreferrer"
-             className="flex w-40 px-4 py-3 bg-[#ADF802] text-black font-semibold rounded-full text-center mt-4"
+              className="flex w-40 px-4 py-3 bg-[#ADF802] text-black font-semibold rounded-full text-center mt-4"
             >
-            Lets Connect
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-               
+              Lets Connect
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         )}

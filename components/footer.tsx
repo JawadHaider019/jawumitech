@@ -13,9 +13,9 @@ export function Footer() {
                 <Image 
                   src="/logojt.png" 
                   alt="JG Logo" 
-                  width={180} 
-                  height={90}  
-                  className="w-auto h-14 object-contain"  
+                  width={150} 
+                  height={70}  
+                  className="w-auto h-12 object-contain"  
                   priority
                 />
               </Link>

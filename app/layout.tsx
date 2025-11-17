@@ -13,10 +13,10 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL('https://jawumitech.com'), // Added this line
   title: {
-    default: "Jawumi Tech - Custom Software, Web & POS Development",
-    template: "%s | Jawumi Tech"
+    default: "JawumiTech - Custom Software, Web & POS Development",
+    template: "%s | JawumiTech"
   },
-  description: "Jawumi Tech delivers custom software solutions, web applications, POS systems, and mobile apps. End-to-end development with modern tech stack for startups and enterprises.",
+  description: "JawumiTech delivers custom software solutions, web applications, POS systems, and mobile apps. End-to-end development with modern tech stack for startups and enterprises.",
   keywords: [
     "custom software development",
     "web application development", 
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     "digital transformation",
     "business automation"
   ],
-  authors: [{ name: "Jawumi Tech" }],
-  creator: "Jawumi Tech",
-  publisher: "Jawumi Tech",
+  authors: [{ name: "JawumiTech" }],
+  creator: "JawumiTech",
+  publisher: "JawumiTech",
   robots: {
     index: true,
     follow: true,
@@ -50,15 +50,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://jawumitech.com",
-    siteName: "Jawumi Tech",
-    title: "Jawumi Tech - Custom Software, Web & POS Development",
+    siteName: "JawumiTech",
+    title: "JawumiTech - Custom Software, Web & POS Development",
     description: "Professional software development services including web apps, POS systems, mobile apps, and custom business solutions.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Jawumi Tech - Software Development Services",
+        alt: "JawumiTech - Software Development Services",
       },
     ],
   },
@@ -102,7 +102,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "Jawumi Tech",
+              "name": "JawumiTech",
               "description": "Custom software development company specializing in web applications, POS systems, mobile apps, and business automation solutions.",
               "url": "https://jawumitech.com",
               "logo": "https://jawumitech.com/logo.png",

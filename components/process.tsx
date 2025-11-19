@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useRef } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import Link from "next/link"
@@ -6,6 +8,7 @@ const ProcessSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const leftSideRef = useRef<HTMLDivElement>(null);
   const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const leftContentRef = useRef<HTMLDivElement>(null);
 
   const processSteps = [
     { step: "01", title: "Understanding your needs", description: "We start by listening to your challenges and goals to identify your unique IT requirements." },
@@ -18,66 +21,103 @@ const ProcessSection = () => {
     stepsRef.current[index] = el;
   };
 
-useEffect(() => {
-  let ctx: any;
+  useEffect(() => {
+    let mounted = true;
+    let cleanup: (() => void) | undefined;
 
-  const initGSAP = async () => {
-    const gsapModule = await import('gsap');
-    const ScrollTriggerModule = await import('gsap/ScrollTrigger');
-    const gsap = gsapModule.default;
-    const ScrollTrigger = ScrollTriggerModule.default;
+    const initAnimations = async () => {
+      if (!mounted || !sectionRef.current) return;
 
-    gsap.registerPlugin(ScrollTrigger);
+      try {
+        const gsapModule = await import('gsap');
+        const ScrollTriggerModule = await import('gsap/ScrollTrigger');
+        
+        const gsap = gsapModule.gsap || gsapModule.default;
+        const ScrollTrigger = ScrollTriggerModule.ScrollTrigger || ScrollTriggerModule.default;
+        
+        if (!gsap || !ScrollTrigger) {
+          throw new Error('GSAP modules not found');
+        }
 
-    ctx = gsap.context(() => {
-      // Pin left side on desktop
-      if (window.innerWidth >= 1024) {
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=200%",
-          pin: leftSideRef.current,
-          pinSpacing: false,
-          anticipatePin: 1,
+        gsap.registerPlugin(ScrollTrigger);
+
+        const ctx = gsap.context(() => {
+          // Left content animation
+          if (leftContentRef.current) {
+            gsap.fromTo(leftContentRef.current,
+              { y: 30, opacity: 0 },
+              { 
+                y: 0, 
+                opacity: 1, 
+                duration: 0.6,
+                scrollTrigger: {
+                  trigger: leftContentRef.current,
+                  start: "top 85%",
+                  toggleActions: "play none none none"
+                }
+              }
+            );
+          }
+
+          // Pin left side on desktop only
+          if (window.innerWidth >= 1024 && leftSideRef.current) {
+            ScrollTrigger.create({
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom bottom",
+              pin: leftSideRef.current,
+              pinSpacing: false,
+              anticipatePin: 1,
+            });
+          }
+
+          // Steps animation
+          stepsRef.current.forEach((step, index) => {
+            if (!step) return;
+            gsap.fromTo(step,
+              { y: 40, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                delay: index * 0.1,
+                scrollTrigger: {
+                  trigger: step,
+                  start: "top 85%",
+                  toggleActions: "play none none none"
+                }
+              }
+            );
+          });
+        }, sectionRef);
+
+        cleanup = () => ctx.revert();
+
+      } catch (error) {
+        console.log('GSAP loading failed, using fallback animations');
+        // Fallback: show elements immediately
+        if (leftContentRef.current) {
+          leftContentRef.current.style.opacity = '1';
+          leftContentRef.current.style.transform = 'translateY(0)';
+        }
+        stepsRef.current.forEach(step => {
+          if (step) {
+            step.style.opacity = '1';
+            step.style.transform = 'translateY(0) scale(1)';
+          }
         });
       }
+    };
 
-      // Animate steps
-      stepsRef.current.forEach((step) => {
-        if (!step) return;
-        gsap.fromTo(step,
-          { opacity: 0, y: 80, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: step,
-              start: window.innerWidth < 768 ? "top 85%" : "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse",
-              invalidateOnRefresh: true,
-            }
-          }
-        );
-      });
-    }, sectionRef);
-
-    // Refresh ScrollTrigger on resize
-    const handleResize = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", handleResize);
+    // Initialize with delay
+    const timer = setTimeout(initAnimations, 100);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      ctx?.revert();
+      mounted = false;
+      clearTimeout(timer);
+      if (cleanup) cleanup();
     };
-  };
-
-  initGSAP();
-}, []);
-
+  }, []);
 
   return (
     <section ref={sectionRef} className="bg-black text-white relative overflow-hidden">
@@ -91,7 +131,7 @@ useEffect(() => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-0 flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-20">
         {/* Left Side - Sticky content */}
         <div ref={leftSideRef} className="lg:w-2/5 lg:sticky lg:top-0 lg:h-screen flex items-start lg:items-center py-8 sm:py-12 lg:py-0">
-          <div className="space-y-6 lg:space-y-8 w-full">
+          <div ref={leftContentRef} className="space-y-6 lg:space-y-8 w-full opacity-0">
             <h3 className="text-[#bff747] text-lg sm:text-xl font-bold">HOW IT WORK</h3>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
               Streamlining success through proven <span className="text-[#bff747]">process</span>
@@ -101,16 +141,14 @@ useEffect(() => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
-                             
-                              
-                               <Link
-                                              href="/contact"
-                                              className="px-8 py-4 bg-[#bff747] hover:bg-black text-black hover:text-[#bff747] font-semibold rounded-full border border-transparent hover:border-[#bff747] transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
-                                              Get Free Quote
-                                <FaArrowRight className="w-5 h-5" />
-                                            </Link>
-                              
-                            </div>
+              <Link
+                href="/contact"
+                className="px-8 py-4 bg-[#bff747] hover:bg-black text-black hover:text-[#bff747] font-semibold rounded-full border border-transparent hover:border-[#bff747] transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+              >
+                Get Free Quote
+                <FaArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -120,8 +158,7 @@ useEffect(() => {
             <div
               key={index}
               ref={(el) => addToRefs(el, index)}
-              className="min-h-[60vh] lg:h-screen flex items-center justify-center py-12 sm:py-16 lg:py-0"
-              style={{ opacity: 0, transform: 'translateY(80px) scale(0.95)' }}
+              className="min-h-[60vh] lg:h-screen flex items-center justify-center py-12 sm:py-16 lg:py-0 opacity-0"
             >
               <div className="w-full max-w-2xl space-y-4 lg:space-y-6">
                 <div className="text-[#bff747] text-base lg:text-lg font-semibold">STEP {step.step}</div>

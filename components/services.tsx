@@ -1,4 +1,6 @@
 // components/ServicesSection.tsx
+"use client"
+
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -83,81 +85,85 @@ const ServicesSection: React.FC = () => {
   };
 
   useEffect(() => {
-    let gsap: any;
-    let ScrollTrigger: any;
-
+    // Dynamic import to ensure GSAP loads properly
     const initAnimations = async () => {
-      if (typeof window === "undefined" || !sectionRef.current) return;
-
       try {
         const gsapModule = await import('gsap');
         const ScrollTriggerModule = await import('gsap/ScrollTrigger');
-        gsap = gsapModule.default || gsapModule;
-        ScrollTrigger = ScrollTriggerModule.default || ScrollTriggerModule;
+        
+        const gsap = gsapModule.default || gsapModule;
+        const ScrollTrigger = ScrollTriggerModule.default || ScrollTriggerModule;
+        
         gsap.registerPlugin(ScrollTrigger);
 
-        const ctx = gsap.context(() => {
-          // FASTER header animation
-          if (headerRef.current) {
-            gsap.fromTo(headerRef.current,
-              { opacity: 0, y: 30 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.6, // Faster
-                ease: "power2.out",
-                scrollTrigger: {
-                  trigger: headerRef.current,
-                  start: "top 85%", // Trigger earlier
-                  end: "bottom 60%",
-                  toggleActions: "play none none none"
-                }
+        // Check if all refs are available
+        if (!sectionRef.current) return;
+
+        // Header animation
+        if (headerRef.current) {
+          gsap.fromTo(headerRef.current,
+            { y: 30, opacity: 0 },
+            { 
+              y: 0, 
+              opacity: 1, 
+              duration: 0.6,
+              scrollTrigger: {
+                trigger: headerRef.current,
+                start: "top 85%",
+                toggleActions: "play none none none",
+                markers: false
               }
-            );
-          }
+            }
+          );
+        }
 
-          // FASTER card animations with better performance
-          cardsRef.current.forEach((card, index) => {
-            if (!card) return;
-            gsap.fromTo(card,
-              { 
-                opacity: 0, 
-                y: 40, // Less movement
-                scale: 0.98 
-              },
-              {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.5, // Much faster
-                ease: "power2.out",
-                delay: index * 0.05, // Reduced stagger
-                scrollTrigger: {
-                  trigger: card,
-                  start: window.innerWidth < 768 ? "top 95%" : "top 90%", // Earlier triggers
-                  end: "bottom 70%",
-                  toggleActions: "play none none none"
-                }
+        // Cards animation with stagger
+        cardsRef.current.forEach((card, index) => {
+          if (!card) return;
+          gsap.fromTo(card,
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.5,
+              delay: index * 0.05,
+              scrollTrigger: {
+                trigger: card,
+                start: "top 90%",
+                toggleActions: "play none none none",
+                markers: false
               }
-            );
-          });
-        }, sectionRef);
+            }
+          );
+        });
 
-        return () => ctx.revert();
-
-      } catch (err) {
-        console.error('GSAP failed to load', err);
-        // Fallback: show elements immediately
-        if (headerRef.current) headerRef.current.style.opacity = '1';
+      } catch (error) {
+        console.log('GSAP loading failed, using fallback animations');
+        // Immediate fallback animations
+        if (headerRef.current) {
+          headerRef.current.style.opacity = '1';
+          headerRef.current.style.transform = 'translateY(0)';
+        }
         cardsRef.current.forEach(card => {
-          if (card) card.style.opacity = '1';
+          if (card) {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }
         });
       }
     };
 
-    // Initialize with small delay
-    const timer = setTimeout(initAnimations, 50);
-    return () => clearTimeout(timer);
+    // Initialize animations with a small delay to ensure DOM is ready
+    const timer = setTimeout(initAnimations, 100);
+
+    // Cleanup function
+    return () => {
+      clearTimeout(timer);
+      // Clean up ScrollTrigger instances if they exist
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      }
+    };
   }, []);
 
   return (
@@ -206,7 +212,7 @@ const ServicesSection: React.FC = () => {
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    priority={index < 3} // Prioritize first 3 images
+                    priority={index < 3}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   

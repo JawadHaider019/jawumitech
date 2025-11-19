@@ -270,7 +270,7 @@ const Footer = () => {
                       'Mobile Applications', 
                       'UI/UX Design',
                       'Software Development',
-                      'Digital Transformation'
+                      'Maintenance Support'
                     ].map((service) => (
                       <li key={service}>
                         <a href="#" className="text-gray-300 hover:text-[#bff747] transition-all duration-300 flex items-center gap-2 group hover:translate-x-1 text-sm sm:text-base">

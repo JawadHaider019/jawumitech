@@ -73,7 +73,7 @@ const ServicesSection: React.FC = () => {
       id: 6,
       title: "SEO Optimization",
       description: "Comprehensive SEO strategies to boost visibility and drive organic traffic growth.",
-      image: "/Seo.png",
+      image: "/SEO.png",
       link: "/services/seo-optimization",
       icon: <FaSearch className="w-5 h-5 sm:w-6 sm:h-6" />
     }

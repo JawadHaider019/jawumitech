@@ -1,12 +1,22 @@
 "use client"
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const GlowingCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null)
+  const [isTouchDevice, setIsTouchDevice] = useState(true) // Start as true to avoid flash
 
   useEffect(() => {
-    if (!cursorRef.current) return
+    // Check if it's a touch device
+    const checkTouchDevice = () => {
+      return 'ontouchstart' in window || 
+             navigator.maxTouchPoints > 0 || 
+             (navigator as any).msMaxTouchPoints > 0
+    }
+
+    setIsTouchDevice(checkTouchDevice())
+
+    if (isTouchDevice || !cursorRef.current) return
 
     const moveCursor = (e: MouseEvent) => {
       if (cursorRef.current) {
@@ -69,10 +79,10 @@ const GlowingCursor = () => {
       document.removeEventListener('mouseout', handleMouseOut)
       document.body.style.cursor = 'auto'
     }
-  }, [])
+  }, [isTouchDevice])
 
-  // Don't render on touch devices
-  if (typeof window !== 'undefined' && 'ontouchstart' in window) {
+  // Don't render anything on touch devices
+  if (isTouchDevice) {
     return null
   }
 
@@ -94,10 +104,14 @@ const GlowingCursor = () => {
       />
 
       <style jsx global>{`
-        * {
-          cursor: none !important;
+        /* Only apply cursor none on non-touch devices */
+        @media (hover: hover) and (pointer: fine) {
+          * {
+            cursor: none !important;
+          }
         }
         
+        /* Ensure touch devices have normal cursor */
         @media (hover: none) and (pointer: coarse) {
           * {
             cursor: auto !important;
@@ -113,4 +127,4 @@ const GlowingCursor = () => {
   )
 }
 
-export default GlowingCursor
+export default GlowingCursorw

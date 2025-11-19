@@ -175,7 +175,7 @@ const Footer = () => {
         
         {/* Text Content */}
         <h1 ref={collaborateTextRef} className='text-xl md:text-2xl font-bold text-[#bff747] opacity-0'>LET'S COLLABORATE</h1>
-        <h1 className='text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[12rem] font-bold leading-tight md:leading-none px-2 sm:px-4 text-white'>
+        <h1 className='text-5xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[12rem] font-bold leading-tight md:leading-none px-2  text-white'>
           <span ref={workTextRef} className='inline-block opacity-0'>LET'S WORK</span>
           <br/>
           <span ref={togetherTextRef} className='inline-block opacity-0'>TOGETHER</span>

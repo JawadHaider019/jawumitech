@@ -322,8 +322,8 @@ const Footer = () => {
               </div>
 
               {/* Newsletter Section with Glass Effect */}
-              <div className="footer-element mb-8 sm:mb-12 backdrop-blur-md bg-black/15 p-4 sm:p-6 rounded-2xl opacity-0">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+              <div className="footer-element  backdrop-blur-md bg-black/15 p-4 rounded-2xl opacity-0">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                   <div className="mb-4 sm:mb-0">
                     <h3 className="text-xl sm:text-2xl font-semibold text-white">
                      Subscribe Our Newsletter:

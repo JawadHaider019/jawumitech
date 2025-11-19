@@ -127,4 +127,4 @@ const GlowingCursor = () => {
   )
 }
 
-export default GlowingCursorw
+export default GlowingCursor

@@ -6,6 +6,7 @@ import "./globals.css"
 
 import Footer  from "@/components/footer"
 import { Navbar } from "@/components/navbar"
+import GlowingCursor from "@/components/GlowingCursor"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -146,6 +147,7 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased bg-black text-white`} suppressHydrationWarning>
            <Navbar />
         {children}
+         <GlowingCursor />
         <Footer />
 
       </body>

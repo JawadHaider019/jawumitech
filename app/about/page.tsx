@@ -1,7 +1,6 @@
 "use client"
 
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+
 import {  Target, Zap, Users, Code2, Shield, Rocket , Mail, Github, Linkedin, ExternalLink, GraduationCap, Award, Clock } from "lucide-react"
 import { StatsCounter } from "@/components/stats-counter"
 import Image from "next/image"
@@ -63,13 +62,13 @@ export default function About() {
 
   return (
     <main className="bg-black">
-      <Navbar />
+
 
       {/* Hero */}
       <section className="min-h-[60vh] flex items-center justify-center pt-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            About <span className="text-[#ADF802]">JawumiTech</span>
+            About <span className="text-[#bff747]">JawumiTech</span>
           </h1>
           <p className="text-xl text-gray-400">Transforming ideas into digital realities since day one</p>
         </div>
@@ -80,9 +79,9 @@ export default function About() {
 <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   {/* Main Story */}
   <div className="text-center mb-20">
-    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ADF802]/10 border border-[#ADF802]/20 mb-6">
-      <span className="w-2 h-2 bg-[#ADF802] rounded-full animate-pulse"></span>
-      <span className="text-[#ADF802] text-sm font-medium">Our Journey</span>
+    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#bff747]/10 border border-[#bff747]/20 mb-6">
+      <span className="w-2 h-2 bg-[#bff747] rounded-full animate-pulse"></span>
+      <span className="text-[#bff747] text-sm font-medium">Our Journey</span>
     </div>
     <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
       Our Story
@@ -100,10 +99,10 @@ export default function About() {
 
 {/* Enhanced Founder Section */}
 <div className="mb-20 relative">
-  <div className="absolute inset-0 bg-gradient-to-r from-[#ADF802]/5 to-transparent rounded-3xl blur-3xl"></div>
+  <div className="absolute inset-0 bg-gradient-to-r from-[#bff747]/5 to-transparent rounded-3xl blur-3xl"></div>
   <div className="relative py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#2A2A2A] rounded-3xl shadow-2xl overflow-hidden">
     <div className="text-center mb-12 lg:mb-16">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-[#ADF802] to-[#8BC400] bg-clip-text text-transparent">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-[#bff747] to-[#8BC400] bg-clip-text text-transparent">
         Meet the Founder
       </h2>
       <p className="text-gray-400 text-lg sm:text-xl md:text-2xl">Founder & Full-Stack Developer</p>
@@ -114,8 +113,8 @@ export default function About() {
       <div className="flex-shrink-0 w-full lg:w-2/5 max-w-[280px] sm:max-w-xs md:max-w-sm mx-auto lg:mx-0">
         <div className="flex flex-col items-center">
           <div className="relative mb-6 lg:mb-8 group w-full">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ADF802] to-[#8BC400] rounded-2xl lg:rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-            <div className="relative w-full aspect-square rounded-xl lg:rounded-2xl bg-gradient-to-br from-[#ADF802] to-[#8BC400] flex items-center justify-center text-4xl lg:text-6xl font-bold text-black shadow-xl lg:shadow-2xl shadow-[#ADF802]/30 overflow-hidden border-2 sm:border-3 lg:border-4 border-white/10">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#bff747] to-[#8BC400] rounded-2xl lg:rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+            <div className="relative w-full aspect-square rounded-xl lg:rounded-2xl bg-gradient-to-br from-[#bff747] to-[#8BC400] flex items-center justify-center text-4xl lg:text-6xl font-bold text-black shadow-xl lg:shadow-2xl shadow-[#bff747]/30 overflow-hidden border-2 sm:border-3 lg:border-4 border-white/10">
               <Image
                 src="/founder.webp"
                 alt="Jawad Haider - Founder"
@@ -138,7 +137,7 @@ export default function About() {
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 lg:mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
             Jawad Haider
           </h3>
-          <p className="text-[#ADF802] font-semibold text-xl lg:text-2xl mb-4 lg:mb-6">Founder & Full-Stack Developer</p>
+          <p className="text-[#bff747] font-semibold text-xl lg:text-2xl mb-4 lg:mb-6">Founder & Full-Stack Developer</p>
           
           <div className="space-y-4 lg:space-y-6">
             <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
@@ -151,9 +150,9 @@ export default function About() {
         </div>
 
         {/* Current Focus */}
-        <div className="bg-gradient-to-r from-[#ADF802]/10 to-transparent border-l-4 border-[#ADF802] p-4 sm:p-6 rounded-r-xl hover:shadow-lg hover:shadow-[#ADF802]/10 transition-all duration-300">
-          <h4 className="font-bold text-lg sm:text-xl mb-2 sm:mb-3 text-[#ADF802] flex items-center gap-2 justify-center lg:justify-start">
-            <span className="w-2 h-2 bg-[#ADF802] rounded-full flex-shrink-0"></span>
+        <div className="bg-gradient-to-r from-[#bff747]/10 to-transparent border-l-4 border-[#bff747] p-4 sm:p-6 rounded-r-xl hover:shadow-lg hover:shadow-[#bff747]/10 transition-all duration-300">
+          <h4 className="font-bold text-lg sm:text-xl mb-2 sm:mb-3 text-[#bff747] flex items-center gap-2 justify-center lg:justify-start">
+            <span className="w-2 h-2 bg-[#bff747] rounded-full flex-shrink-0"></span>
             Current Focus & Vision
           </h4>
           <p className="text-gray-300 text-sm sm:text-base">
@@ -170,9 +169,9 @@ export default function About() {
   {/* Values */}
   <div className="mb-20">
     <div className="text-center mb-16">
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ADF802]/10 border border-[#ADF802]/20 mb-6">
-        <span className="w-2 h-2 bg-[#ADF802] rounded-full animate-pulse"></span>
-        <span className="text-[#ADF802] text-sm font-medium">What Drives Us</span>
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#bff747]/10 border border-[#bff747]/20 mb-6">
+        <span className="w-2 h-2 bg-[#bff747] rounded-full animate-pulse"></span>
+        <span className="text-[#bff747] text-sm font-medium">What Drives Us</span>
       </div>
       <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
         Our Values
@@ -184,12 +183,12 @@ export default function About() {
         return (
           <div
             key={index}
-            className="group p-8 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#1A1A1A] rounded-2xl hover:border-[#ADF802] hover:shadow-2xl hover:shadow-[#ADF802]/10 transition-all duration-500 hover:-translate-y-2"
+            className="group p-8 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#1A1A1A] rounded-2xl hover:border-[#bff747] hover:shadow-2xl hover:shadow-[#bff747]/10 transition-all duration-500 hover:-translate-y-2"
           >
-            <div className="mb-6 p-4 bg-[#ADF802]/10 rounded-2xl w-fit group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-              <Icon size={28} className="text-[#ADF802]" />
+            <div className="mb-6 p-4 bg-[#bff747]/10 rounded-2xl w-fit group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+              <Icon size={28} className="text-[#bff747]" />
             </div>
-            <h3 className="text-2xl font-bold mb-4 group-hover:text-[#ADF802] transition-colors">{value.title}</h3>
+            <h3 className="text-2xl font-bold mb-4 group-hover:text-[#bff747] transition-colors">{value.title}</h3>
             <p className="text-gray-400 leading-relaxed">{value.description}</p>
           </div>
         )
@@ -203,9 +202,9 @@ export default function About() {
   {/* Skills */}
   <div className="mb-16">
     <div className="text-center mb-16">
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ADF802]/10 border border-[#ADF802]/20 mb-6">
-        <span className="w-2 h-2 bg-[#ADF802] rounded-full animate-pulse"></span>
-        <span className="text-[#ADF802] text-sm font-medium">Our Expertise</span>
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#bff747]/10 border border-[#bff747]/20 mb-6">
+        <span className="w-2 h-2 bg-[#bff747] rounded-full animate-pulse"></span>
+        <span className="text-[#bff747] text-sm font-medium">Our Expertise</span>
       </div>
       <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
         Technical Skills
@@ -216,12 +215,12 @@ export default function About() {
         {skills.slice(0, 4).map((skill, index) => (
           <div key={index} className="group">
             <div className="flex justify-between items-center mb-4">
-              <span className="font-semibold text-lg group-hover:text-[#ADF802] transition-colors">{skill.name}</span>
-              <span className="text-[#ADF802] font-bold text-lg bg-[#ADF802]/10 px-3 py-1 rounded-full">{skill.percentage}%</span>
+              <span className="font-semibold text-lg group-hover:text-[#bff747] transition-colors">{skill.name}</span>
+              <span className="text-[#bff747] font-bold text-lg bg-[#bff747]/10 px-3 py-1 rounded-full">{skill.percentage}%</span>
             </div>
-            <div className="w-full bg-[#0A0A0A] rounded-full h-4 border border-[#1A1A1A] overflow-hidden group-hover:border-[#ADF802]/30 transition-colors">
+            <div className="w-full bg-[#0A0A0A] rounded-full h-4 border border-[#1A1A1A] overflow-hidden group-hover:border-[#bff747]/30 transition-colors">
               <div
-                className="bg-gradient-to-r from-[#ADF802] to-[#8BC400] h-4 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_15px_rgba(173,248,2,0.3)] relative"
+                className="bg-gradient-to-r from-[#bff747] to-[#8BC400] h-4 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_15px_rgba(173,248,2,0.3)] relative"
                 style={{ width: `${skill.percentage}%` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20 rounded-full"></div>
@@ -234,12 +233,12 @@ export default function About() {
         {skills.slice(4, 8).map((skill, index) => (
           <div key={index} className="group">
             <div className="flex justify-between items-center mb-4">
-              <span className="font-semibold text-lg group-hover:text-[#ADF802] transition-colors">{skill.name}</span>
-              <span className="text-[#ADF802] font-bold text-lg bg-[#ADF802]/10 px-3 py-1 rounded-full">{skill.percentage}%</span>
+              <span className="font-semibold text-lg group-hover:text-[#bff747] transition-colors">{skill.name}</span>
+              <span className="text-[#bff747] font-bold text-lg bg-[#bff747]/10 px-3 py-1 rounded-full">{skill.percentage}%</span>
             </div>
-            <div className="w-full bg-[#0A0A0A] rounded-full h-4 border border-[#1A1A1A] overflow-hidden group-hover:border-[#ADF802]/30 transition-colors">
+            <div className="w-full bg-[#0A0A0A] rounded-full h-4 border border-[#1A1A1A] overflow-hidden group-hover:border-[#bff747]/30 transition-colors">
               <div
-                className="bg-gradient-to-r from-[#ADF802] to-[#8BC400] h-4 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_15px_rgba(173,248,2,0.3)] relative"
+                className="bg-gradient-to-r from-[#bff747] to-[#8BC400] h-4 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_15px_rgba(173,248,2,0.3)] relative"
                 style={{ width: `${skill.percentage}%` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20 rounded-full"></div>
@@ -265,7 +264,7 @@ export default function About() {
       </section>
 
 
-      <Footer />
+
     </main>
   )
 }

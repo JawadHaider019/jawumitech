@@ -1,7 +1,5 @@
 "use client"
 
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
 import { Code, Smartphone, Palette, Zap, Wrench, ShoppingCart } from "lucide-react"
 
 export default function Services() {
@@ -49,13 +47,13 @@ export default function Services() {
 
   return (
     <main className="bg-black">
-      <Navbar />
+     
 
       {/* Hero */}
       <section className="min-h-[60vh] flex items-center justify-center pt-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Our <span className="text-[#ADF802]">Services</span>
+            Our <span className="text-[#bff747]">Services</span>
           </h1>
           <p className="text-xl text-gray-400">Comprehensive solutions tailored to your startup's needs</p>
         </div>
@@ -69,17 +67,17 @@ export default function Services() {
             return (
               <div
                 key={index}
-                className="group p-8 bg-[#0A0A0A] border border-[#1A1A1A] rounded-lg hover:border-[#ADF802] transition-all duration-300 hover:shadow-lg hover:shadow-[#ADF802]/20"
+                className="group p-8 bg-[#0A0A0A] border border-[#1A1A1A] rounded-lg hover:border-[#bff747] transition-all duration-300 hover:shadow-lg hover:shadow-[#bff747]/20"
               >
-                <div className="mb-6 p-4 bg-[#ADF802]/10 rounded-lg w-fit group-hover:bg-[#ADF802]/20 transition-colors">
-                  <Icon size={32} className="text-[#ADF802]" />
+                <div className="mb-6 p-4 bg-[#bff747]/10 rounded-lg w-fit group-hover:bg-[#bff747]/20 transition-colors">
+                  <Icon size={32} className="text-[#bff747]" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
                 <p className="text-gray-400 mb-6">{service.description}</p>
                 <ul className="space-y-2">
                   {service.features.map((feature, i) => (
                     <li key={i} className="text-sm text-gray-300 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-[#ADF802] rounded-full" />
+                      <span className="w-1.5 h-1.5 bg-[#bff747] rounded-full" />
                       {feature}
                     </li>
                   ))}
@@ -90,7 +88,7 @@ export default function Services() {
         </div>
       </section>
 
-      <Footer />
+
     </main>
   )
 }

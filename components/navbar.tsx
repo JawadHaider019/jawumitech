@@ -2,26 +2,36 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, ArrowRight } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { Menu, X, ArrowRight, MessageCircle } from "lucide-react"
 import Image from "next/image"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     setIsMounted(true)
     
-    // Check if mobile on mount and resize
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768) // md breakpoint
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
     }
+
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsOpen(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleResize)
     
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
-    return () => window.removeEventListener('resize', checkMobile)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   const navLinks = [
@@ -31,104 +41,148 @@ export function Navbar() {
     { href: "/contact", label: "Contact" },
   ]
 
-  // Prevent hydration mismatch by only showing mobile menu after mount
+  // Check if link is active
+  const isActiveLink = (href: string) => {
+    if (href === "/") {
+      return pathname === "/"
+    }
+    return pathname.startsWith(href)
+  }
+
   const showMobileMenu = isMounted && isOpen
 
   return (
     <nav
-      className="fixed w-full z-50 transition-all duration-300 
-       bg-black/80 backdrop-blur-md border-b border-[#1A1A1A]"
+      className={`fixed w-full z-50 transition-all duration-500 ${
+        isScrolled 
+          ? "bg-black/95 backdrop-blur-xl border-b border-gray-800/50 py-2" 
+          : "bg-transparent py-4"
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo - Changes based on screen size */}
-          <Link href="/" className="flex items-center gap-2 group">
-            {isMounted && isMobile ? (
-              // Mobile logo
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link 
+            href="/" 
+            className="flex items-center gap-1 group"
+            onClick={() => setIsOpen(false)}
+          >
+            <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
               <Image 
                 src="/iconjt.png" 
-                alt="JG Logo" 
-                width={40} 
-                height={40}  
-                className="w-auto h-12 object-contain"  
+                alt="Jawumitech Logo" 
+                fill
+                className="object-contain"
                 priority
               />
-            ) : (
-              // Desktop logo
-              <Image 
-                src="/logojt.png" 
-                alt="JG Logo" 
-                width={150} 
-                height={70}  
-                className="w-auto h-12 object-contain"  
-                priority
-              />
-            )}
+            </div>
+            <div className="hidden sm:block">
+              <h2 className="text-2xl font-bold text-white tracking-tight">
+                Jawumitech<span className="text-[#bff747]">.</span>
+              </h2>
+            </div>
           </Link>
 
-          {/* Desktop Menu */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-gray-300 hover:text-[#ADF802] transition-colors duration-300"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = isActiveLink(link.href)
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative text-sm font-medium transition-colors duration-300 group/nav-link ${
+                    isActive 
+                      ? "text-[#bff747] font-semibold" 
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                  <span 
+                    className={`absolute -bottom-1 left-0 h-0.5 transition-all duration-300 ${
+                      isActive 
+                        ? "w-full bg-[#bff747]" 
+                        : "w-0 bg-[#bff747] group-hover/nav-link:w-full"
+                    }`} 
+                  />
+                </Link>
+              )
+            })}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block mb-5">
+          {/* Desktop CTA Button */}
+          <div className="hidden md:flex items-center gap-4">
             <a
               href="https://wa.me/923291927168"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex px-4 py-3 bg-[#ADF802] text-black font-semibold rounded-full text-center mt-4"
+              className="group/cta px-6 py-3 bg-[#bff747] hover:bg-black text-black hover:text-[#bff747] font-semibold rounded-full border-2 border-transparent hover:border-[#bff747] transition-all duration-300 hover:scale-105 flex items-center gap-2 shadow-lg hover:shadow-[#bff747]/20"
             >
+             
               Lets Connect
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={18} className="transition-transform duration-300 group-hover/cta:translate-x-1" />
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
-            className="md:hidden text-[#ADF802]"
+            className="md:hidden p-2 rounded-lg  transition-colors duration-300"
             aria-label="Toggle menu"
             aria-expanded={isOpen}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? (
+              <X size={24} className="text-[#bff747]" />
+            ) : (
+              <Menu size={24} className="text-gray-300" />
+            )}
           </button>
         </div>
 
-        {/* Mobile Menu - Only render after client-side mount */}
+        {/* Mobile Menu */}
         {showMobileMenu && (
-          <div className="md:hidden pb-4 space-y-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="block px-4 py-2 text-gray-300 hover:text-[#ADF802] hover:bg-[#0A0A0A] rounded transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-           
+          <div className="md:hidden mt-4 pb-4 space-y-3 animate-in fade-in slide-in-from-top-5 duration-300">
+            {navLinks.map((link) => {
+              const isActive = isActiveLink(link.href)
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`block px-4 py-3 rounded-xl transition-all duration-300 border ${
+                    isActive
+                      ? "text-[#bff747] font-semibold bg-[#bff747]/10 border-[#bff747]/30"
+                      : "text-gray-300 hover:text-white hover:bg-gray-800/50 border-transparent hover:border-gray-700"
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
+            
+            {/* Mobile CTA Button */}
             <a
               href="https://wa.me/923291927168"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-40 px-4 py-3 bg-[#ADF802] text-black font-semibold rounded-full text-center mt-4"
+              className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-[#bff747] hover:bg-[#bff747]/90 text-black font-semibold rounded-xl transition-all duration-300 mt-4"
+              onClick={() => setIsOpen(false)}
             >
+             
               Lets Connect
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={18} />
             </a>
           </div>
         )}
       </div>
+
+      {/* Overlay for mobile menu */}
+      {showMobileMenu && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] md:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
     </nav>
   )
 }

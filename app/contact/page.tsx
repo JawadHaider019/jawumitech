@@ -2,8 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+
 import { Mail, Phone, MapPin, Send } from "lucide-react"
 import emailjs from '@emailjs/browser'
 
@@ -101,13 +100,13 @@ export default function Contact() {
 
   return (
     <main className="bg-black">
-      <Navbar />
+   
 
       {/* Hero */}
       <section className="min-h-[60vh] flex items-center justify-center pt-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Let's <span className="text-[#ADF802]">Talk</span>
+            Let's <span className="text-[#bff747]">Talk</span>
           </h1>
           <p className="text-xl text-gray-400">Ready to start your next project? Get in touch with us today.</p>
         </div>
@@ -122,8 +121,8 @@ export default function Contact() {
 
             <div className="flex gap-2 justify-between items-center space-y-6 mb-12">
               <div className="flex gap-4">
-                <div className="p-3 bg-[#ADF802]/10 rounded-lg h-fit">
-                  <Mail size={24} className="text-[#ADF802]" />
+                <div className="p-3 bg-[#bff747]/10 rounded-lg h-fit">
+                  <Mail size={24} className="text-[#bff747]" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
@@ -132,8 +131,8 @@ export default function Contact() {
               </div>
 
               <div className="flex gap-4">
-                <div className="p-3 bg-[#ADF802]/10 rounded-lg h-fit">
-                  <Phone size={24} className="text-[#ADF802]" />
+                <div className="p-3 bg-[#bff747]/10 rounded-lg h-fit">
+                  <Phone size={24} className="text-[#bff747]" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Phone</h3>
@@ -142,8 +141,8 @@ export default function Contact() {
               </div>
 
               <div className="flex gap-4">
-                <div className="p-3 bg-[#ADF802]/10 rounded-lg h-fit">
-                  <MapPin size={24} className="text-[#ADF802]" />
+                <div className="p-3 bg-[#bff747]/10 rounded-lg h-fit">
+                  <MapPin size={24} className="text-[#bff747]" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Location</h3>
@@ -166,7 +165,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded focus:border-[#ADF802] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded focus:border-[#bff747] focus:outline-none transition-colors"
                   placeholder="Your name"
                 />
               </div>
@@ -179,7 +178,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded focus:border-[#ADF802] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded focus:border-[#bff747] focus:outline-none transition-colors"
                   placeholder="your@email.com"
                 />
               </div>
@@ -192,7 +191,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded focus:border-[#ADF802] focus:outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded focus:border-[#bff747] focus:outline-none transition-colors resize-none"
                   placeholder="Tell us about your project..."
                 />
               </div>
@@ -206,7 +205,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-[#ADF802] text-black font-bold rounded hover:shadow-lg hover:shadow-[#ADF802]/50 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 bg-[#bff747] text-black font-bold rounded hover:shadow-lg hover:shadow-[#bff747]/50 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
@@ -222,7 +221,7 @@ export default function Contact() {
               </button>
 
               {submitted && (
-                <div className="p-4 bg-[#ADF802]/10 border border-[#ADF802] rounded text-[#ADF802] text-center">
+                <div className="p-4 bg-[#bff747]/10 border border-[#bff747] rounded text-[#bff747] text-center">
                   ✅ Thanks for reaching out! We'll get back to you soon.
                 </div>
               )}
@@ -233,7 +232,7 @@ export default function Contact() {
                 Form not working?{" "}
                 <a 
                   href="mailto:support@jawumitech.com" 
-                  className="text-[#ADF802] hover:underline"
+                  className="text-[#bff747] hover:underline"
                 >
                   Click here to email us directly
                 </a>
@@ -243,7 +242,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <Footer />
+
     </main>
   )
 }

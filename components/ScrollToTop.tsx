@@ -16,27 +16,21 @@ const ScrollToTop = () => {
   }, []);
 
   const scrollToTop = () => {
-    const scrollStep = -window.scrollY / (500 / 15);
-    
-    const scrollAnimation = () => {
-      if (window.scrollY !== 0) {
-        window.scrollBy(0, scrollStep);
-        requestAnimationFrame(scrollAnimation);
-      }
-    };
-    
-    requestAnimationFrame(scrollAnimation);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-50">
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="bg-[#ADF802] text-black p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-[#ADF802]/40 focus:outline-none focus:ring-2 focus:ring-[#ADF802] focus:ring-opacity-50"
+          className="bg-[#bff747] text-black p-3 sm:p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-[#bff747]/40 focus:outline-none focus:ring-2 focus:ring-[#bff747] focus:ring-opacity-50"
           aria-label="Scroll to top"
         >
-          <FaArrowUp size={20} />
+          <FaArrowUp size={16} className="sm:w-5 sm:h-5" />
         </button>
       )}
     </div>

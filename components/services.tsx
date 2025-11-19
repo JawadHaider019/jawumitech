@@ -53,22 +53,23 @@ const ServicesSection: React.FC = () => {
       link: "/services/web-development",
       icon: <FaLaptopCode className="w-5 h-5 sm:w-6 sm:h-6" />
     },
-    {
+     {
       id: 4,
-      title: "IT Project Management",
-      description: "End-to-end project management ensuring timely delivery within budget constraints.",
-      image: "/IT.png",
-      link: "/services/it-project-management",
-      icon: <FaProjectDiagram className="w-5 h-5 sm:w-6 sm:h-6" />
-    },
-    {
-      id: 5,
       title: "IT Maintenance",
       description: "Proactive maintenance and support to keep your systems running smoothly 24/7.",
       image: "/maintain.png",
       link: "/services/digital-transformation",
       icon: <FaDigitalTachograph className="w-5 h-5 sm:w-6 sm:h-6" />
     },
+    {
+      id: 5,
+      title: "IT Project Management",
+      description: "End-to-end project management ensuring timely delivery within budget constraints.",
+      image: "/IT.png",
+      link: "/services/it-project-management",
+      icon: <FaProjectDiagram className="w-5 h-5 sm:w-6 sm:h-6" />
+    },
+   
     {
       id: 6,
       title: "SEO Optimization",

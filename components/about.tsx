@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react"
 import { Check, ArrowRight, TrendingUp, Users, Target } from "lucide-react"
 import Link from "next/link"
 
-export function About() {
+export function AboutSection() {
   const [activeStat, setActiveStat] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
@@ -165,7 +165,7 @@ export function About() {
             Innovating technology
           </h1>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-            ABOUT <span className="text-[#bff747]">COMPANY</span>
+            ABOUT <span className="text-[#bff747]">JAWUMITECH</span>
           </h2>
         </div>
 

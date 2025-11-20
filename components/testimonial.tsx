@@ -2,14 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaStar, FaArrowRight } from 'react-icons/fa';
-
-// Register ScrollTrigger plugin
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface Testimonial {
   id: number;
@@ -21,9 +14,10 @@ interface Testimonial {
 }
 
 const Testimonials: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [reviewsCount, setReviewsCount] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const testimonials: Testimonial[] = [
@@ -40,8 +34,7 @@ const Testimonials: React.FC = () => {
       id: 2,
       name: "Muhammad Ahmad",
       position: "Founder",
-      image:
-        "https://demo.awaikenthemes.com/artistics/it-company/wp-content/uploads/2025/01/author-2.jpg",
+      image: "https://demo.awaikenthemes.com/artistics/it-company/wp-content/uploads/2025/01/author-2.jpg",
       content:
         "“Running a business that focuses on natural foods means I already have a lot on my plate. The website JawumiTech delivered made my life so much easier. Managing products, tracking orders, and updating content is now effortless. It feels like the tech finally supports the business — not the other way around.”",
       rating: 5
@@ -57,24 +50,75 @@ const Testimonials: React.FC = () => {
     }
   ];
 
+  // Animation useEffect
   useEffect(() => {
-    let startTimestamp: number | null = null;
-    const duration = 2000;
-    const startValue = 0;
-    const endValue = 1200;
+    const initAnimations = async () => {
+      try {
+        const gsapModule = await import('gsap');
+        const ScrollTriggerModule = await import('gsap/ScrollTrigger');
+        
+        const gsap = gsapModule.default || gsapModule;
+        const ScrollTrigger = ScrollTriggerModule.default || ScrollTriggerModule;
+        
+        gsap.registerPlugin(ScrollTrigger);
 
-    const animateCounter = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const value = Math.floor(progress * (endValue - startValue) + startValue);
-      setReviewsCount(value);
+        if (!sectionRef.current) return;
 
-      if (progress < 1) {
-        requestAnimationFrame(animateCounter);
+        // Header animation
+        if (headerRef.current) {
+          gsap.fromTo(headerRef.current,
+            { y: 30, opacity: 0 },
+            { 
+              y: 0, 
+              opacity: 1, 
+              duration: 0.6,
+              scrollTrigger: {
+                trigger: headerRef.current,
+                start: "top 85%",
+                toggleActions: "play none none none",
+                markers: false
+              }
+            }
+          );
+        }
+
+        // Cards animation
+        cardsRef.current.forEach((card, index) => {
+          if (!card) return;
+          gsap.fromTo(card,
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              delay: index * 0.1,
+              scrollTrigger: {
+                trigger: card,
+                start: "top 85%",
+                toggleActions: "play none none none",
+                markers: false
+              }
+            }
+          );
+        });
+
+      } catch (error) {
+        console.log('GSAP loading failed, using fallback animations');
+        if (headerRef.current) {
+          headerRef.current.style.opacity = '1';
+          headerRef.current.style.transform = 'translateY(0)';
+        }
+        cardsRef.current.forEach(card => {
+          if (card) {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }
+        });
       }
     };
 
-    requestAnimationFrame(animateCounter);
+    const timer = setTimeout(initAnimations, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -86,36 +130,6 @@ const Testimonials: React.FC = () => {
 
     return () => clearInterval(interval);
   }, [isAutoPlaying, testimonials.length]);
-
-  // Simple animation that won't conflict with slides
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Simple fade up for the entire section
-      gsap.fromTo(sectionRef.current, 
-        {
-          y: 50,
-          opacity: 0.9
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none none",
-          }
-        }
-      );
-
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const nextSlide = useCallback(() => {
     setIsAutoPlaying(false);
@@ -134,11 +148,11 @@ const Testimonials: React.FC = () => {
 
   const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
     return (
-      <div className="flex justify-start items-start gap-1 mb-4 md:mb-6">
+      <div className="flex justify-start items-start gap-1 mb-4">
         {[...Array(5)].map((_, index) => (
           <FaStar 
             key={index}
-            className={`w-4 h-4 md:w-5 md:h-5 ${index < rating ? 'text-[#bff747]' : 'text-gray-400'}`}
+            className={`w-4 h-4 ${index < rating ? 'text-[#bff747]' : 'text-gray-400'}`}
             fill="currentColor"
           />
         ))}
@@ -146,121 +160,143 @@ const Testimonials: React.FC = () => {
     );
   };
 
+  // Add ref to cards array
+  const addToCardsRefs = (el: HTMLDivElement | null, index: number) => {
+    cardsRef.current[index] = el;
+  };
+
   return (
-    <div 
-      ref={sectionRef} 
-      className="bg-black text-white py-16 md:py-20 relative overflow-hidden"
-    >
+    <section ref={sectionRef} className="relative py-12 sm:py-16 lg:py-20 bg-black text-white overflow-x-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 right-4 md:right-20 w-48 h-48 md:w-72 md:h-72 bg-[#bff747]/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-4 md:left-20 w-48 h-48 md:w-72 md:h-72 bg-[#bff747]/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 right-10 sm:top-20 sm:right-20 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/10 rounded-full blur-2xl sm:blur-3xl"></div>
+        <div className="absolute bottom-10 left-10 sm:bottom-20 sm:left-20 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/10 rounded-full blur-2xl sm:blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/5 rounded-full blur-2xl sm:blur-3xl"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="mb-12 md:mb-16 text-center w-full">
-          <h3 className="text-[#bff747] text-lg md:text-xl font-bold mb-3 md:mb-4 uppercase tracking-wider">
-            TESTIMONIALS
-          </h3>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-            What our <span className="text-[#bff747]">client</span> says
+        {/* Header */}
+        <div ref={headerRef} className="text-center mb-12 sm:mb-16 opacity-0">
+          <h1 className='text-base sm:text-lg mb-4 sm:mb-5 md:text-xl font-bold text-[#bff747] uppercase'>
+            Client testimonials
+          </h1>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
+            WHAT OUR <span className="text-[#bff747]">CLIENTS</span> SAY
           </h2>
+          <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto px-4">
+            Don't just take our word for it. Here's what our clients have to say about their experience working with us.
+          </p>
         </div>
 
         {/* Testimonials Container */}
-        <div className="w-full">
+        <div className="relative max-w-6xl mx-auto">
+          {/* Testimonial Cards */}
           <div className="relative">
-            {/* Testimonials Slides */}
-            <div className="relative">
-              {testimonials.map((testimonial, index) => (
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={testimonial.id}
+                ref={(el) => addToCardsRefs(el, index)}
+                className={`transition-all duration-500 ease-in-out ${
+                  index === currentSlide 
+                    ? 'opacity-100 scale-100 translate-x-0 block' 
+                    : 'opacity-0 scale-95 translate-x-10 hidden'
+                } opacity-0`}
+              >
                 <div 
-                  key={testimonial.id}
-                  className={`transition-all duration-500 ease-in-out ${
-                    index === currentSlide 
-                      ? 'opacity-100 scale-100 translate-x-0 block' 
-                      : 'opacity-0 scale-95 translate-x-10 hidden'
-                  }`}
+                  className="bg-[#0b0b0b] backdrop-blur-xl rounded-2xl border border-gray-800 hover:border-[#bff747]/30 transition-all duration-300 hover:-translate-y-2 overflow-hidden hover:shadow-2xl hover:shadow-[#bff747]/20 p-6 sm:p-8 lg:p-12 relative"
+                  onMouseEnter={() => setIsAutoPlaying(false)}
+                  onMouseLeave={() => setIsAutoPlaying(true)}
                 >
-                  <div 
-                    className="bg-[#0b0b0b] backdrop-blur-xl rounded-2xl border border-white/10 p-6 md:p-8 lg:p-12 relative overflow-hidden"
-                    onMouseEnter={() => setIsAutoPlaying(false)}
-                    onMouseLeave={() => setIsAutoPlaying(true)}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#bff747]/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
-                    
-                    <div className="relative z-10">
-                      <StarRating rating={testimonial.rating} />
+                  {/* Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#bff747]/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                  
+                  <div className="relative z-10">
+                    <StarRating rating={testimonial.rating} />
 
-                      <div className="mb-6 md:mb-8">
-                        <p className="text-gray-300 text-base md:text-lg lg:text-xl leading-relaxed">
-                          {testimonial.content}
-                        </p>
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-300 text-base sm:text-lg lg:text-xl leading-relaxed">
+                        {testimonial.content}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <div className="flex-shrink-0">
+                        <Image
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          width={60}
+                          height={60}
+                          className="rounded-full object-cover border-2 border-[#bff747] w-12 h-12 sm:w-14 sm:h-14"
+                        />
                       </div>
-
-                      <div className="flex items-center gap-4">
-                        <div className="flex-shrink-0">
-                          <Image
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                            width={50}
-                            height={50}
-                            className="rounded-full object-cover border-2 border-[#bff747] w-12 h-12 md:w-14 md:h-14"
-                          />
+                      <div>
+                        <div className="text-white font-bold text-lg sm:text-xl">
+                          {testimonial.name}
                         </div>
-                        <div>
-                          <div className="text-white font-bold text-lg md:text-xl">
-                            {testimonial.name}
-                          </div>
-                          <div className="text-[#bff747] text-xs md:text-sm">
-                            {testimonial.position}
-                          </div>
+                        <div className="text-[#bff747] text-sm">
+                          {testimonial.position}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Controls */}
+          <div className='flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 sm:mt-12'>
+            <div className="flex justify-center gap-2 order-2 sm:order-1">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                    index === currentSlide 
+                      ? 'bg-[#bff747] scale-125 shadow-lg shadow-[#bff747]/40' 
+                      : 'bg-gray-600 hover:bg-gray-400 hover:scale-110'
+                  }`}
+                />
               ))}
             </div>
-
-            {/* Navigation Controls */}
-            <div className='flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 md:mt-8 px-2'>
-              <div className="flex justify-center gap-2 order-2 sm:order-1">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
-                      index === currentSlide 
-                        ? 'bg-[#bff747] scale-125' 
-                        : 'bg-white/30 hover:bg-white/50'
-                    }`}
-                  />
-                ))}
-              </div>
+            
+            <div className="flex justify-center sm:justify-end items-center gap-3 sm:gap-4 order-1 sm:order-2">
+              <button
+                onClick={prevSlide}
+                className="w-10 h-10 sm:w-12 sm:h-12 bg-[#0b0b0b] border border-gray-800 hover:border-[#bff747] rounded-full flex items-center justify-center text-white hover:text-[#bff747] transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#bff747]/20"
+                aria-label="Previous testimonial"
+              >
+                <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5 rotate-180" />
+              </button>
               
-              <div className="flex justify-center sm:justify-end items-center gap-3 md:gap-4 order-1 sm:order-2">
-                <button
-                  onClick={prevSlide}
-                  className="w-10 h-10 md:w-12 md:h-12 bg-[#0b0b0b] border border-white/10 rounded-full flex items-center justify-center text-white hover:text-[#bff747] hover:border-[#bff747] transition-all duration-300 hover:scale-110"
-                  aria-label="Previous testimonial"
-                >
-                  <FaArrowRight className="w-4 h-4 md:w-5 md:h-5 rotate-180" />
-                </button>
-                
-                <button
-                  onClick={nextSlide}
-                  className="w-10 h-10 md:w-12 md:h-12 bg-[#0b0b0b] border border-white/10 rounded-full flex items-center justify-center text-white hover:text-[#bff747] hover:border-[#bff747] transition-all duration-300 hover:scale-110"
-                  aria-label="Next testimonial"
-                >
-                  <FaArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-                </button>
-              </div>
+              <button
+                onClick={nextSlide}
+                className="w-10 h-10 sm:w-12 sm:h-12 bg-[#0b0b0b] border border-gray-800 hover:border-[#bff747] rounded-full flex items-center justify-center text-white hover:text-[#bff747] transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#bff747]/20"
+                aria-label="Next testimonial"
+              >
+                <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Background Animated Elements */}
+      <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-16 h-16 sm:w-24 sm:h-24 bg-[#bff747]/10 rounded-full rotate-12 animate-float blur-xl sm:blur-2xl"></div>
+      <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-14 h-14 sm:w-20 sm:h-20 bg-[#bff747]/10 rounded-full -rotate-12 animate-float delay-1000 blur-lg sm:blur-xl"></div>
+      <div className="absolute top-1/2 left-1/4 w-16 h-16 sm:w-24 sm:h-24 bg-[#bff747]/10 rounded-full rotate-12 animate-float delay-500 blur-xl sm:blur-2xl"></div>
+
+      {/* Custom Animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(12deg); }
+          50% { transform: translateY(-10px) rotate(12deg); }
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+      `}</style>
+    </section>
   );
 };
 

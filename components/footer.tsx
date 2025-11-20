@@ -151,7 +151,7 @@ const Footer = () => {
       {/* Collaboration Section */}
       <section 
         ref={collaborationRef}
-        className='pb-20 border-b border-gray-400 relative flex items-center justify-center flex-col gap-6 md:gap-8 text-center bg-black min-h-screen px-4'
+        className='overflow-x-hidden pb-20 border-b border-gray-400 relative flex items-center justify-center flex-col gap-6 md:gap-8 text-center bg-black min-h-screen px-4'
       >
         {/* Animated background elements */}
         <div className="absolute bottom-20 left-4 sm:left-10 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/10 rounded-full blur-3xl animate-pulse" />

@@ -15,7 +15,7 @@ import TechStack from '@/components/techstack'
 import WhyChooseUs from '@/components/whyus'
 import Hero from '@/components/Hero'
 import Marquee from '@/components/Marquee'
-import {About} from '@/components/about'
+import {AboutSection} from '@/components/about'
 import ScrollToTop from '@/components/ScrollToTop'
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
     <>
       <Hero/>
      <Marquee/>
-     <About/>
+     <AboutSection/>
      <AnimatedDivider />
       <ServicesSection />
       <AnimatedDivider />

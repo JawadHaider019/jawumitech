@@ -4,9 +4,10 @@ import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
 import "./globals.css"
 
-import Footer  from "@/components/footer"
+import Footer from "@/components/footer"
 import { Navbar } from "@/components/navbar"
 import GlowingCursor from "@/components/GlowingCursor"
+import DebugOverflow from "@/components/DebugOverflow"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,17 +18,16 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL('https://jawumitech.com'), // Added this line
   title: {
-    default: "JawumiTech - Custom Software, Web & POS Development",
+    default: "JawumiTech IT Company",
     template: "%s | JawumiTech"
   },
-  description: "JawumiTech delivers custom software solutions, web applications, POS systems, and mobile apps. End-to-end development with modern tech stack for startups and enterprises.",
+  description: "JawumiTech delivers custom software solutions, web applications and mobile apps. End-to-end development with modern tech stack for startups and enterprises.",
   keywords: [
-    "custom software development",
-    "web application development", 
-    "POS system development",
-    "mobile app development", 
+    "software development",
+    "web application development",
+    "mobile app development",
     "ecommerce solutions",
-    "startup development", 
+    "startup development",
     "react development",
     "next.js development",
     "node.js development",
@@ -82,11 +82,11 @@ export default function RootLayout({
       <head>
         {/* Google Site Verification */}
         <meta name="google-site-verification" content="c0876b0e7a2b01c2" />
-        
+
         {/* Preload critical resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        
+
         {/* Comprehensive Favicon Setup */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -96,9 +96,9 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#ADF802" />
-        <meta name="msapplication-TileColor" content="#ADF802" />
-        
+        <meta name="theme-color" content="#bff747" />
+        <meta name="msapplication-TileColor" content="#bff747" />
+
         {/* Structured Data for Software Development Company */}
         <script
           type="application/ld+json"
@@ -125,7 +125,7 @@ export default function RootLayout({
               },
               "knowsAbout": [
                 "Web Development",
-                "Mobile App Development", 
+                "Mobile App Development",
                 "POS Systems",
                 "E-commerce Solutions",
                 "Custom Software",
@@ -145,11 +145,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`${poppins.className} antialiased bg-black text-white`} suppressHydrationWarning>
-           <Navbar />
-        {children}
-         <GlowingCursor />
-        <Footer />
 
+          <Navbar />
+          {children}
+          <GlowingCursor />
+          <Footer />
+    
       </body>
     </html>
   )

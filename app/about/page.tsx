@@ -1,270 +1,256 @@
 "use client"
 
+import { useEffect, useRef } from 'react';
+import { 
+  Target, 
+  Zap, 
+  Users, 
+  Code2, 
+  Shield, 
+  Rocket,
 
-import {  Target, Zap, Users, Code2, Shield, Rocket , Mail, Github, Linkedin, ExternalLink, GraduationCap, Award, Clock } from "lucide-react"
-import { StatsCounter } from "@/components/stats-counter"
-import Image from "next/image"
-import { Team } from "@/components/team"
+} from "lucide-react"
+import {Team} from '@/components/team'
+import Hero from '@/components/HeroSection';
+import LeftRight from '@/components/LeftRight';
+import {AboutSection} from '@/components/about';
+import FounderSection from '@/components/FounderSection';
+import TechStack from '@/components/techstack';
+import Marquee from '@/components/Marquee';
 
-export default function About() {
-  const skills = [
-    { name: "Frontend Development", percentage: 95 },
-    { name: "Backend Development", percentage: 90 },
-    { name: "Mobile App Development", percentage: 85 },
-    { name: "UI/UX Design", percentage: 88 },
-    { name: "POS Software Development", percentage: 80 },
-    { name: "Database Design", percentage: 92 },
-    { name: "API Development", percentage: 94 },
-    { name: "AI Integration", percentage: 75 },
+const About = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const leftSideRef = useRef<HTMLDivElement>(null);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const leftContentRef = useRef<HTMLDivElement>(null);
+
+
+  const values = [
+    {
+      icon: Target,
+      title: "Mission-Driven",
+      description: "We focus on your success and growth.",
+    },
+    {
+      icon: Zap,
+      title: "Innovation First",
+      description: "Always exploring cutting-edge technologies to stay ahead.",
+    },
+    {
+      icon: Users,
+      title: "Collaboration",
+      description: "Your vision, our expertise — building together as partners.",
+    },
+    {
+      icon: Code2,
+      title: "Quality Code",
+      description: "Clean, maintainable, and scalable solutions built to last.",
+    },
+    {
+      icon: Shield,
+      title: "Integrity",
+      description: "We value honesty, transparency, and trust in every project.",
+    },
+    {
+      icon: Rocket,
+      title: "Continuous Growth",
+      description: "Constantly learning, improving, and evolving with technology.",
+    },
   ]
-
- const values = [
-  {
-    icon: Target,
-    title: "Mission-Driven",
-    description: "We focus on your success and growth.",
-  },
-  {
-    icon: Zap,
-    title: "Innovation First",
-    description: "Always exploring cutting-edge technologies to stay ahead.",
-  },
-  {
-    icon: Users,
-    title: "Collaboration",
-    description: "Your vision, our expertise — building together as partners.",
-  },
-  {
-    icon: Code2,
-    title: "Quality Code",
-    description: "Clean, maintainable, and scalable solutions built to last.",
-  },
-  {
-    icon: Shield,
-    title: "Integrity",
-    description: "We value honesty, transparency, and trust in every project.",
-  },
-  {
-    icon: Rocket,
-    title: "Continuous Growth",
-    description: "Constantly learning, improving, and evolving with technology.",
-  },
-]
-
-  const technicalExpertise = [
-    { category: "Frontend", technologies: "React, Next.js, TypeScript, Tailwind CSS, Vue.js" },
-    { category: "Backend", technologies: "Node.js, Python, Express, FastAPI, REST & GraphQL" },
-    { category: "Mobile", technologies: "React Native, Flutter, iOS & Android Development" },
-    { category: "Database", technologies: "MongoDB, PostgreSQL, Firebase, Redis, SQL" },
-    { category: "Tools", technologies: "Git, Figma, Postman, VS Code, Jira" },
-  ]
-
-
-  return (
-    <main className="bg-black">
-
-
-      {/* Hero */}
-      <section className="min-h-[60vh] flex items-center justify-center pt-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            About <span className="text-[#bff747]">JawumiTech</span>
-          </h1>
-          <p className="text-xl text-gray-400">Transforming ideas into digital realities since day one</p>
-        </div>
-      </section>
 
   
-{/* Story Section */}
-<section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  {/* Main Story */}
-  <div className="text-center mb-20">
-    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#bff747]/10 border border-[#bff747]/20 mb-6">
-      <span className="w-2 h-2 bg-[#bff747] rounded-full animate-pulse"></span>
-      <span className="text-[#bff747] text-sm font-medium">Our Journey</span>
-    </div>
-    <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-      Our Story
-    </h2>
-    <div className="max-w-3xl mx-auto space-y-6">
-      <p className="text-gray-300 text-xl leading-relaxed">
-        Jawumi Tech was founded with a simple mission: to help startups and businesses build their digital future. 
-        We believe that great technology should be accessible to everyone, regardless of size or budget.
-      </p>
-      <p className="text-gray-300 text-xl leading-relaxed">
-      Founded by Jawad Haider, a passionate full-stack developer and visionary entrepreneur, our approach blends technical expertise with real-world experience to deliver solutions that are both innovative and reliable.
-      </p>
-    </div>
-  </div>
 
-{/* Enhanced Founder Section */}
-<div className="mb-20 relative">
-  <div className="absolute inset-0 bg-gradient-to-r from-[#bff747]/5 to-transparent rounded-3xl blur-3xl"></div>
-  <div className="relative py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#2A2A2A] rounded-3xl shadow-2xl overflow-hidden">
-    <div className="text-center mb-12 lg:mb-16">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-[#bff747] to-[#8BC400] bg-clip-text text-transparent">
-        Meet the Founder
-      </h2>
-      <p className="text-gray-400 text-lg sm:text-xl md:text-2xl">Founder & Full-Stack Developer</p>
-    </div>
-    
-    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16 items-center">
-      {/* Founder Avatar & Social */}
-      <div className="flex-shrink-0 w-full lg:w-2/5 max-w-[280px] sm:max-w-xs md:max-w-sm mx-auto lg:mx-0">
-        <div className="flex flex-col items-center">
-          <div className="relative mb-6 lg:mb-8 group w-full">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#bff747] to-[#8BC400] rounded-2xl lg:rounded-3xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-            <div className="relative w-full aspect-square rounded-xl lg:rounded-2xl bg-gradient-to-br from-[#bff747] to-[#8BC400] flex items-center justify-center text-4xl lg:text-6xl font-bold text-black shadow-xl lg:shadow-2xl shadow-[#bff747]/30 overflow-hidden border-2 sm:border-3 lg:border-4 border-white/10">
-              <Image
-                src="/founder.webp"
-                alt="Jawad Haider - Founder"
-                width={400}
-                height={400}
-                className="w-full h-full object-cover"
-                priority
-                loading="eager"
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              />
-            </div>
-          </div>
+  useEffect(() => {
+    let mounted = true;
+    let cleanup: (() => void) | undefined;
+
+    const initAnimations = async () => {
+      if (!mounted || !sectionRef.current) return;
+
+      try {
+        const gsapModule = await import('gsap');
+        const ScrollTriggerModule = await import('gsap/ScrollTrigger');
+        
+        const gsap = gsapModule.gsap || gsapModule.default;
+        const ScrollTrigger = ScrollTriggerModule.ScrollTrigger || ScrollTriggerModule.default;
+        
+        if (!gsap || !ScrollTrigger) {
+          throw new Error('GSAP modules not found');
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const ctx = gsap.context(() => {
+          // Left content animation
+          if (leftContentRef.current) {
+            gsap.fromTo(leftContentRef.current,
+              { y: 30, opacity: 0 },
+              { 
+                y: 0, 
+                opacity: 1, 
+                duration: 0.6,
+                scrollTrigger: {
+                  trigger: leftContentRef.current,
+                  start: "top 85%",
+                  toggleActions: "play none none none"
+                }
+              }
+            );
+          }
+
+          // Pin left side on desktop only
+          if (window.innerWidth >= 1024 && leftSideRef.current) {
+            ScrollTrigger.create({
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom bottom",
+              pin: leftSideRef.current,
+              pinSpacing: false,
+              anticipatePin: 1,
+            });
+          }
+
+          // Content animations
+          contentRefs.current.forEach((content, index) => {
+            if (!content) return;
+            gsap.fromTo(content,
+              { y: 40, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                delay: index * 0.1,
+                scrollTrigger: {
+                  trigger: content,
+                  start: "top 85%",
+                  toggleActions: "play none none none"
+                }
+              }
+            );
+          });
+        }, sectionRef);
+
+        cleanup = () => ctx.revert();
+
+      } catch (error) {
+        console.log('GSAP loading failed, using fallback animations');
+        // Fallback: show elements immediately
+        if (leftContentRef.current) {
+          leftContentRef.current.style.opacity = '1';
+          leftContentRef.current.style.transform = 'translateY(0)';
+        }
+        contentRefs.current.forEach(content => {
+          if (content) {
+            content.style.opacity = '1';
+            content.style.transform = 'translateY(0)';
+          }
+        });
+      }
+    };
+
+    // Initialize with delay
+    const timer = setTimeout(initAnimations, 100);
+
+    return () => {
+      mounted = false;
+      clearTimeout(timer);
+      if (cleanup) cleanup();
+    };
+  }, []);
+
+  return (
+    <main className="bg-black text-white relative ">
+      {/* Background circles */}
+      <div className="absolute inset-0">
+        <div className="absolute top-10 right-5 sm:top-20 sm:right-10 lg:top-20 lg:right-20 w-48 h-48 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-[#bff747]/10 rounded-full blur-2xl lg:blur-3xl"></div>
+        <div className="absolute bottom-10 left-5 sm:bottom-20 sm:left-10 lg:bottom-20 lg:left-20 w-48 h-48 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-[#bff747]/10 rounded-full blur-2xl lg:blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-40 h-40 sm:w-52 sm:h-52 lg:w-72 lg:h-72 bg-[#bff747]/5 rounded-full blur-2xl lg:blur-3xl"></div>
+      </div>
+
+ <Hero
+  title1="ABOUT"
+  title2='US'
+  image='/HeroImage.webp'
+/>
+<Marquee/>
+
+     <AboutSection/>
+
+     <LeftRight
+  badge="OUR JOURNEY"
+  title="Innovating technology for your"
+  titleAccent="success"
+  description="We specialize in delivering cutting-edge IT solutions that drive innovation, streamline operations, and empower businesses to achieve their goals."
+  buttonText="Get Free Quote"
+  buttonLink="/contact"
+  sections={[
+    {
+      step: "01",
+      title: "Our Story & Mission",
+      description: "Jawumi Tech was founded with a simple mission: to help startups and businesses build their digital future.",
+      additional: "We believe that great technology should be accessible to everyone, regardless of size or budget."
+    },
+    {
+      step: "02", 
+      title: "Technical Excellence",
+      description: "With expertise in modern technologies, we build scalable, performant applications that drive business growth.",
+      additional: "Our team stays ahead of the curve with the most efficient and modern tools available."
+    },
+    {
+      step: "03",
+      title: "Why Choose JawumiTech", 
+      description: "We combine technical expertise with business understanding to deliver solutions that drive real results.",
+      additional: "Trusted by startups and established businesses alike."
+    }
+  ]}
+/>
+
+      {/* Values Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-[#bff747]/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-72 h-72 bg-[#bff747]/10 rounded-full blur-3xl"></div>
         </div>
-      </div>
 
-      {/* Founder Info */}
-      <div className="flex-1 lg:w-3/5 text-center lg:text-left">
-        <div className="mb-6 lg:mb-8">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 lg:mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Jawad Haider
-          </h3>
-          <p className="text-[#bff747] font-semibold text-xl lg:text-2xl mb-4 lg:mb-6">Founder & Full-Stack Developer</p>
-          
-          <div className="space-y-4 lg:space-y-6">
-            <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-              With years of hands-on experience in full-stack development, I'm passionate about creating digital solutions that solve real-world problems. My journey in technology began with a deep curiosity and a drive to turn ideas into meaningful, impactful web experiences.
-            </p>
-            <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-              What sets me apart is the ability to combine technical expertise with strategic thinking. I don't just write code—I design scalable, maintainable systems that align with business goals, ensuring every project delivers measurable value. As the founder of Jawumitech, I lead a team dedicated to crafting innovative, results-driven web solutions for clients across industries.
-            </p>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h3 className="text-[#bff747] text-lg md:text-xl font-bold mb-4 uppercase tracking-wider">
+              OUR VALUES
+            </h3>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              What Drives <span className="text-[#bff747]">Us</span>
+            </h2>
           </div>
-        </div>
 
-        {/* Current Focus */}
-        <div className="bg-gradient-to-r from-[#bff747]/10 to-transparent border-l-4 border-[#bff747] p-4 sm:p-6 rounded-r-xl hover:shadow-lg hover:shadow-[#bff747]/10 transition-all duration-300">
-          <h4 className="font-bold text-lg sm:text-xl mb-2 sm:mb-3 text-[#bff747] flex items-center gap-2 justify-center lg:justify-start">
-            <span className="w-2 h-2 bg-[#bff747] rounded-full flex-shrink-0"></span>
-            Current Focus & Vision
-          </h4>
-          <p className="text-gray-300 text-sm sm:text-base">
-            Leveraging years of hands-on industry experience to build innovative SaaS products, integrate AI into modern web applications, and help startups achieve technical excellence through cutting-edge digital solutions.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-  {/* Values */}
-  <div className="mb-20">
-    <div className="text-center mb-16">
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#bff747]/10 border border-[#bff747]/20 mb-6">
-        <span className="w-2 h-2 bg-[#bff747] rounded-full animate-pulse"></span>
-        <span className="text-[#bff747] text-sm font-medium">What Drives Us</span>
-      </div>
-      <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-        Our Values
-      </h2>
-    </div>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {values.map((value, index) => {
-        const Icon = value.icon
-        return (
-          <div
-            key={index}
-            className="group p-8 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-[#1A1A1A] rounded-2xl hover:border-[#bff747] hover:shadow-2xl hover:shadow-[#bff747]/10 transition-all duration-500 hover:-translate-y-2"
-          >
-            <div className="mb-6 p-4 bg-[#bff747]/10 rounded-2xl w-fit group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-              <Icon size={28} className="text-[#bff747]" />
-            </div>
-            <h3 className="text-2xl font-bold mb-4 group-hover:text-[#bff747] transition-colors">{value.title}</h3>
-            <p className="text-gray-400 leading-relaxed">{value.description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {values.map((value, index) => {
+              const Icon = value.icon
+              return (
+                <div
+                  key={index}
+                  className="group p-6 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-white/10 rounded-2xl hover:border-[#bff747] transition-all duration-500 hover:-translate-y-2 backdrop-blur-sm"
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 bg-[#bff747]/10 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                      <Icon size={24} className="text-[#bff747]" />
+                    </div>
+                    <h3 className="text-xl font-bold group-hover:text-[#bff747] transition-colors">{value.title}</h3>
+                  </div>
+                  <p className="text-gray-300 text-sm leading-relaxed">{value.description}</p>
+                </div>
+              )
+            })}
           </div>
-        )
-      })}
-    </div>
-  </div>
-
-{/* Team Section */}
-<Team/>
-
-  {/* Skills */}
-  <div className="mb-16">
-    <div className="text-center mb-16">
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#bff747]/10 border border-[#bff747]/20 mb-6">
-        <span className="w-2 h-2 bg-[#bff747] rounded-full animate-pulse"></span>
-        <span className="text-[#bff747] text-sm font-medium">Our Expertise</span>
-      </div>
-      <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-        Technical Skills
-      </h2>
-    </div>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <div className="space-y-8">
-        {skills.slice(0, 4).map((skill, index) => (
-          <div key={index} className="group">
-            <div className="flex justify-between items-center mb-4">
-              <span className="font-semibold text-lg group-hover:text-[#bff747] transition-colors">{skill.name}</span>
-              <span className="text-[#bff747] font-bold text-lg bg-[#bff747]/10 px-3 py-1 rounded-full">{skill.percentage}%</span>
-            </div>
-            <div className="w-full bg-[#0A0A0A] rounded-full h-4 border border-[#1A1A1A] overflow-hidden group-hover:border-[#bff747]/30 transition-colors">
-              <div
-                className="bg-gradient-to-r from-[#bff747] to-[#8BC400] h-4 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_15px_rgba(173,248,2,0.3)] relative"
-                style={{ width: `${skill.percentage}%` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20 rounded-full"></div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="space-y-8">
-        {skills.slice(4, 8).map((skill, index) => (
-          <div key={index} className="group">
-            <div className="flex justify-between items-center mb-4">
-              <span className="font-semibold text-lg group-hover:text-[#bff747] transition-colors">{skill.name}</span>
-              <span className="text-[#bff747] font-bold text-lg bg-[#bff747]/10 px-3 py-1 rounded-full">{skill.percentage}%</span>
-            </div>
-            <div className="w-full bg-[#0A0A0A] rounded-full h-4 border border-[#1A1A1A] overflow-hidden group-hover:border-[#bff747]/30 transition-colors">
-              <div
-                className="bg-gradient-to-r from-[#bff747] to-[#8BC400] h-4 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_15px_rgba(173,248,2,0.3)] relative"
-                style={{ width: `${skill.percentage}%` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20 rounded-full"></div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Our Impact</h2>
-          <p className="text-gray-400">Numbers that speak for themselves</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <StatsCounter end={50} label="Projects Delivered" suffix="+" />
-          <StatsCounter end={100} label="Client Satisfaction" suffix="%" />
-          <StatsCounter end={5} label="Years Experience" suffix="+" />
         </div>
       </section>
 
+      {/* Founder Section */}
+    <FounderSection/>
 
-
+        <Team/>
+        <TechStack/>
     </main>
-  )
-}
+  );
+};
+
+export default About;

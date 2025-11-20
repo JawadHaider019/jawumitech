@@ -1,54 +1,46 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, Star, Sparkles } from "lucide-react"
+import { FaChevronLeft, FaChevronRight, FaArrowRight } from "react-icons/fa"
 
 const teamMembers = [
   {
     name: "Jawad Haider",
     position: "Founder / CEO",
     image: "/team/jawadfounder.webp",
-    description: "Leads the vision and direction of the company while also contributing as a full stack developer. Guides the team, ensures technical standards, and focuses on building high-quality products.",
-    skills: ["Full Stack Development", "Team Leadership", "Product Strategy"]
+    description: "Leads the vision and direction of the company while also contributing as a full stack developer. Guides the team, ensures technical standards, and focuses on building high-quality products."
   },
   {
     name: "Aqib Mansoor",
     position: "Full Stack Developer",
     image: "/team/aqibdev.webp",
-    description: "Specialized in building scalable web applications. Passionate about creating smooth user experiences and delivering reliable, high-quality projects.",
-    skills: ["Full Stack Development", "Web Applications", "UX Focus"]
+    description: "Specialized in building scalable web applications. Passionate about creating smooth user experiences and delivering reliable, high-quality projects."
   },
   {
     name: "Haseeb Ur Rehman",
     position: "Software Developer",
     image: "/team/Haseebdev.webp",
-    description: "Develops custom software solutions and business applications. Focused on efficiency, reliability, and simplifying daily operations for clients.",
-    skills: ["Custom Software", "Business Applications", "System Integration"]
+    description: "Develops custom software solutions and business applications. Focused on efficiency, reliability, and simplifying daily operations for clients."
   },
   {
     name: "Muhammad Jamshaid",
     position: "Project Manager",
     image: "/team/jamshaidDev.webp",
-    description: "Manages projects from planning to delivery. Coordinates the team, ensures timely execution, and maintains clear communication with clients.",
-    skills: ["Agile", "Scrum", "Team Coordination", "Project Delivery"]
+    description: "Manages projects from planning to delivery. Coordinates the team, ensures timely execution, and maintains clear communication with clients."
   }
 ]
-
 
 export function Team() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsPerView, setItemsPerView] = useState(1)
-  const [isHovering, setIsHovering] = useState(false)
-  const [flippedCards, setFlippedCards] = useState<number[]>([])
-  const [isMobile, setIsMobile] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
-  // Calculate items per view based on screen size and detect mobile
+  // Calculate items per view based on screen size
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 768
-      setIsMobile(mobile)
-      
       if (window.innerWidth >= 1280) {
         setItemsPerView(3)
       } else if (window.innerWidth >= 1024) {
@@ -63,6 +55,77 @@ export function Team() {
     handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Animation useEffect
+  useEffect(() => {
+    const initAnimations = async () => {
+      try {
+        const gsapModule = await import('gsap')
+        const ScrollTriggerModule = await import('gsap/ScrollTrigger')
+        
+        const gsap = gsapModule.default || gsapModule
+        const ScrollTrigger = ScrollTriggerModule.default || ScrollTriggerModule
+        
+        gsap.registerPlugin(ScrollTrigger)
+
+        if (!sectionRef.current) return
+
+        // Header animation
+        if (headerRef.current) {
+          gsap.fromTo(headerRef.current,
+            { y: 30, opacity: 0 },
+            { 
+              y: 0, 
+              opacity: 1, 
+              duration: 0.6,
+              scrollTrigger: {
+                trigger: headerRef.current,
+                start: "top 85%",
+                toggleActions: "play none none none",
+                markers: false
+              }
+            }
+          )
+        }
+
+        // Cards animation with stagger
+        cardsRef.current.forEach((card, index) => {
+          if (!card) return
+          gsap.fromTo(card,
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              delay: index * 0.1,
+              scrollTrigger: {
+                trigger: card,
+                start: "top 85%",
+                toggleActions: "play none none none",
+                markers: false
+              }
+            }
+          )
+        })
+
+      } catch (error) {
+        console.log('GSAP loading failed, using fallback animations')
+        if (headerRef.current) {
+          headerRef.current.style.opacity = '1'
+          headerRef.current.style.transform = 'translateY(0)'
+        }
+        cardsRef.current.forEach(card => {
+          if (card) {
+            card.style.opacity = '1'
+            card.style.transform = 'translateY(0)'
+          }
+        })
+      }
+    }
+
+    const timer = setTimeout(initAnimations, 100)
+    return () => clearTimeout(timer)
   }, [])
 
   const totalSlides = Math.ceil(teamMembers.length / itemsPerView)
@@ -83,217 +146,181 @@ export function Team() {
     setCurrentIndex(index)
   }
 
-  const handleCardClick = (index: number) => {
-    if (isMobile) {
-      setFlippedCards(prev => 
-        prev.includes(index) 
-          ? prev.filter(i => i !== index)
-          : [...prev, index]
-      )
-    }
-  }
-
-  const isCardFlipped = (index: number) => {
-    return flippedCards.includes(index)
+  // Add ref to cards array
+  const addToCardsRefs = (el: HTMLDivElement | null, index: number) => {
+    cardsRef.current[index] = el
   }
 
   return (
-    <div className="relative mx-4 sm:mx-6 lg:mx-8 xl:mx-20 my-16 sm:my-24">
-      <div className="text-center mb-16 sm:mb-20 relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#ADF802]/10 to-[#ADF802]/5 border border-[#ADF802]/20 mb-6 backdrop-blur-sm">
-          <div className="w-2 h-2 bg-[#ADF802] rounded-full"></div>
-          <span className="text-[#ADF802] text-sm font-medium tracking-wide">MEET THE TEAM</span>
-        </div>
-        
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent">
-          Our <span className="text-[#ADF802]">Dream</span> Team
-        </h2>
-        
-        <p className="text-gray-300 text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto px-4 leading-relaxed">
-          Meet the brilliant minds behind our success. A dedicated team of professionals 
-          committed to turning your vision into reality.
-        </p>
+    <section ref={sectionRef} className="relative py-12 sm:py-16 lg:py-20 bg-black text-white">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-10 right-10 sm:top-20 sm:right-20 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/10 rounded-full blur-2xl sm:blur-3xl"></div>
+        <div className="absolute bottom-10 left-10 sm:bottom-20 sm:left-20 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/10 rounded-full blur-2xl sm:blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/5 rounded-full blur-2xl sm:blur-3xl"></div>
       </div>
 
-      {/* Slider Container */}
-      <div className="relative max-w-7xl mx-auto z-10">
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevSlide}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-          className="hidden sm:flex absolute -left-6 sm:-left-10 lg:-left-14 top-1/2 -translate-y-1/2 z-20 bg-gradient-to-r from-black/90 to-black/70 hover:from-[#ADF802]/20 hover:to-[#ADF802]/10 border border-[#ADF802]/30 rounded-2xl p-3 sm:p-4 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-[#ADF802]/30 backdrop-blur-sm"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-[#ADF802] transition-transform duration-300 group-hover:-translate-x-1" />
-        </button>
-        
-        <button
-          onClick={nextSlide}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-          className="hidden sm:flex absolute -right-6 sm:-right-10 lg:-right-14 top-1/2 -translate-y-1/2 z-20 bg-gradient-to-l from-black/90 to-black/70 hover:from-[#ADF802]/20 hover:to-[#ADF802]/10 border border-[#ADF802]/30 rounded-2xl p-3 sm:p-4 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-[#ADF802]/30 backdrop-blur-sm"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-[#ADF802] transition-transform duration-300 group-hover:translate-x-1" />
-        </button>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div ref={headerRef} className="text-center mb-12 sm:mb-16 opacity-0">
+          <h1 className='text-base sm:text-lg mb-4 sm:mb-5 md:text-xl font-bold text-[#bff747] uppercase'>
+            Meet the experts
+          </h1>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
+            OUR EXPERT<span className="text-[#bff747]"> TEAM</span>
+          </h2>
+        </div>
 
-        {/* Mobile Navigation */}
-        <div className="sm:hidden flex justify-center space-x-6 mb-8">
+        {/* Slider Container */}
+        <div className="relative max-w-7xl mx-auto">
+          {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="bg-gradient-to-r from-black/90 to-black/70 hover:from-[#ADF802]/20 hover:to-[#ADF802]/10 border border-[#ADF802]/30 rounded-xl p-4 transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+            className="hidden sm:flex absolute -left-6 sm:-left-10 lg:-left-14 top-1/2 -translate-y-1/2 z-20 bg-gradient-to-r from-black/90 to-black/70 hover:from-[#bff747]/20 hover:to-[#bff747]/10 border border-[#bff747]/30 rounded-full p-3 sm:p-4 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-[#bff747]/30 backdrop-blur-sm"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="w-6 h-6 text-[#ADF802]" />
+            <FaChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-[#bff747] transition-transform duration-300 group-hover:-translate-x-1" />
           </button>
+          
           <button
             onClick={nextSlide}
-            className="bg-gradient-to-l from-black/90 to-black/70 hover:from-[#ADF802]/20 hover:to-[#ADF802]/10 border border-[#ADF802]/30 rounded-xl p-4 transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+            className="hidden sm:flex absolute -right-6 sm:-right-10 lg:-right-14 top-1/2 -translate-y-1/2 z-20 bg-gradient-to-l from-black/90 to-black/70 hover:from-[#bff747]/20 hover:to-[#bff747]/10 border border-[#bff747]/30 rounded-full p-3 sm:p-4 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-[#bff747]/30 backdrop-blur-sm"
             aria-label="Next slide"
           >
-            <ChevronRight className="w-6 h-6 text-[#ADF802]" />
+            <FaChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-[#bff747] transition-transform duration-300 group-hover:translate-x-1" />
           </button>
-        </div>
 
-        {/* Slider */}
-        <div className="overflow-hidden">
-          <div 
-            className="flex transition-transform duration-700 ease-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-              <div
-                key={slideIndex}
-                className="w-full flex-shrink-0"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 px-4">
-                  {teamMembers
-                    .slice(slideIndex * itemsPerView, slideIndex * itemsPerView + itemsPerView)
-                    .map((member, index) => {
-                      const globalIndex = slideIndex * itemsPerView + index
-                      const isFlipped = isCardFlipped(globalIndex)
-                      
-                      return (
-                        <div
-                          key={index}
-                          className="group perspective-1000"
-                          onMouseEnter={() => setIsHovering(true)}
-                          onMouseLeave={() => setIsHovering(false)}
-                          onClick={() => handleCardClick(globalIndex)}
-                        >
-                          {/* Enhanced Flip Card */}
-                          <div className={`relative w-full lg:h-100 h-70 mx-auto transition-transform duration-1000 transform-style-preserve-3d ${
-                            isMobile 
-                              ? (isFlipped ? 'rotate-y-180' : '') 
-                              : 'group-hover:rotate-y-180'
-                          }`}>
-                            {/* Front Side - Enhanced */}
-                            <div className="absolute inset-0 backface-hidden bg-gradient-to-br from-[#0A0A0A] via-[#111111] to-[#1A1A1A] border border-[#2A2A2A] rounded-2xl lg:rounded-3xl overflow-hidden group-hover:border-[#ADF802] hover:shadow-2xl hover:shadow-[#ADF802]/20 transition-all duration-700 hover:-translate-y-2">
-                              {/* Glow Effect */}
-                              <div className="absolute inset-0 bg-gradient-to-br from-[#ADF802]/0 via-[#ADF802]/5 to-[#ADF802]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          {/* Mobile Navigation */}
+          <div className="sm:hidden flex justify-center space-x-6 mb-8">
+            <button
+              onClick={prevSlide}
+              className="bg-gradient-to-r from-black/90 to-black/70 hover:from-[#bff747]/20 hover:to-[#bff747]/10 border border-[#bff747]/30 rounded-full p-4 transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+              aria-label="Previous slide"
+            >
+              <FaChevronLeft className="w-6 h-6 text-[#bff747]" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="bg-gradient-to-l from-black/90 to-black/70 hover:from-[#bff747]/20 hover:to-[#bff747]/10 border border-[#bff747]/30 rounded-full p-4 transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+              aria-label="Next slide"
+            >
+              <FaChevronRight className="w-6 h-6 text-[#bff747]" />
+            </button>
+          </div>
+
+          {/* Slider */}
+          <div className="overflow-hidden">
+            <div 
+              className="flex transition-transform duration-700 ease-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+                <div
+                  key={slideIndex}
+                  className="w-full flex-shrink-0"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 px-4">
+                    {teamMembers
+                      .slice(slideIndex * itemsPerView, slideIndex * itemsPerView + itemsPerView)
+                      .map((member, index) => {
+                        const globalIndex = slideIndex * itemsPerView + index
+                        
+                        return (
+                          <div
+                            key={index}
+                            ref={(el) => addToCardsRefs(el, globalIndex)}
+                            className="group cursor-pointer relative rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-96 opacity-0"
+                            role="button"
+                            tabIndex={0}
+                          >
+                            {/* Background Image */}
+                            <div className="absolute inset-0">
+                              <Image
+                                src={member.image}
+                                alt={member.name}
+                                fill
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                priority={index === 0}
+                              />
                               
-                              {/* Image Container */}
-                              <div className="relative aspect-[4/5] overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10"></div>
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#ADF802]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
-                                <Image
-                                  src={member.image}
-                                  alt={member.name}
-                                  width={400}
-                                  height={500}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                                  // Optimized loading props
-                                  priority={index === 0} // Load first image immediately
-                                  loading={index === 0 ? "eager" : "lazy"}
-                                  placeholder="blur"
-                                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                                />
-                                
-                                {/* Overlay Content */}
-                                <div className="absolute bottom-0 left-0 right-0 p-0 z-30">
-                                  <div className="bg-gradient-to-t from-black/80 to-transparent p-4 backdrop-blur-sm">
-                                    <h3 className="text-xl lg:text-2xl font-bold text-white mb-2 group-hover:text-[#ADF802] transition-colors duration-300">
-                                      {member.name}
-                                    </h3>
-                                    <p className="text-gray-300 text-sm lg:text-base font-medium">
-                                      {member.position}
-                                    </p>
-                                  </div>
+                              {/* Gradient Overlay */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                            </div>
+
+                            {/* Content Overlay */}
+                            <div className="relative z-10 h-full flex flex-col justify-end p-6 text-white">
+                              {/* Position Badge */}
+                              <div className="flex justify-between items-start mb-4">
+                                <div className="rounded-full bg-[#bff747] text-black px-3 py-1 text-xs font-medium">
+                                  {member.position}
                                 </div>
+                              
+                              </div>
+
+                              {/* Content */}
+                              <div className="space-y-3">
+                                {/* Title */}
+                                <h3 className="font-bold text-xl leading-tight">
+                                  {member.name}
+                                </h3>
+
+                                {/* Description */}
+                                <p className="text-gray-200 text-sm leading-relaxed ">
+                                  {member.description}
+                                </p>
+
+      
                               </div>
                             </div>
-
-                            {/* Back Side - Enhanced */}
-                            <div className="absolute inset-0 backface-hidden bg-gradient-to-br from-[#0A0A0A] via-[#111111] to-[#1A1A1A] border-2 border-[#ADF802] rounded-2xl lg:rounded-3xl overflow-hidden rotate-y-180 p-4 items-center flex gap-2 flex-col justify-center">
-                              {/* Header */}
-                              <h3 className="text-xl lg:text-2xl font-bold text-[#ADF802]">
-                                {member.name}
-                              </h3>
-                              <p className="text-gray-300 italic text-sm lg:text-base font-medium">
-                                {member.position}
-                              </p>
-
-                              {/* Description */}
-                              <p className="text-gray-200 text-sm lg:text-base leading-relaxed text-center">
-                                {member.description}
-                              </p>
-                            </div>
                           </div>
-                        </div>
-                      )
-                    })}
+                        )
+                      })}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Enhanced Dots Indicator */}
-        {totalSlides > 1 && (
-          <div className="flex justify-center mt-12 lg:mt-16 space-x-3">
-            {Array.from({ length: totalSlides }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`relative w-3 h-3 rounded-full transition-all duration-500 ${
-                  index === currentIndex 
-                    ? 'bg-[#ADF802] scale-125 shadow-lg shadow-[#ADF802]/40' 
-                    : 'bg-gray-600 hover:bg-gray-400 hover:scale-110'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              >
-                {index === currentIndex && (
-                  <div className="absolute inset-0 rounded-full bg-[#ADF802] animate-ping opacity-30"></div>
-                )}
-              </button>
-            ))}
-          </div>
-        )}
+          {/* Dots Indicator */}
+          {totalSlides > 1 && (
+            <div className="flex justify-center mt-12 lg:mt-16 space-x-3">
+              {Array.from({ length: totalSlides }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`relative w-3 h-3 rounded-full transition-all duration-500 ${
+                    index === currentIndex 
+                      ? 'bg-[#bff747] scale-125 shadow-lg shadow-[#bff747]/40' 
+                      : 'bg-gray-600 hover:bg-gray-400 hover:scale-110'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                >
+                  {index === currentIndex && (
+                    <div className="absolute inset-0 rounded-full bg-[#bff747] animate-ping opacity-30"></div>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* CSS for 3D flip effect */}
+      {/* Background Animated Elements */}
+      <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-16 h-16 sm:w-24 sm:h-24 bg-[#bff747]/10 rounded-full rotate-12 animate-float blur-xl sm:blur-2xl"></div>
+      <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-14 h-14 sm:w-20 sm:h-20 bg-[#bff747]/10 rounded-full -rotate-12 animate-float delay-1000 blur-lg sm:blur-xl"></div>
+      <div className="absolute top-1/2 left-1/4 w-16 h-16 sm:w-24 sm:h-24 bg-[#bff747]/10 rounded-full rotate-12 animate-float delay-500 blur-xl sm:blur-2xl"></div>
+
+      {/* Custom Animations */}
       <style jsx>{`
-        .perspective-1000 {
-          perspective: 1200px;
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(12deg); }
+          50% { transform: translateY(-10px) rotate(12deg); }
         }
-        .transform-style-preserve-3d {
-          transform-style: preserve-3d;
-        }
-        .backface-hidden {
-          backface-visibility: hidden;
-        }
-        .rotate-y-180 {
-          transform: rotateY(180deg);
-        }
-        
-        /* Smooth transitions for mobile */
-        @media (max-width: 640px) {
-          .perspective-1000 {
-            perspective: 1000px;
-          }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
         }
       `}</style>
-    </div>
+    </section>
   )
 }

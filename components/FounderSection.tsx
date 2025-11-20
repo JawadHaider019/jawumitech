@@ -97,16 +97,6 @@ const FounderSection = () => {
                   
                   {/* Overlay Gradient - Desktop only */}
                   <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  {/* Floating Badge */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={imageLoaded ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.4, delay: 0.2 }}
-                    className="absolute top-3 right-3 bg-gradient-to-r from-[#bff747] to-[#8BC400] text-black px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-xs sm:text-sm backdrop-blur-sm"
-                  >
-                    FOUNDER
-                  </motion.div>
                 </div>
 
                 {/* Floating Elements - Desktop only */}

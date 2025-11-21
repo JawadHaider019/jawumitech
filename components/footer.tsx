@@ -3,7 +3,8 @@
 import { ArrowRight } from 'lucide-react';
 import Image from "next/image"
 import { FaEnvelope, FaPhone, FaWhatsapp } from "react-icons/fa";
-import { useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const Footer = () => {
   const collaborationRef = useRef<HTMLElement>(null);
@@ -12,139 +13,70 @@ const Footer = () => {
   const togetherTextRef = useRef<HTMLSpanElement>(null);
   const collaborateTextRef = useRef<HTMLHeadingElement>(null);
 
+  const isCollaborationInView = useInView(collaborationRef, { once: true, margin: "-100px" });
+  const isFooterInView = useInView(collaborationRef, { once: true, margin: "-50px" });
+
   // WhatsApp number and link
   const whatsappNumber = '923291927168';
   const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
-  useEffect(() => {
-    // Dynamic import to ensure GSAP loads properly
-    const initAnimations = async () => {
-      try {
-        const gsapModule = await import('gsap');
-        const ScrollTriggerModule = await import('gsap/ScrollTrigger');
-        
-        const gsap = gsapModule.default || gsapModule;
-        const ScrollTrigger = ScrollTriggerModule.default || ScrollTriggerModule;
-        
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Check if all refs are available
-        if (!collaborationRef.current || !workTextRef.current || !togetherTextRef.current || !circleButtonRef.current) return;
-
-        // FASTER Collaboration section animations
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: collaborationRef.current,
-            start: "top 85%", // Trigger earlier
-            end: "bottom 15%",
-            toggleActions: "play none none none",
-            markers: false // Remove debug markers
-          }
-        });
-
-        tl.fromTo(collaborateTextRef.current, 
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.4 } // Faster duration
-        )
-        .fromTo(workTextRef.current,
-          { x: -100, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.6 }, // Faster duration
-          "-=0.3" // Reduced overlap
-        )
-        .fromTo(togetherTextRef.current,
-          { x: 100, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.6 }, // Faster duration
-          "-=0.4" // Reduced overlap
-        )
-        .fromTo(circleButtonRef.current,
-          { scale: 0 },
-          { scale: 1, duration: 0.5, ease: "back.out(1.7)" }, // Faster duration
-          "-=0.3" // Reduced overlap
-        );
-
-        // FASTER Footer animations with better triggers
-        const footerElements = document.querySelectorAll('.footer-element');
-        footerElements.forEach((element, index) => {
-          gsap.fromTo(element,
-            { y: 20, opacity: 0 }, // Reduced initial movement
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.4, // Much faster
-              delay: index * 0.05, // Reduced delay
-              scrollTrigger: {
-                trigger: element,
-                start: "top 95%", // Trigger much earlier
-                end: "bottom 10%",
-                toggleActions: "play none none none",
-                markers: false
-              }
-            }
-          );
-        });
-
-        // Ensure footer bottom section is always visible
-        const footerBottom = document.querySelector('.footer-bottom-element');
-        if (footerBottom) {
-          gsap.fromTo(footerBottom,
-            { y: 10, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.4,
-              scrollTrigger: {
-                trigger: footerBottom,
-                start: "top 98%", // Very early trigger
-                end: "bottom top",
-                toggleActions: "play none none none",
-                markers: false
-              }
-            }
-          );
-        }
-
-      } catch (error) {
-        console.log('GSAP loading failed, using fallback animations');
-        // Immediate fallback animations
-        const elements = document.querySelectorAll('.footer-element, .footer-bottom-element, [class*="opacity-0"]');
-        elements.forEach((el) => {
-          const htmlElement = el as HTMLElement;
-          htmlElement.style.opacity = '1';
-          htmlElement.style.transform = 'translateY(0)';
-        });
-        
-        if (circleButtonRef.current) {
-          circleButtonRef.current.style.transform = 'translate(-50%, -50%) scale(1)';
-        }
-        
-        // Immediate text element animations
-        if (collaborateTextRef.current) {
-          collaborateTextRef.current.style.opacity = '1';
-          collaborateTextRef.current.style.transform = 'translateY(0)';
-        }
-        if (workTextRef.current) {
-          workTextRef.current.style.opacity = '1';
-          workTextRef.current.style.transform = 'translateX(0)';
-        }
-        if (togetherTextRef.current) {
-          togetherTextRef.current.style.opacity = '1';
-          togetherTextRef.current.style.transform = 'translateX(0)';
-        }
+  // Fixed Animation variants - removed transition from variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
       }
-    };
+    }
+  };
 
-    // Initialize animations with a small delay to ensure DOM is ready
-    const timer = setTimeout(initAnimations, 100);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0
+    }
+  };
 
-    // Cleanup function
-    return () => {
-      clearTimeout(timer);
-      // Clean up ScrollTrigger instances if they exist
-      if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      }
-    };
-  }, []);
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -100 },
+    visible: {
+      opacity: 1,
+      x: 0
+    }
+  };
+
+  const slideInRight = {
+    hidden: { opacity: 0, x: 100 },
+    visible: {
+      opacity: 1,
+      x: 0
+    }
+  };
+
+  const scaleUp = {
+    hidden: { scale: 0 },
+    visible: {
+      scale: 1
+    }
+  };
+
+  // Common transition settings with proper easing types
+  const itemTransition = {
+    duration: 0.6,
+    ease: "easeOut" as const
+  };
+
+  const slideTransition = {
+    duration: 0.8,
+    ease: "easeOut" as const
+  };
+
+  const scaleTransition = {
+    duration: 0.6,
+    ease: [0.175, 0.885, 0.32, 1.275] as const // Custom cubic-bezier equivalent to back.out(1.7)
+  };
 
   return (
     <>
@@ -163,22 +95,52 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div 
+          <motion.div 
             ref={circleButtonRef}
+            variants={scaleUp}
+            initial="hidden"
+            animate={isCollaborationInView ? "visible" : "hidden"}
+            transition={scaleTransition}
             className='z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bff747] hover:bg-black/80 hover:text-white w-16 h-16 md:w-28 md:h-28 lg:w-36 lg:h-36 rounded-full text-black font-bold flex flex-col items-center justify-center text-xs md:text-base tracking-wider transition-all duration-300 hover:scale-110 cursor-pointer group border border-transparent hover:border-[#bff747]'
-            style={{ transform: 'translate(-50%, -50%) scale(0)' }}
           >
             <ArrowRight className='group-hover:rotate-[-40deg] transition-transform duration-300 mb-0.5 md:mb-1 w-4 h-4 md:w-6 md:h-6' />
             <span className='text-[10px] md:text-sm'>Get In Touch</span>
-          </div>
+          </motion.div>
         </a>
         
         {/* Text Content */}
-        <h1 ref={collaborateTextRef} className='text-xl md:text-2xl font-bold text-[#bff747] opacity-0'>LET'S COLLABORATE</h1>
-        <h1 className='text-5xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[12rem] font-bold leading-tight md:leading-none px-2  text-white'>
-          <span ref={workTextRef} className='inline-block opacity-0'>LET'S WORK</span>
+        <motion.h1 
+          variants={itemVariants}
+          initial="hidden"
+          animate={isCollaborationInView ? "visible" : "hidden"}
+          transition={itemTransition}
+          className='text-xl md:text-2xl font-bold text-[#bff747]'
+        >
+          LET'S COLLABORATE
+        </motion.h1>
+        
+        <h1 className='text-5xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[12rem] font-bold leading-tight md:leading-none px-2 text-white'>
+          <motion.span 
+            ref={workTextRef}
+            variants={slideInLeft}
+            initial="hidden"
+            animate={isCollaborationInView ? "visible" : "hidden"}
+            transition={slideTransition}
+            className='inline-block'
+          >
+            LET'S WORK
+          </motion.span>
           <br/>
-          <span ref={togetherTextRef} className='inline-block opacity-0'>TOGETHER</span>
+          <motion.span 
+            ref={togetherTextRef}
+            variants={slideInRight}
+            initial="hidden"
+            animate={isCollaborationInView ? "visible" : "hidden"}
+            transition={slideTransition}
+            className='inline-block'
+          >
+            TOGETHER
+          </motion.span>
         </h1>
       </section>
 
@@ -186,24 +148,88 @@ const Footer = () => {
       <footer className="bg-black text-white relative overflow-hidden">
         {/* Enhanced Animated Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute -top-20 -right-10 sm:-top-40 sm:-right-20 w-48 h-48 sm:w-80 sm:h-80 bg-[#bff747]/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute -bottom-20 -left-10 sm:-bottom-40 sm:-left-20 w-48 h-48 sm:w-80 sm:h-80 bg-[#bff747]/5 rounded-full blur-3xl animate-float delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-[#bff747]/3 rounded-full blur-3xl animate-pulse"></div>
+          <motion.div
+            animate={{
+              y: [0, -20, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute -top-20 -right-10 sm:-top-40 sm:-right-20 w-48 h-48 sm:w-80 sm:h-80 bg-[#bff747]/10 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              y: [0, 15, 0],
+              scale: [1.1, 1, 1.1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+            className="absolute -bottom-20 -left-10 sm:-bottom-40 sm:-left-20 w-48 h-48 sm:w-80 sm:h-80 bg-[#bff747]/5 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-[#bff747]/3 rounded-full blur-3xl"
+          />
           
           {/* Additional Random Glowing Circles */}
-          <div className="absolute top-1/4 right-1/3 w-24 h-24 sm:w-40 sm:h-40 bg-[#bff747]/8 rounded-full blur-2xl animate-pulse delay-500"></div>
-          <div className="absolute bottom-1/3 left-1/4 w-20 h-20 sm:w-32 sm:h-32 bg-[#bff747]/6 rounded-full blur-xl animate-pulse delay-1500"></div>
-          <div className="absolute top-3/4 right-1/5 w-32 h-32 sm:w-48 sm:h-48 bg-[#bff747]/12 rounded-full blur-2xl animate-pulse delay-2000"></div>
-          <div className="absolute top-1/5 left-3/4 w-20 h-20 sm:w-28 sm:h-28 bg-[#bff747]/4 rounded-full blur-lg animate-pulse delay-700"></div>
-          <div className="absolute bottom-1/5 right-3/4 w-24 h-24 sm:w-36 sm:h-36 bg-[#bff747]/9 rounded-full blur-xl animate-pulse delay-1200"></div>
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+            className="absolute top-1/4 right-1/3 w-24 h-24 sm:w-40 sm:h-40 bg-[#bff747]/8 rounded-full blur-2xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.3, 0.1, 0.3],
+            }}
+            transition={{
+              duration: 9,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 3
+            }}
+            className="absolute bottom-1/3 left-1/4 w-20 h-20 sm:w-32 sm:h-32 bg-[#bff747]/6 rounded-full blur-xl"
+          />
         </div>
 
         {/* Main Footer Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate={isFooterInView ? "visible" : "hidden"}
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20"
+        >
           {/* Top Section */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mb-8">
             {/* Brand Column with Glass Effect */}
-            <div className="footer-element lg:col-span-4 border border-gray-400/30 p-4 sm:p-6 rounded-2xl backdrop-blur-lg bg-[#0b0b0b] hover:-translate-y-2 transition-all opacity-0">
+            <motion.div 
+              variants={itemVariants}
+              transition={itemTransition}
+              className="lg:col-span-4 border border-gray-400/30 p-4 sm:p-6 rounded-2xl backdrop-blur-lg bg-[#0b0b0b] hover:-translate-y-2 transition-all"
+            >
               <div className="flex items-center gap-0 mb-4 sm:mb-6">
                 <div className="relative">
                   <Image 
@@ -254,11 +280,15 @@ const Footer = () => {
                   </div>
                 </a>
               </div>
-            </div>
+            </motion.div>
 
             <div className='flex flex-col justify-between lg:col-span-8'>
               {/* Links Grid with Glass Effect */}
-              <div className="footer-element lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 border-b border-gray-400 pb-8 sm:pb-12 mb-8 sm:mb-12 backdrop-blur-sm bg-black/10 p-4 sm:p-6 opacity-0">
+              <motion.div 
+                variants={itemVariants}
+                transition={itemTransition}
+                className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 border-b border-gray-400 pb-8 sm:pb-12 mb-8 sm:mb-12 backdrop-blur-sm bg-black/10 p-4 sm:p-6"
+              >
                 {/* Services */}
                 <div className="md:border-r md:border-gray-400/50 md:pr-6 sm:md:pr-8 pb-6 sm:pb-8 md:pb-0 border-b border-gray-400/50 md:border-b-0">
                   <h3 className="text-white font-semibold text-lg sm:text-xl mb-4 sm:mb-6 pb-2 inline-block">
@@ -319,10 +349,14 @@ const Footer = () => {
                     </a>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Newsletter Section with Glass Effect */}
-              <div className="footer-element  backdrop-blur-md bg-black/15 p-4 rounded-2xl opacity-0">
+              <motion.div 
+                variants={itemVariants}
+                transition={itemTransition}
+                className="backdrop-blur-md bg-black/15 p-4 rounded-2xl"
+              >
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                   <div className="mb-4 sm:mb-0">
                     <h3 className="text-xl sm:text-2xl font-semibold text-white">
@@ -341,31 +375,23 @@ const Footer = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 
-          {/* Bottom Section with Glass Effect - Always visible */}
-          <div className="footer-bottom-element border-t border-gray-400/50 pt-6 sm:pt-8 backdrop-blur-sm bg-black/10 p-4 sm:p-6 opacity-0">
+          {/* Bottom Section with Glass Effect */}
+          <motion.div 
+            variants={itemVariants}
+            transition={itemTransition}
+            className="border-t border-gray-400/50 pt-6 sm:pt-8 backdrop-blur-sm bg-black/10 p-4 sm:p-6"
+          >
             <div className="flex justify-center items-center gap-6">
               <div className="text-gray-400 text-xs sm:text-sm text-center">
                 © 2025 Jawumitech. All rights reserved. Developed by Jawad Haider.
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Custom CSS for animations */}
-        <style jsx>{`
-          @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-15px) rotate(120deg); }
-            66% { transform: translateY(10px) rotate(240deg); }
-          }
-          .animate-float {
-            animation: float 12s ease-in-out infinite;
-          }
-        `}</style>
+          </motion.div>
+        </motion.div>
       </footer>
     </>
   );

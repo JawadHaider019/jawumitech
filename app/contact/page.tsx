@@ -5,6 +5,8 @@ import { useState, useEffect } from "react"
 
 import { Mail, Phone, MapPin, Send } from "lucide-react"
 import emailjs from '@emailjs/browser'
+import Marquee from '@/components/Marquee';
+import Hero from '@/components/HeroSection';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -100,17 +102,14 @@ export default function Contact() {
 
   return (
     <main className="bg-black">
-   
+      <Hero
+        title1="LET'S"
+        title2='TALK'
+        image='/HeroImage.webp'
+      />
+      <Marquee/>
 
-      {/* Hero */}
-      <section className="min-h-[60vh] flex items-center justify-center pt-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Let's <span className="text-[#bff747]">Talk</span>
-          </h1>
-          <p className="text-xl text-gray-400">Ready to start your next project? Get in touch with us today.</p>
-        </div>
-      </section>
+    
 
       {/* Contact Section */}
       <section className="py-20 px-4 max-w-6xl mx-auto">

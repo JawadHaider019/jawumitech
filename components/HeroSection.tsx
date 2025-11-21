@@ -1,7 +1,8 @@
 "use client"
 
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
+import { motion, useInView, Variants } from 'framer-motion'
 
 interface HeroProps {
   title1: string
@@ -15,26 +16,76 @@ const Hero = ({
   image,
 }: HeroProps) => {
   const heroRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(heroRef, { 
+    once: true, 
+    margin: "-100px 0px"
+  })
 
-  useEffect(() => {
-    // Simple fade-in animation on page load
-    const timer = setTimeout(() => {
-      if (heroRef.current) {
-        const elements = heroRef.current.querySelectorAll('.hero-element')
-        elements.forEach(el => {
-          el.classList.add('opacity-100', 'translate-y-0')
-          el.classList.remove('opacity-0', 'translate-y-4')
-        })
+  // Animation variants with proper typing
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        when: "beforeChildren"
       }
-    }, 100)
+    }
+  }
 
-    return () => clearTimeout(timer)
-  }, [])
+  const titleVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      y: 40 
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const lineVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      scaleX: 0 
+    },
+    visible: {
+      opacity: 1,
+      scaleX: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay: 0.3
+      }
+    }
+  }
+
+  const backgroundVariants: Variants = {
+    hidden: { 
+      scale: 0.8, 
+      opacity: 0 
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut"
+      }
+    }
+  }
 
   return (
-    <section 
+    <motion.section 
       ref={heroRef}
-      className="min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex items-center justify-center relative overflow-hidden py-16 sm:py-20  text-center"
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={containerVariants}
+      className="min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex items-center justify-center relative overflow-hidden py-16 sm:py-20 text-center"
     >
       {/* Background Image */}
       <div className="absolute inset-0">
@@ -44,7 +95,7 @@ const Hero = ({
           fill
           className="object-cover"
           priority
-          quality={90}
+          quality={75}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
         />
         {/* Dark overlay for better text readability */}
@@ -53,24 +104,38 @@ const Hero = ({
 
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-10 md:left-10 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-[#bff747]/10 rounded-full blur-xl sm:blur-2xl"></div>
-        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-10 md:right-10 w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 bg-[#bff747]/5 rounded-full blur-xl sm:blur-2xl"></div>
+        <motion.div 
+          variants={backgroundVariants}
+          className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-10 md:left-10 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-[#bff747]/10 rounded-full blur-xl sm:blur-2xl"
+        />
+        <motion.div 
+          variants={backgroundVariants}
+          transition={{ delay: 0.2 }}
+          className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-10 md:right-10 w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 bg-[#bff747]/5 rounded-full blur-xl sm:blur-2xl"
+        />
       </div>
 
       <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="mx-auto">
+        <motion.div 
+          variants={containerVariants}
+          className="mx-auto"
+        >
           {/* Title */}
-          <h1 className="hero-element text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 opacity-0 translate-y-4 transition-all duration-300 ease-out leading-tight">
+          <motion.h1 
+            variants={titleVariants}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 leading-tight"
+          >
             {title1} <span className='text-[#bff747] block sm:inline'>{title2}</span>
-          </h1>
+          </motion.h1>
           
           {/* Colored Bottom Line */}
-          <div className="hero-element opacity-0 translate-y-4 transition-all duration-300 ease-out delay-150">
-            <div className="w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 bg-[#bff747] mx-auto"></div>
-          </div>
-        </div>
+          <motion.div 
+            variants={lineVariants}
+            className="w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 bg-[#bff747] mx-auto"
+          />
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

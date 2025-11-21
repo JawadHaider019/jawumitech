@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { 
   SiNextdotjs, 
   SiReact, 
@@ -69,41 +69,11 @@ const techStack = [
 ];
 
 const TechStack: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current || !sectionRef.current) return;
-
-    // Simple intersection observer for scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const icons = containerRef.current?.querySelectorAll('.tech-icon');
-            if (icons) {
-              // Animate icons in with stagger
-              gsap.to(icons, {
-                scale: 1,
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                stagger: 0.05,
-                ease: "back.out(1.7)"
-              });
-            }
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(sectionRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const isInView = useInView(sectionRef, { 
+    once: true, 
+    margin: "-100px 0px"
+  });
 
   return (
     <section ref={sectionRef} className="py-20 bg-black overflow-hidden relative">
@@ -122,23 +92,38 @@ const TechStack: React.FC = () => {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Our Tech <span className="text-[#bff747]">Stack</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            We work with the latest and most reliable technologies to build exceptional digital experiences.
-          </p>
         </div>
 
         {/* Icons Grid */}
         <div className="flex justify-center">
-          <div 
-            ref={containerRef}
+          <motion.div 
             className="flex flex-wrap justify-center gap-6 max-w-6xl"
           >
             {techStack.map((tech, i) => {
               const IconComponent = tech.icon;
               return (
-                <div
+                <motion.div
                   key={i}
-                  className="tech-icon flex flex-col items-center justify-center cursor-pointer group opacity-0 scale-50 translate-y-10"
+                  initial={{ 
+                    opacity: 0, 
+                    scale: 0.5,
+                    y: 40
+                  }}
+                  animate={isInView ? { 
+                    opacity: 1, 
+                    scale: 1,
+                    y: 0
+                  } : { 
+                    opacity: 0, 
+                    scale: 0.5,
+                    y: 40
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    delay: i * 0.05, // Same stagger as GSAP
+                    ease: [0.34, 1.56, 0.64, 1] // Matches GSAP's back.out(1.7)
+                  }}
+                  className="flex flex-col items-center justify-center cursor-pointer group"
                 >
                   <div className={`text-4xl md:text-5xl ${tech.color} transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-2`}>
                     <IconComponent />
@@ -146,10 +131,10 @@ const TechStack: React.FC = () => {
                   <span className="text-white/70 text-xs mt-2 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {tech.name}
                   </span>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
 
         {/* Tech Categories */}

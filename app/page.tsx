@@ -8,7 +8,7 @@ import { AnimatedDivider } from "@/components/animated-divider"
 
 import { ChevronRight, ChevronUp } from "lucide-react"
 import ProcessSection from "@/components/process"
-import ServicesSection from "@/components/services"
+import ServicesSection from "@/components/servicessection"
 import FAQSection from "@/components/FAQ"
 import Testimonials from '@/components/testimonial'
 import TechStack from '@/components/techstack'

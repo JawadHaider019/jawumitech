@@ -17,7 +17,7 @@ export default function Portfolio() {
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
   const isCardsContainerInView = useInView(cardsContainerRef, { once: true, margin: "-50px" });
 
- const projects = [
+const projects = [
   {
     id: 1,
     title: "Pure Clay – Organic Food",
@@ -45,17 +45,36 @@ export default function Portfolio() {
     tags: ["React.js", "Tailwind CSS", "Vite", "Mongodb", "Node.js"],
     liveLink: "https://naturablissorganics.com/"
   },
+  
   {
     id: 4,
-   title: "POS Pro – Modern POS Frontend",
-  category: "web",
-  description: "Frontend for a cloud-based POS system, featuring dashboards for sales, inventory, and customer management. Optimized for speed, security, and responsive design.",
-  image: "/Projects/pos.webp",
-  tags: ["Next.js", "Tailwind CSS", "JavaScript", "UI/UX"],
-    liveLink: "https://pos-demoo.vercel.app/dashboard"
+    title: "Gogency – Travel Agency Platform",
+    category: "web",
+    description: "B2B travel management platform with automated onboarding, client communication, bookings, and payment management. Integrated WhatsApp and email tools streamline operations.",
+    image: "/Projects/gogency.webp",
+    tags: ["Next.js", "React", "GraphQL", "Nhost", "Hasura", "Material UI", "Shadcn/ui", "WhatsApp API"],
+    liveLink: "https://www.gogency.com/"
   },
   {
     id: 5,
+    title: "Xpert Advisers – Education Consultancy Platform",
+    category: "web",
+    description: "B2B consultancy platform with automated branded websites, lead management, and integrated WhatsApp and email tools for real-time client communication.",
+    image: "/Projects/xpert-advisor.webp",
+    tags: ["Next.js", "GraphQL", "Nhost", "Hasura", "Material UI", "Shadcn/ui", "WhatsApp API"],
+    liveLink: "http://xpertadvisers.com/"
+  },
+  // {
+  //   id: 6,
+  //   title: "POS Pro – Modern POS Frontend",
+  //   category: "web",
+  //   description: "Frontend for a cloud-based POS system, featuring dashboards for sales, inventory, and customer management. Optimized for speed, security, and responsive design.",
+  //   image: "/Projects/pos.webp",
+  //   tags: ["Next.js", "Tailwind CSS", "JavaScript", "UI/UX"],
+  //   liveLink: "https://pos-demoo.vercel.app/dashboard"
+  // },
+  {
+    id: 6,
     title: "TechFusion – IT Training & Digital Services",
     category: "web",
     description: "TechFusion offers IT training, and stock coaching. Features team profiles, testimonials, and a corporate landing page.",
@@ -64,6 +83,7 @@ export default function Portfolio() {
     liveLink: "https://techfpl.com/"
   }
 ]
+
   // Animation variants with proper typing
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -177,7 +197,7 @@ export default function Portfolio() {
       {/* Portfolio Section */}
       <section 
         ref={sectionRef}
-        className="bg-black text-white relative overflow-hidden py-12 sm:py-16 lg:py-20"
+        className="bg-black text-white  relative overflow-hidden py-12 sm:py-16 lg:py-20"
       >
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -233,7 +253,7 @@ export default function Portfolio() {
             variants={containerVariants}
             initial="hidden"
             animate={isCardsContainerInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 items-center"
           >
             {projects.map((project, index) => (
               <motion.div

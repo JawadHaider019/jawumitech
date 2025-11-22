@@ -123,9 +123,9 @@ export function Team() {
           </motion.h1>
         </motion.div>
 
-        {/* Grid of Team Members */}
+        {/* Team Members Container - Changed to flex column on mobile */}
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-4 py-8 sm:py-10 relative text-white"
+          className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-4 py-8 sm:py-10 relative text-white"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -135,10 +135,10 @@ export function Team() {
               key={i}
               variants={itemVariants}
               transition={itemTransition}
-              className="group flex flex-col items-center sm:items-end space-y-3 sm:space-y-4 relative cursor-pointer"
+              className="group flex flex-col items-center space-y-3 sm:space-y-4 relative cursor-pointer w-full"
             >
               {/* Member Text Block - Above image */}
-              <div className="text-center sm:text-right leading-tight w-full">
+              <div className="text-center leading-tight w-full">
                 <motion.h3 
                   className="text-lg sm:text-xl font-bold uppercase tracking-wide mb-1 sm:mb-2"
                 >
@@ -152,13 +152,13 @@ export function Team() {
               </div>
 
               {/* Image Container - Responsive height */}
-              <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[450px] overflow-hidden border border-white/20 transition-all duration-500 ease-in-out group-hover:border-[#bff747] group-hover:shadow-2xl group-hover:shadow-[#bff747]/20">
+              <div className="relative w-full h-[450px] overflow-hidden border border-white/20 transition-all duration-500 ease-in-out group-hover:border-[#bff747] group-hover:shadow-2xl group-hover:shadow-[#bff747]/20">
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   className="object-cover transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:contrast-110 grayscale"
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  sizes="(max-width: 1024px) 100vw, 25vw"
                   priority={i === 0}
                 />
                 

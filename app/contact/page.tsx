@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
-
+import { motion, Variants } from "framer-motion"
 import { Mail, Phone, MapPin, Send } from "lucide-react"
 import emailjs from '@emailjs/browser'
 import Marquee from '@/components/Marquee';
@@ -100,6 +100,97 @@ export default function Contact() {
     }
   }
 
+  // Animation variants with proper typing
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        when: "beforeChildren"
+      }
+    }
+  }
+
+  const itemVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30 
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const cardVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.9 
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      y: -5,
+      scale: 1.02,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const iconVariants: Variants = {
+    hover: {
+      scale: 1.1,
+      rotate: 5,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const formVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      x: 50 
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        delay: 0.3
+      }
+    }
+  }
+
+  const buttonVariants: Variants = {
+    hover: {
+      scale: 1.05,
+      boxShadow: "0 10px 30px -10px rgba(191, 247, 71, 0.5)",
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    },
+    tap: {
+      scale: 0.95
+    }
+  }
+
   return (
     <main className="bg-black">
       <Hero
@@ -109,106 +200,177 @@ export default function Contact() {
       />
       <Marquee/>
 
-    
-
       {/* Contact Section */}
-      <section className="py-20 px-4 max-w-6xl mx-auto">
-        <div className="gap-12">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={containerVariants}
+        className="py-16 md:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
+      >
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Contact Info */}
-          <div >
-            <h2 className="text-3xl font-bold mb-8">Get In Touch</h2>
+          <motion.div variants={itemVariants}>
+            <motion.h2 
+              variants={itemVariants}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white"
+            >
+              Get In Touch
+            </motion.h2>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-lg text-gray-300 mb-8 leading-relaxed"
+            >
+              Ready to start your next project? Let's discuss how we can transform your ideas into reality with cutting-edge solutions.
+            </motion.p>
 
-            <div className="flex gap-2 justify-between items-center space-y-6 mb-12">
-              <div className="flex gap-4">
-                <div className="p-3 bg-[#bff747]/10 rounded-lg h-fit">
-                  <Mail size={24} className="text-[#bff747]" />
+            {/* Contact Cards Grid */}
+            <motion.div 
+              variants={containerVariants}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6 mb-8"
+            >
+              {/* Email Card */}
+              <motion.div
+                variants={cardVariants}
+                whileHover="hover"
+                className="p-4 sm:p-6 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl hover:border-[#bff747]/30 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <motion.div
+                    variants={iconVariants}
+                    whileHover="hover"
+                    className="p-3 bg-[#bff747]/10 rounded-lg flex-shrink-0"
+                  >
+                    <Mail size={24} className="text-[#bff747]" />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-semibold mb-2 text-white">Email</h3>
+                    <p className="text-gray-400 text-sm sm:text-base">support@jawumitech.com</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-gray-400">support@jawumitech.com</p>
-                </div>
-              </div>
+              </motion.div>
 
-              <div className="flex gap-4">
-                <div className="p-3 bg-[#bff747]/10 rounded-lg h-fit">
-                  <Phone size={24} className="text-[#bff747]" />
+              {/* Phone Card */}
+              <motion.div
+                variants={cardVariants}
+                whileHover="hover"
+                className="p-4 sm:p-6 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl hover:border-[#bff747]/30 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <motion.div
+                    variants={iconVariants}
+                    whileHover="hover"
+                    className="p-3 bg-[#bff747]/10 rounded-lg flex-shrink-0"
+                  >
+                    <Phone size={24} className="text-[#bff747]" />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-semibold mb-2 text-white">Phone</h3>
+                    <p className="text-gray-400 text-sm sm:text-base">+92 329 1927168</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Phone</h3>
-                  <p className="text-gray-400">+923205917168</p>
-                </div>
-              </div>
+              </motion.div>
 
-              <div className="flex gap-4">
-                <div className="p-3 bg-[#bff747]/10 rounded-lg h-fit">
-                  <MapPin size={24} className="text-[#bff747]" />
+              {/* Location Card */}
+              <motion.div
+                variants={cardVariants}
+                whileHover="hover"
+                className="p-4 sm:p-6 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl hover:border-[#bff747]/30 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <motion.div
+                    variants={iconVariants}
+                    whileHover="hover"
+                    className="p-3 bg-[#bff747]/10 rounded-lg flex-shrink-0"
+                  >
+                    <MapPin size={24} className="text-[#bff747]" />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-semibold mb-2 text-white">Location</h3>
+                    <p className="text-gray-400 text-sm sm:text-base">Remote - Serving Global Clients</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Location</h3>
-                  <p className="text-gray-400">Remote - Serving Global Clients</p>
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-           
-          </div>
+            {/* Additional Info */}
+            <motion.div 
+              variants={itemVariants}
+              className="p-4 bg-[#0A0A0A] border border-[#1A1A1A] rounded-lg"
+            >
+              <p className="text-sm text-gray-400 text-center">
+                Typically respond within 2-4 hours during business hours
+              </p>
+            </motion.div>
+          </motion.div>
 
           {/* Contact Form */}
-          {/* <div className="p-8 bg-[#0A0A0A] border border-[#1A1A1A] rounded-lg">
+          <motion.div 
+            variants={formVariants}
+            className="p-6 sm:p-8 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl"
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-semibold mb-2">Name</label>
+              <motion.div variants={itemVariants}>
+                <label className="block text-sm font-semibold mb-3 text-white">Name</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded focus:border-[#bff747] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded-lg focus:border-[#bff747] focus:outline-none transition-colors text-white placeholder-gray-500"
                   placeholder="Your name"
                 />
-              </div>
+              </motion.div>
 
-              <div>
-                <label className="block text-sm font-semibold mb-2">Email</label>
+              <motion.div variants={itemVariants}>
+                <label className="block text-sm font-semibold mb-3 text-white">Email</label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded focus:border-[#bff747] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded-lg focus:border-[#bff747] focus:outline-none transition-colors text-white placeholder-gray-500"
                   placeholder="your@email.com"
                 />
-              </div>
+              </motion.div>
 
-              <div>
-                <label className="block text-sm font-semibold mb-2">Message</label>
+              <motion.div variants={itemVariants}>
+                <label className="block text-sm font-semibold mb-3 text-white">Message</label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded focus:border-[#bff747] focus:outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded-lg focus:border-[#bff747] focus:outline-none transition-colors text-white placeholder-gray-500 resize-none"
                   placeholder="Tell us about your project..."
                 />
-              </div>
+              </motion.div>
 
               {error && (
-                <div className="p-4 bg-red-500/10 border border-red-500 rounded text-red-500 text-center">
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-center"
+                >
                   {error}
-                </div>
+                </motion.div>
               )}
 
-              <button
+              <motion.button
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-[#bff747] text-black font-bold rounded hover:shadow-lg hover:shadow-[#bff747]/50 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 bg-[#bff747] text-black font-bold rounded-lg transition-all flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 {loading ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
                     Sending...
                   </>
                 ) : (
@@ -217,31 +379,36 @@ export default function Contact() {
                     <Send size={18} className="group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
-              </button>
+              </motion.button>
 
               {submitted && (
-                <div className="p-4 bg-[#bff747]/10 border border-[#bff747] rounded text-[#bff747] text-center">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="p-4 bg-[#bff747]/10 border border-[#bff747] rounded-lg text-[#bff747] text-center"
+                >
                   ✅ Thanks for reaching out! We'll get back to you soon.
-                </div>
+                </motion.div>
               )}
             </form>
 
-            <div className="mt-6 p-4 bg-black border border-[#1A1A1A] rounded text-center">
+            <motion.div 
+              variants={itemVariants}
+              className="mt-6 p-4 bg-black border border-[#1A1A1A] rounded-lg text-center"
+            >
               <p className="text-sm text-gray-400">
                 Form not working?{" "}
                 <a 
                   href="mailto:support@jawumitech.com" 
-                  className="text-[#bff747] hover:underline"
+                  className="text-[#bff747] hover:underline transition-colors"
                 >
                   Click here to email us directly
                 </a>
               </p>
-            </div>
-          </div> */}
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
-
-
+      </motion.section>
     </main>
   )
 }

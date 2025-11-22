@@ -90,7 +90,7 @@ const ServicesSection: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08, // Slightly faster stagger for better performance
+        staggerChildren: 0.08,
         when: "beforeChildren"
       }
     }
@@ -99,7 +99,7 @@ const ServicesSection: React.FC = () => {
   const itemVariants: Variants = {
     hidden: { 
       opacity: 0, 
-      y: 30, // Reduced from 40 for smoother animation
+      y: 30,
       scale: 0.98 
     },
     visible: {
@@ -107,8 +107,8 @@ const ServicesSection: React.FC = () => {
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.4, // Slightly faster for better UX
-        ease: [0.25, 0.46, 0.45, 0.94] // Custom ease for smoother feel
+        duration: 0.4,
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
   };
@@ -137,7 +137,7 @@ const ServicesSection: React.FC = () => {
       scale: 1,
       opacity: 1,
       transition: {
-        duration: 0.8, // Faster background animation
+        duration: 0.8,
         ease: "easeOut"
       }
     }
@@ -145,7 +145,7 @@ const ServicesSection: React.FC = () => {
 
   const cardHoverVariants: Variants = {
     hover: {
-      y: -6, // Reduced lift for subtler effect
+      y: -6,
       scale: 1.01,
       transition: {
         duration: 0.2,
@@ -156,7 +156,7 @@ const ServicesSection: React.FC = () => {
 
   const imageHoverVariants: Variants = {
     hover: {
-      scale: 1.03, // Reduced scale for better performance
+      scale: 1.03,
       transition: {
         duration: 0.3,
         ease: "easeOut"
@@ -167,7 +167,7 @@ const ServicesSection: React.FC = () => {
   const iconHoverVariants: Variants = {
     hover: {
       scale: 1.05,
-      rotate: 2, // Reduced rotation for subtler effect
+      rotate: 2,
       transition: {
         duration: 0.15,
         ease: "easeOut"
@@ -252,10 +252,11 @@ const ServicesSection: React.FC = () => {
               variants={itemVariants}
               whileHover="hover"
               className="group h-full flex"
-              whileTap={{ scale: 0.98 }} // Add tap feedback for mobile
+              whileTap={{ scale: 0.98 }}
             >
-              <motion.div
-                variants={cardHoverVariants}
+              {/* Card as Link */}
+              <Link 
+                href={service.link}
                 className="relative bg-[#0b0b0b] backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 hover:border-[#bff747]/30 transition-all duration-200 overflow-hidden hover:shadow-lg sm:hover:shadow-xl hover:shadow-[#bff747]/15 flex flex-col w-full"
               >
                 {/* Glow Effect */}
@@ -297,8 +298,8 @@ const ServicesSection: React.FC = () => {
                   </p>
                   <div className="mt-auto">
                     <motion.div whileHover="hover">
-                      <Link
-                        href={service.link}
+                      <button 
+                        onClick={(e) => e.preventDefault()} // Prevent double navigation
                         className="group/btn inline-flex items-center gap-2 px-1 py-2 bg-transparent text-[#bff747] transition-all duration-200 hover:text-[#bff747]/90"
                       >
                         <span className="font-semibold text-xs sm:text-sm lg:text-sm">Explore</span>
@@ -308,23 +309,15 @@ const ServicesSection: React.FC = () => {
                         >
                           <FaArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                         </motion.span>
-                      </Link>
+                      </button>
                     </motion.div>
                   </div>
                 </div>
-              </motion.div>
+              </Link>
             </motion.div>
           ))}
         </motion.div>
-
-      
       </div>
-
-      <style jsx>{`
-        .hover\\:glow-green:hover {
-          text-shadow: 0 0 20px rgba(191, 247, 71, 0.8);
-        }
-      `}</style>
     </section>
   );
 };

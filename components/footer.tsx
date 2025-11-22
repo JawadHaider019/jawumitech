@@ -101,7 +101,7 @@ const Footer = () => {
             initial="hidden"
             animate={isCollaborationInView ? "visible" : "hidden"}
             transition={scaleTransition}
-            className='z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bff747] hover:bg-black/80 hover:text-white w-16 h-16 md:w-28 md:h-28 lg:w-36 lg:h-36 rounded-full text-black font-bold flex flex-col items-center justify-center text-xs md:text-base tracking-wider transition-all duration-300 hover:scale-110 cursor-pointer group border border-transparent hover:border-[#bff747]'
+            className='z-45 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#bff747] hover:bg-black/80 hover:text-white w-16 h-16 md:w-28 md:h-28 lg:w-36 lg:h-36 rounded-full text-black font-bold flex flex-col items-center justify-center text-xs md:text-base tracking-wider transition-all duration-300 hover:scale-110 cursor-pointer group border border-transparent hover:border-[#bff747]'
           >
             <ArrowRight className='group-hover:rotate-[-40deg] transition-transform duration-300 mb-0.5 md:mb-1 w-4 h-4 md:w-6 md:h-6' />
             <span className='text-[10px] md:text-sm'>Get In Touch</span>

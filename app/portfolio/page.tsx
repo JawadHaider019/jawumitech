@@ -27,15 +27,24 @@ const projects = [
     image: "/Projects/pureclay.webp",
     liveLink: "https://www.pureclay.org/"
   },
-  {
+  // {
+  //   id: 2,
+  //   title: "Bannu Gul – Multi-Vendor Restaurant",
+  //   category: "web",
+  //   description: "Multi-vendor food delivery system with real-time ordering, vendor dashboards, and tracking.",
+  //   image: "/Projects/bannugul.webp",
+  //   tags: ["Next.js", "Tailwind CSS", "Laravel", "PostgreSQL", "TypeScript"],
+  //   liveLink: "https://bannu-gul-customer-web.vercel.app/"
+  // },
+ {
     id: 2,
-    title: "Bannu Gul – Multi-Vendor Restaurant",
-    category: "web",
-    description: "Multi-vendor food delivery system with real-time ordering, vendor dashboards, and tracking.",
-    image: "/Projects/bannugul.webp",
-    tags: ["Next.js", "Tailwind CSS", "Laravel", "PostgreSQL", "TypeScript"],
-    liveLink: "https://bannu-gul-customer-web.vercel.app/"
-  },
+    title: "TimeXperts – IT Outsourcing & Staff Augmentation",
+    category: "corporate",
+    description: "Corporate website for an IT outsourcing company specializing in software development, QA, IT networking, and technical recruitment since 2008. Features services overview, core competencies, and client partnership information.",
+    image: "/Projects/timeexpert.webp",
+    tags: ["React.js", "Laravel", "Tailwind CSS" ,"My Sql"],
+    liveLink: "https://timexperts.com.pk/"
+},
   {
     id: 3,
     title: "Natura Bliss – Organic Skincare",
@@ -64,24 +73,25 @@ const projects = [
     tags: ["Next.js", "GraphQL", "Nhost", "Hasura", "Material UI", "Shadcn/ui", "WhatsApp API"],
     liveLink: "http://xpertadvisers.com/"
   },
-  // {
-  //   id: 6,
-  //   title: "POS Pro – Modern POS Frontend",
-  //   category: "web",
-  //   description: "Frontend for a cloud-based POS system, featuring dashboards for sales, inventory, and customer management. Optimized for speed, security, and responsive design.",
-  //   image: "/Projects/pos.webp",
-  //   tags: ["Next.js", "Tailwind CSS", "JavaScript", "UI/UX"],
-  //   liveLink: "https://pos-demoo.vercel.app/dashboard"
-  // },
-  {
+{
     id: 6,
-    title: "TechFusion – IT Training & Digital Services",
-    category: "web",
-    description: "TechFusion offers IT training, and stock coaching. Features team profiles, testimonials, and a corporate landing page.",
-    image: "/Projects/techfusion.webp",
-    tags: ["React", "PHP", "Tailwind"],
-    liveLink: "https://techfpl.com/"
-  }
+    title: "SZ Naturals – Herbal Hair Care & Natural Products",
+    category: "ecommerce",
+    description: "An e-commerce website for herbal hair care products blending Ayurvedic wisdom with modern science. Features product philosophy, herbal ingredients focus, brand mission, and customer testimonials for natural hair wellness solutions.",
+    image: "/Projects/sznaturals.webp",
+     tags: ["React.js", "Tailwind CSS", "Vite", "Mongodb", "Node.js"],
+    liveLink: "https://sznaturals.com"
+}
+ 
+  // {
+  //   id: 8,
+  //   title: "TechFusion – IT Training & Digital Services",
+  //   category: "web",
+  //   description: "TechFusion offers IT training, and stock coaching. Features team profiles, testimonials, and a corporate landing page.",
+  //   image: "/Projects/techfusion.webp",
+  //   tags: ["React", "PHP", "Tailwind"],
+  //   liveLink: "https://techfpl.com/"
+  // }
 ]
 
   // Animation variants with proper typing

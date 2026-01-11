@@ -2,7 +2,8 @@
 
 import { useRef, useState } from 'react';
 import { motion, Variants } from 'framer-motion';
-import { ArrowUpRight, ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Star, Sparkles, CheckCircle } from 'lucide-react';
+import Image from 'next/image';
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -74,6 +75,24 @@ export default function HeroSection() {
       transition: {
         duration: 1.2,
         ease: "easeOut"
+      }
+    }
+  };
+
+  const imageVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.9,
+      x: 50 
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      x: 0,
+      transition: {
+        duration: 1,
+        ease: "easeOut",
+        delay: 0.5
       }
     }
   };
@@ -157,6 +176,68 @@ export default function HeroSection() {
               </motion.a>
             </motion.div>
           </div>
+
+          {/* Right Column - Custom Shaped Image with White Overlay */}
+          <motion.div 
+            variants={imageVariants}
+            className="relative hidden lg:block"
+          >
+            <div className="relative w-[400px] h-[400px] lg:w-[500px] lg:h-[500px] mx-auto">
+              
+              {/* Image Container */}
+              <div className="absolute inset-0 w-full h-full overflow-hidden 
+                [clip-path:polygon(25%_0%,100%_0%,75%_100%,0%_100%)]
+                shadow-2xl shadow-[#bff747]/20
+                z-10">
+                
+                {/* Your Image */}
+                <Image
+                  src="/Hero.jpg" 
+                  alt="Jawumi Tech - Digital Solutions"
+                  fill
+                  className="object-cover"
+                  priority
+                  onLoad={() => setIsLoaded(true)}
+                />
+
+                {/* Loading animation */}
+                {!isLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+                    <div className="w-16 h-16 border-4 border-[#bff747]/30 border-t-[#bff747] rounded-full animate-spin"></div>
+                  </div>
+                )}
+              </div>
+
+              {/* White Overlay */}
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+                className="absolute inset-0 w-full h-full overflow-hidden 
+                  [clip-path:polygon(25%_0%,100%_0%,75%_100%,0%_100%)]
+                  bg-[#bff747]/20
+                  shadow-2xl
+                  -translate-x-12 -translate-y-7
+                  flex flex-col items-center justify-center p-8 text-center z-20"
+              >
+              
+                        </motion.div>
+        
+              <motion.div 
+                className="absolute -bottom-8 -left-8 w-20 h-20 bg-[#bff747]/5 rounded-full blur-xl -z-10"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.2, 0.4, 0.2],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1
+                }}
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </motion.section>

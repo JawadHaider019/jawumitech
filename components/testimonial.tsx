@@ -34,7 +34,7 @@ const Testimonials: React.FC = () => {
       id: 2,
       name: "Muhammad Ahmad",
       position: "Founder",
-      image: "/clients/noman.png",
+      image: "/clients/Ahmad.png",
       content: "“Running a business that focuses on natural foods means I already have a lot on my plate. The website JawumiTech delivered made my life so much easier. Managing products, tracking orders, and updating content is now effortless. It feels like the tech finally supports the business — not the other way around.”",
       rating: 5
     },

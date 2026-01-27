@@ -12,7 +12,7 @@ const teamMembers = [
     description: "Leads the vision and direction of the company while also contributing as a full stack developer. Guides the team, ensures technical standards, and focuses on building high-quality products."
   },
   {
-    name: "Daniel Mansoor",
+    name: "Aqib Mansoor",
     position: "Full Stack Developer",
     image: "/team/aqibdev.webp",
     description: "Specialized in building scalable web applications. Passionate about creating smooth user experiences and delivering reliable, high-quality projects."

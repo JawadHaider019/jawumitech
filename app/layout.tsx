@@ -14,26 +14,25 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jawumitech.com"),
+  metadataBase: new URL("https://Jawumitech.com"),
   title: {
-    default: "JawumiTech Software Agency",
-    template: "%s | JawumiTech",
+    default: "Jawumitech Software Agency",
+    template: "%s | Jawumitech",
   },
   description:
-    "JawumiTech transforms ideas into exceptional digital experiences. We deliver professional web development, UI/UX design, mobile apps, software solutions, and ongoing support for businesses globally.",
+    "Jawumitech transforms ideas into exceptional digital experiences. We deliver professional web development, UI/UX design, software solutions, and ongoing support for businesses globally.",
   keywords: [
     "software development",
     "web development",
     "UI/UX design",
-    "mobile app development",
     "business automation",
     "e-commerce solutions",
     "digital transformation",
     "IT consulting",
   ],
-  authors: [{ name: "JawumiTech" }],
-  creator: "JawumiTech",
-  publisher: "JawumiTech",
+  authors: [{ name: "Jawumitech" }],
+  creator: "Jawumitech",
+  publisher: "Jawumitech",
   robots: {
     index: true,
     follow: true,
@@ -48,9 +47,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://jawumitech.com",
-    siteName: "JawumiTech",
-    title: "JawumiTech - IT Solutions, Web & UI/UX Design",
+    url: "https://Jawumitech.com",
+    siteName: "Jawumitech",
+    title: "Jawumitech Software Agency",
     description:
       "Professional IT services for businesses including web development, UI/UX design, software solutions, and ongoing support. Delivering projects with quality, performance, and efficiency.",
     images: [
@@ -58,12 +57,12 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "JawumiTech - Business IT Solutions",
+        alt: "Jawumitech - Business IT Solutions",
       },
     ],
   },
   alternates: {
-    canonical: "https://jawumitech.com",
+    canonical: "https://Jawumitech.com",
   },
   category: "technology",
 };
@@ -129,23 +128,23 @@ export default function RootLayout({
         <meta name="theme-color" content="#bff747" />
         <meta name="msapplication-TileColor" content="#bff747" />
 
-        {/* Structured Data for JawumiTech */}
+        {/* Structured Data for Jawumitech */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "JawumiTech",
+              name: "Jawumitech",
               description:
-                "JawumiTech provides client-focused IT solutions including web development, UI/UX design, software development, maintenance, and digital strategy.",
-              url: "https://jawumitech.com",
-              logo: "https://jawumitech.com/logo.png",
+                "Jawumitech provides client-focused IT solutions including web development, UI/UX design, software development, maintenance, and digital strategy.",
+              url: "https://Jawumitech.com",
+              logo: "https://Jawumitech.com/logo.png",
               founder: {
                 "@type": "Person",
                 name: "Jawad Haider",
                 jobTitle: "Founder & Developer",
-                url: "https://jawumitech.com/about",
+                url: "https://Jawumitech.com/about",
               },
               contactPoint: {
                 "@type": "ContactPoint",

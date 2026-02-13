@@ -8,40 +8,33 @@ const SERVICES = [
   {
     number: "01",
     title: "Trusted Experts",
-    description: "Proven track record with startups and businesses. Real projects, real results.",
-    bg: "bg-[#0b0b0b] text-white border border-white/10",
-    numberBg: "text-[#bff747]",
-    arrowColor: "text-[#bff747]",
+    description: "Our team has years of hands-on experience in web development, UI/UX, and social media marketing.",
+ 
     rotate: "rotate-[-3deg]",
   },
   {
     number: "02",
-    title: "Clear Communication",
-    description: "No hidden costs or delays. We deliver exactly what we promise, transparently.",
-    bg: "bg-[#0b0b0b] text-white border border-white/10",
-    numberBg: "text-[#bff747]",
-    arrowColor: "text-[#bff747]",
+       title: "Clear Communication",
+    description: "Transparent process with regular updates and open collaboration, ensuring no hidden costs or surprises.",
+ 
     rotate: "rotate-[2deg]",
   },
   {
     number: "03",
     title: "Reliable Support",
-    description: "Ongoing maintenance and updates to keep your digital products performing perfectly.",
-    bg: "bg-[#0b0b0b] text-white border border-white/10",
-    numberBg: "text-[#bff747]",
-    arrowColor: "text-[#bff747]",
+    description: "We provide ongoing support to ensure your websites, social media campaigns, and digital products run smoothly.",
+ 
     rotate: "rotate-[-2deg]",
   },
   {
     number: "04",
-    title: "Custom Solutions",
-    description: "Tailored solutions built for performance, scalability, and real business impact.",
-    bg: "bg-[#0b0b0b] text-white border border-white/10",
-    numberBg: "text-[#bff747]",
-    arrowColor: "text-[#bff747]",
+   title: "Custom Solutions",
+    description: "Tailored solutions designed for your business goals, performance, scalability, and measurable results.",
+ 
     rotate: "rotate-[3deg]",
   },
 ];
+
 
 export default function WhyChooseUs() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -76,6 +69,15 @@ export default function WhyChooseUs() {
         duration: 0.6,
         ease: "easeOut"
       }
+    },
+     hover: {
+      y: -8,
+      scale: 1.02,
+     
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
     }
   };
 
@@ -94,17 +96,7 @@ export default function WhyChooseUs() {
     }
   };
 
-  const cardHoverVariants: Variants = {
-    hover: {
-      y: -8,
-      scale: 1.02,
-     
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }
-  };
+
 
   const backgroundVariants: Variants = {
     hidden: { 
@@ -172,17 +164,17 @@ export default function WhyChooseUs() {
               key={idx}
               variants={itemVariants}
               whileHover="hover"
-              className={`relative rounded-2xl p-6 min-h-[200px] flex flex-col justify-between backdrop-blur-sm ${item.bg} ${item.rotate}`}
+              className={`relative rounded-2xl p-6 min-h-[200px] flex flex-col justify-between backdrop-blur-sm bg-[#0b0b0b] text-white border border-white/10 ${item.rotate}`}
             >
               <motion.div 
-                variants={cardHoverVariants}
+    
                 className="w-full h-full"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <span className={`flex items-center justify-center font-bold text-5xl ${item.numberBg}`}>
+                  <span className='flex items-center justify-center font-bold text-5xl text-[#bff747]'>
                     {item.number}
                   </span>
-                  <ArrowUpRight className={`w-6 h-6 ${item.arrowColor}`} />
+                  <ArrowUpRight className='w-6 h-6 text-[#bff747] ' />
                 </div>
                 <div>
                   <h3 className="font-bold text-xl mb-3 text-white">{item.title}</h3>

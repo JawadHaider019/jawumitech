@@ -175,15 +175,11 @@ const FounderSection = () => {
               className="space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base lg:text-lg text-center lg:text-left"
             >
               <p>
-                With over 5 years of intensive experience in full-stack development and system architecture, 
-                I've dedicated my career to transforming complex business challenges into elegant digital solutions. 
-                My journey began with a simple belief: technology should empower, not complicate.
+               With several years of hands-on experience in full-stack development, I’ve dedicated my career to turning ideas into reliable, efficient digital solutions. I started with a passion for technology and a belief that every business, big or small, deserves access to smart, well-designed software.
               </p>
               
               <p>
-                What distinguishes my approach is the fusion of deep technical expertise with strategic business acumen. 
-                I don't just build applications—I architect ecosystems that scale, perform, and drive measurable ROI for 
-                businesses ranging from ambitious startups to established enterprises.
+My approach combines deep technical expertise with practical problem-solving. I craft scalable applications and systems that help startups and growing businesses achieve measurable results.
               </p>
             </motion.div>
 
@@ -202,8 +198,7 @@ const FounderSection = () => {
                     <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-[#bff747] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                   </h4>
                   <p className="text-gray-300 leading-relaxed text-md ">
-                    Designing the foundation for a world driven by intelligent automation — where workflows manage themselves, 
-                    systems optimize continuously, and businesses scale without human limitations. This is the future I'm working toward.
+                  Building digital ecosystems where technology works seamlessly — optimizing workflows, enhancing efficiency, and empowering businesses to grow confidently.
                   </p>
                 </div>
               </div>

@@ -110,7 +110,7 @@ const LeftRight = ({
           <div className="lg:w-2/5 lg:sticky lg:top-24 lg:self-start py-4 sm:py-8 lg:py-8">
             <motion.div 
               variants={leftContentVariants}
-              className="space-y-4 sm:space-y-6 lg:space-y-8 w-full text-center lg:text-left"
+              className="space-y-4 sm:space-y-5 w-full text-center lg:text-left"
             >
               <motion.h3 
                 variants={leftContentVariants}
@@ -144,8 +144,7 @@ const LeftRight = ({
                 >
                   <Link
                     href={buttonLink}
-                    className="px-6 sm:px-8 py-3 sm:py-4 bg-[#bff747] text-black font-semibold rounded-full border border-transparent flex items-center justify-center gap-2 text-sm sm:text-base"
-                  >
+                    className="group px-6 sm:px-8 py-3 sm:py-4 bg-[#bff747] hover:bg-black text-black hover:text-[#bff747] font-semibold rounded-full border-2 border-transparent hover:border-[#bff747] transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-[#bff747]/20 text-sm sm:text-base">
                     {buttonText}
                     <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </Link>

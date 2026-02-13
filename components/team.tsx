@@ -9,27 +9,28 @@ const teamMembers = [
     name: "Jawad Haider",
     position: "Founder / CEO",
     image: "/team/jawadfounder.webp",
-    description: "Leads the vision and direction of the company while also contributing as a full stack developer. Guides the team, ensures technical standards, and focuses on building high-quality products."
+    description: "Leads the company’s vision and direction while contributing as a full-stack developer. Ensures high technical standards and delivers top-quality solutions."
   },
   {
     name: "Aqib Mansoor",
     position: "Full Stack Developer",
     image: "/team/aqibdev.webp",
-    description: "Specialized in building scalable web applications. Passionate about creating smooth user experiences and delivering reliable, high-quality projects."
+    description: "Builds scalable web applications with a focus on smooth user experiences and reliable, high-quality solutions that meet client needs."
   },
   {
     name: "Haseeb Ur Rehman",
     position: "Software Developer",
     image: "/team/Haseebdev.webp",
-    description: "Develops custom software solutions and business applications. Focused on efficiency, reliability, and simplifying daily operations for clients."
+    description: "Develops custom software solutions to improve business efficiency, with a focus on reliability, performance, and client satisfaction."
   },
   {
     name: "Muhammad Jamshaid",
     position: "Project Manager",
     image: "/team/jamshaidDev.webp",
-    description: "Manages projects from planning to delivery. Coordinates the team, ensures timely execution, and maintains clear communication with clients."
+    description: "Oversees projects from planning to delivery, ensuring smooth team coordination, timely execution, and consistent communication with clients."
   }
 ];
+
 
 export function Team() {
   const sectionRef = useRef(null);
@@ -123,7 +124,7 @@ export function Team() {
           </motion.h1>
         </motion.div>
 
-        {/* Team Members Container - Changed to flex column on mobile */}
+        {/* Team Members Container */}
         <motion.div 
           className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-4 py-8 sm:py-10 relative text-white"
           variants={containerVariants}
@@ -151,7 +152,7 @@ export function Team() {
                 </motion.p>
               </div>
 
-              {/* Image Container - Responsive height */}
+              {/* Image Container - Fixed height */}
               <div className="relative w-full h-[450px] overflow-hidden border border-white/20 transition-all duration-500 ease-in-out group-hover:border-[#bff747] group-hover:shadow-2xl group-hover:shadow-[#bff747]/20">
                 <Image
                   src={member.image}
@@ -162,18 +163,24 @@ export function Team() {
                   priority={i === 0}
                 />
                 
-                {/* Gradient Overlay - Changes on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500" />
+                {/* Gradient Overlay - Always visible, changes on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500" />
                 
-                {/* Description Text - Only shows on hover */}
-                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 lg:p-6 text-white transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  <p className="text-xs sm:text-sm leading-relaxed text-gray-200">
-                    {member.description}
-                  </p>
+                {/* Description Container - With solid background overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 lg:p-6 transform translate-y-0 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                  {/* Solid background overlay for better readability */}
+                  <div className="absolute inset-0 bg-black/30 backdrop-blur-sm  -z-10" />
+                  
+                  {/* Text content */}
+                  <div className="relative z-10">
+                    <p className="text-xs sm:text-sm leading-relaxed text-gray-100 font-medium">
+                      {member.description}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Hover Enhancement Overlay */}
-                <div className="absolute inset-0 bg-[#bff747]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-[#bff747]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay" />
               </div>
             </motion.div>
           ))}

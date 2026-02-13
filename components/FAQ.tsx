@@ -10,60 +10,60 @@ interface FAQ {
 
 const FAQS: FAQ[] = [
   {
-    question: "How long does it take to build a website or app?",
-    answer: "The timeline depends on complexity and features. A simple website may take 3-6 weeks, while a fully-featured web or mobile application can take 8-16 weeks. We provide a detailed project timeline with milestones during the proposal phase."
+    question: "How long does it take to build a website?",
+    answer: "The timeline depends on project scope and features. A standard business website typically takes 3–6 weeks, while a custom web application may take 6–12 weeks. We provide a clear development roadmap with defined milestones before starting."
   },
   {
-    question: "What is the cost of developing a website or app?",
-    answer: "Costs vary based on project complexity, design, and functionality. We provide transparent quotes upfront and offer phased development options for startups or budget-conscious businesses."
+    question: "How much does a professional website cost?",
+    answer: "Pricing depends on design complexity, functionality, and integrations. We provide transparent custom quotes based on your requirements, ensuring scalable solutions that fit your business goals and budget."
   },
   {
-    question: "Do you offer post-launch support and maintenance?",
-    answer: "Yes! We provide ongoing support including bug fixes, updates, performance optimization, and security patches. Flexible support plans can be customized to meet your business needs."
+    question: "Do you provide website maintenance and support?",
+    answer: "Yes. We offer ongoing website maintenance, performance monitoring, security updates, and technical support to ensure your website remains fast, secure, and up to date."
   },
   {
-    question: "Can you work with startups or small budgets?",
-    answer: "Absolutely! We help startups launch MVPs efficiently by prioritizing core features and scalable solutions. Our phased approach ensures quality without exceeding budget."
+    question: "Do you work with startups and small businesses?",
+    answer: "Absolutely. We help startups and growing businesses launch professional websites by focusing on essential features first, with scalable architecture for future expansion."
   },
   {
-    question: "Which technologies and frameworks do you specialize in?",
-    answer: "We specialize in modern tech stacks including Next.js, React, TypeScript, Node.js, Laravel, MongoDb, MySql, React Native, AWS, and Vercel."
+    question: "Which technologies do you use for web development?",
+    answer: "We work with modern technologies including Next.js, React, TypeScript, Node.js, Laravel, MongoDB, MySQL, AWS, and Vercel to build secure, scalable, and high-performance web applications."
   },
   {
-    question: "Will I have ownership of the source code and design assets?",
-    answer: "Yes, 100%. Upon final payment, you own all code, design assets, and intellectual property. We believe you should have full control over your project."
+    question: "Will I own the website and source code?",
+    answer: "Yes. After project completion and final payment, you receive full ownership of the website, source code, and design assets. You maintain complete control over your digital product."
   },
   {
-    question: "Do you handle UI/UX design?",
-    answer: "Yes. We provide end-to-end design services, including research, wireframing, prototyping, and high-fidelity UI/UX design. Our goal is to create interfaces that are intuitive and visually appealing."
+    question: "Do you provide UI/UX design services?",
+    answer: "Yes. We design user-focused interfaces through research, wireframes, and high-fidelity UI/UX design to ensure your website delivers a seamless and engaging user experience."
   },
   {
-    question: "How do you ensure project quality?",
-    answer: "We follow industry best practices: code reviews, automated testing, continuous integration, and thorough QA processes. This ensures maintainable, scalable, and high-performance solutions."
+    question: "How do you ensure website quality and performance?",
+    answer: "We follow structured development processes including testing, performance optimization, SEO best practices, and security checks to deliver reliable and scalable web solutions."
   },
   {
-    question: "Can I request changes or add features mid-project?",
-    answer: "Yes. We follow an agile workflow, allowing for changes while managing impact on timeline and budget. We maintain transparency and communicate clearly about adjustments."
+    question: "Can I request changes during development?",
+    answer: "Yes. We maintain clear communication throughout the project and can accommodate changes with proper impact assessment on timeline and scope."
   },
   {
-    question: "Do you integrate third-party services?",
-    answer: "Yes. We can integrate payment gateways, analytics, social logins, cloud storage, and other APIs to enhance your project functionality."
+    question: "Do you integrate payment gateways and third-party services?",
+    answer: "Yes. We integrate payment gateways, analytics tools, CRM systems, cloud storage, and other third-party APIs to enhance your website functionality."
   },
   {
-    question: "How will you communicate during the project?",
-    answer: "We stay in touch via WhatsApp for quick updates and clarifications. For detailed discussions, milestone reviews, or sharing files, we can also use email or project management tools. This ensures you're always informed and involved throughout the project."
+    question: "How do you communicate during a project?",
+    answer: "We provide regular progress updates via WhatsApp and email. For structured discussions, we schedule review meetings to ensure transparency and alignment at every stage."
   },
   {
-    question: "What if I'm not tech-savvy?",
-    answer: "No worries! We build user-friendly admin panels and dashboards that are easy to use. Plus, our support team is always available to help."
+    question: "What if I am not technical?",
+    answer: "No problem. We build easy-to-manage admin dashboards and provide guidance so you can confidently manage your website without technical expertise."
   },
   {
-    question: "Can you optimize my project for SEO and performance?",
-    answer: "Yes. We follow best practices for SEO, page speed, and performance optimization to ensure your website or app ranks well and loads fast."
+    question: "Do you optimize websites for SEO?",
+    answer: "Yes. We implement on-page SEO best practices, fast loading speeds, clean code structure, and mobile responsiveness to help your website rank better in search engines."
   },
   {
-    question: "What makes you different from other development agencies?",
-    answer: "We combine technical expertise with a client-focused approach. From strategy to support, we prioritize your business goals and long-term success."
+    question: "What makes your agency different?",
+    answer: "We combine technical expertise with a structured development process, clear communication, and long-term support to deliver digital solutions focused on real business growth."
   }
 ];
 

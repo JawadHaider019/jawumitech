@@ -21,78 +21,47 @@ const projects = [
   {
     id: 1,
     title: "Pure Clay – Organic Food",
-    category: "web",
-    description: "Organic wellness e-commerce with natural products, subscription system, and brand storytelling.",
-    tags: ["React.js", "Tailwind CSS", "Vite", "Mongodb", "Node.js"],
+    description: "An online platform for organic wellness products featuring subscriptions, easy navigation, and storytelling to engage customers and boost online orders.",
     image: "/Projects/pureclay.webp",
     liveLink: "https://www.pureclay.org/"
   },
-  // {
-  //   id: 2,
-  //   title: "Bannu Gul – Multi-Vendor Restaurant",
-  //   category: "web",
-  //   description: "Multi-vendor food delivery system with real-time ordering, vendor dashboards, and tracking.",
-  //   image: "/Projects/bannugul.webp",
-  //   tags: ["Next.js", "Tailwind CSS", "Laravel", "PostgreSQL", "TypeScript"],
-  //   liveLink: "https://bannu-gul-customer-web.vercel.app/"
-  // },
- {
+  {
     id: 2,
-    title: "TimeXperts – IT Outsourcing & Staff Augmentation",
-    category: "corporate",
-    description: "Corporate website for an IT outsourcing company specializing in software development, QA, IT networking, and technical recruitment since 2008. Features services overview, core competencies, and client partnership information.",
+    title: "TimeXperts – IT Outsourcing",
+    description: "A corporate website showcasing IT outsourcing services, staffing solutions, and client partnerships, designed to enhance credibility and attract business inquiries.",
     image: "/Projects/timeexpert.webp",
-    tags: ["React.js", "Laravel", "Tailwind CSS" ,"My Sql"],
     liveLink: "https://timexperts.com.pk/"
-},
+  },
   {
     id: 3,
     title: "Natura Bliss – Organic Skincare",
-    category: "web",
-    description: "Handcrafted skincare brand website with organic products, brand story, and subscription form.",
+    description: "A user-friendly e-commerce site for organic skincare products, highlighting the brand story, subscription options, and product offerings to increase customer engagement.",
     image: "/Projects/naturabliss.webp",
-    tags: ["React.js", "Tailwind CSS", "Vite", "Mongodb", "Node.js"],
     liveLink: "https://naturablissorganics.com/"
   },
-  
   {
     id: 4,
     title: "Gogency – Travel Agency Platform",
-    category: "web",
-    description: "B2B travel management platform with automated onboarding, client communication, bookings, and payment management. Integrated WhatsApp and email tools streamline operations.",
+    description: "A B2B travel management platform with automated client onboarding, bookings, and communication tools to streamline operations and improve customer satisfaction.",
     image: "/Projects/gogency.webp",
-    tags: ["Next.js", "React", "GraphQL", "Nhost", "Hasura", "Material UI", "Shadcn/ui", "WhatsApp API"],
     liveLink: "https://www.gogency.com/"
   },
   {
     id: 5,
-    title: "Xpert Advisers – Education Consultancy Platform",
-    category: "web",
-    description: "B2B consultancy platform with automated branded websites, lead management, and integrated WhatsApp and email tools for real-time client communication.",
+    title: "Xpert Advisers – Education Consultancy",
+    description: "A consultancy platform enabling lead management, real-time client communication, and automated branded websites to increase efficiency and client engagement.",
     image: "/Projects/xpert-advisor.webp",
-    tags: ["Next.js", "GraphQL", "Nhost", "Hasura", "Material UI", "Shadcn/ui", "WhatsApp API"],
     liveLink: "http://xpertadvisers.com/"
   },
-{
+  {
     id: 6,
-    title: "SZ Naturals – Herbal Hair Care & Natural Products",
-    category: "ecommerce",
-    description: "An e-commerce website for herbal hair care products blending Ayurvedic wisdom with modern science. Features product philosophy, herbal ingredients focus, brand mission, and customer testimonials for natural hair wellness solutions.",
+    title: "SZ Naturals – Herbal Hair Care",
+    description: "An e-commerce site for herbal hair care products presenting brand philosophy, product focus, and testimonials to increase trust and online sales.",
     image: "/Projects/sznaturals.webp",
-     tags: ["React.js", "Tailwind CSS", "Vite", "Mongodb", "Node.js"],
     liveLink: "https://sznaturals.com"
-}
- 
-  // {
-  //   id: 8,
-  //   title: "TechFusion – IT Training & Digital Services",
-  //   category: "web",
-  //   description: "TechFusion offers IT training, and stock coaching. Features team profiles, testimonials, and a corporate landing page.",
-  //   image: "/Projects/techfusion.webp",
-  //   tags: ["React", "PHP", "Tailwind"],
-  //   liveLink: "https://techfpl.com/"
-  // }
+  }
 ]
+
 
   // Animation variants with proper typing
   const containerVariants: Variants = {
@@ -310,17 +279,7 @@ const projects = [
                       {project.description}
                     </p>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, i) => (
-                        <span 
-                          key={i} 
-                          className="text-xs px-2 py-1 bg-[#bff747]/10 text-[#bff747] rounded border border-[#bff747]/20"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                   
 
                     <div className="mt-auto">
                       <motion.div whileHover="hover">

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Code, Smartphone, Palette, ShoppingCart, Search, Wrench, CreditCard } from "lucide-react";
+import { Code, Palette, Share2, Wrench } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -11,8 +11,7 @@ const Services = [
     title: "Web Development",
     icon: Code,
     description: [
-      "We build modern and responsive websites tailored to your business.",
-      "Our websites are fast, SEO-friendly, and designed to convert visitors into customers."
+      "Build responsive, scalable, and SEO-friendly websites and custom web applications tailored to your business needs."
     ],
     features: [
       "Custom Website Development",
@@ -22,35 +21,15 @@ const Services = [
       "E-commerce Stores",
       "Performance Optimization"
     ],
-    technologies: ["Next.js", "React", "Node.js", "MongoDB", "MySQL"],
+    technologies: ["Next.js", "React", "Node.js","Laravel", "MongoDB", "MySQL"],
     deliveryTime: "2–4 weeks"
   },
   {
     number: "02",
-    title: "Mobile App Development",
-    icon: Smartphone,
-    description: [
-      "We create smooth and user-friendly mobile apps for both Android and iOS.",
-      "Our solutions help you engage customers and grow your business on mobile."
-    ],
-    features: [
-      "Cross-platform Apps",
-      "Native-like Performance",
-      "Push Notifications",
-      "Offline Support",
-      "API Integration",
-      "App Store Publishing"
-    ],
-    technologies: ["React Native", "Flutter", "Firebase"],
-    deliveryTime: "4–8 weeks"
-  },
-  {
-    number: "03",
-    title: "UI/UX Design & Branding",
+    title: "UI/UX Design",
     icon: Palette,
     description: [
-      "We design clean, beautiful, and easy-to-use interfaces that leave a lasting impression.",
-      "Strong branding and thoughtful design help you stand out from competitors."
+      "Design intuitive and visually appealing interfaces that enhance user experience and strengthen your brand presence."
     ],
     features: [
       "UI Design",
@@ -60,54 +39,32 @@ const Services = [
       "Wireframes & Prototypes",
       "Usability Testing"
     ],
-    technologies: ["Figma", "Adobe XD", "Sketch"],
+    technologies: ["Figma", "Adobe XD"],
     deliveryTime: "2–4 weeks"
+  },
+  {
+    number: "03",
+    title: "Social Media Marketing",
+    icon: Share2,
+    description: [
+      "Manage and grow your brand’s presence on platforms like Facebook, Instagram, and Tiktok through engaging content and strategic campaigns."
+    ],
+    features: [
+      "Platform Management",
+      "Engagement Tracking",
+      "Advertising Campaigns",
+      "Analytics & Reporting",
+      "Strategy Planning"
+    ],
+    technologies: ["Facebook Ads", "Instagram Ads", "Tiktok Ads", "Analytics Tools"],
+    deliveryTime: "Ongoing Support"
   },
   {
     number: "04",
-    title: "Custom Software Development",
-    icon: ShoppingCart,
-    description: [
-      "We develop custom software and management systems for businesses of all sizes.",
-      "From inventory to payments, we help automate your operations and improve productivity."
-    ],
-    features: [
-      "Inventory & Billing Systems",
-      "Payment Integration",
-      "Real-time Analytics",
-      "CRM Solutions",
-      "Multi-branch Support",
-      "Custom Dashboards"
-    ],
-    technologies: ["React", "Node.js", "SQL Databases", "Payment APIs"],
-    deliveryTime: "6–12 weeks"
-  },
-  {
-    number: "05",
-    title: "SEO & Digital Growth",
-    icon: Search,
-    description: [
-      "We help your website rank higher on Google and attract more organic visitors.",
-      "Our SEO strategies focus on long-term growth and measurable results."
-    ],
-    features: [
-      "Technical SEO",
-      "On-page Optimization",
-      "Keyword Research",
-      "Content Strategy",
-      "Local SEO",
-      "Performance Reports"
-    ],
-    technologies: ["Google Analytics", "Search Console"],
-    deliveryTime: "2–4 weeks"
-  },
-  {
-    number: "06",
-    title: "Maintenance & Support",
+    title: "IT Maintenance & Support",
     icon: Wrench,
     description: [
-      "We provide ongoing maintenance to keep your website or app secure, fast, and up to date.",
-      "Our team ensures smooth performance with regular monitoring and updates."
+      "Proactive monitoring, updates, and troubleshooting to ensure your systems stay secure and perform optimally."
     ],
     features: [
       "24/7 Support",
@@ -117,7 +74,7 @@ const Services = [
       "Bug Fixes",
       "Server Support"
     ],
-    technologies: ["AWS", "Hosting Services", "Monitoring Tools"],
+    technologies: ["Hosting Services", "Monitoring Tools"],
     deliveryTime: "Ongoing Support"
   }
 ];

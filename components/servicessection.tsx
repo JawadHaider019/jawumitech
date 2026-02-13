@@ -33,56 +33,43 @@ const ServicesSection: React.FC = () => {
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
   const isCardsContainerInView = useInView(cardsContainerRef, { once: true, margin: "-50px" });
 
-  const services: Service[] = [
-    {
-      id: 1,
-      title: "Software Development",
-      description: "Custom software solutions built with cutting-edge technologies to solve your unique business challenges efficiently.",
-      image: "/Software.png",
-      link: "/services",
-      icon: <FaCode className="w-5 h-5 sm:w-6 sm:h-6" />
-    },
-    {
-      id: 2,
-      title: "Mobile Development",
-      description: "High-performance mobile applications for iOS and Android with seamless user experiences.",
-      image: "/App.png",
-      link: "/services",
-      icon: <FaMobileAlt className="w-5 h-5 sm:w-6 sm:h-6" />
-    },
-    {
-      id: 3,
-      title: "Web Development",
-      description: "Responsive, scalable web applications using modern frameworks and best practices.",
-      image: "/Web.png",
-      link: "/services",
-      icon: <FaLaptopCode className="w-5 h-5 sm:w-6 sm:h-6" />
-    },
-    {
-      id: 4,
-      title: "IT Maintenance",
-      description: "Proactive maintenance and support to keep your systems running smoothly 24/7.",
-      image: "/maintain.png",
-      link: "/services",
-      icon: <FaDigitalTachograph className="w-5 h-5 sm:w-6 sm:h-6" />
-    },
-    {
-      id: 5,
-      title: "UI/UX Design",
-      description: "Beautiful, intuitive interfaces combined with strategic branding that resonates with your audience.",
-      image: "/UX.png",
-      link: "/services",
-      icon: <FaProjectDiagram className="w-5 h-5 sm:w-6 sm:h-6" />
-    },
-    {
-      id: 6,
-      title: "SEO Optimization",
-      description: "Comprehensive SEO strategies to boost visibility and drive organic traffic growth.",
-      image: "/SEO.png",
-      link: "/services",
-      icon: <FaSearch className="w-5 h-5 sm:w-6 sm:h-6" />
-    }
-  ];
+const services: Service[] = [
+  {
+    id: 1,
+    title: "Web Development",
+    description: "Build responsive, scalable, and SEO-friendly websites and custom web applications tailored to your business needs.",
+    image: "/Web.png",
+    link: "/services",
+    icon: <FaLaptopCode className="w-5 h-5 sm:w-6 sm:h-6" />
+  },
+  
+  {
+    id: 2,
+    title: "UI/UX Design",
+    description: "Design intuitive and visually appealing interfaces that enhance user experience and strengthen your brand presence.",
+    image: "/UX.png",
+    link: "/services",
+    icon: <FaProjectDiagram className="w-5 h-5 sm:w-6 sm:h-6" />
+  },
+  {
+    id: 3,
+    title: "Social Media Marketing",
+    description: "Manage and grow your brand’s presence on social platforms like Facebook, Instagram, and LinkedIn through engaging content and strategic campaigns.",
+    image: "/SEO.png",
+    link: "/services",
+    icon: <FaSearch className="w-5 h-5 sm:w-6 sm:h-6" />
+  },
+  {
+    id: 4,
+    title: "IT Maintenance & Support",
+    description: "Proactive monitoring, updates, and troubleshooting to ensure your systems stay secure and perform optimally.",
+    image: "/maintain.png",
+    link: "/services",
+    icon: <FaDigitalTachograph className="w-5 h-5 sm:w-6 sm:h-6" />
+  }
+];
+
+
 
   // Animation variants with proper typing
   const containerVariants: Variants = {
@@ -215,7 +202,7 @@ const ServicesSection: React.FC = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4">
         {/* Header Section */}
         <motion.div 
           ref={headerRef}
@@ -244,7 +231,7 @@ const ServicesSection: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isCardsContainerInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 "
         >
           {services.map((service, index) => (
             <motion.div

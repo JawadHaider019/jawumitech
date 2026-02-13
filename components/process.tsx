@@ -4,36 +4,52 @@ import LeftRight from './LeftRight'
 
 const ProcessSection = () => {
   return (
-    <section className="bg-black text-white relative ">
-      {/* Background circles */}
+    <section className="bg-black text-white relative w-full">
+      {/* Background circles - optional */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-20 w-72 h-72 bg-[#bff747]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-[#bff747]/5 rounded-full blur-3xl" />
+      </div>
 
-      {/* Use inline styles to ensure proper background */}
-      <div className="relative z-10" style={{ background: 'black' }}>
+      {/* Content */}
+      <div className="relative z-10 w-full">
         <LeftRight
-          badge="HOW IT WORK"
-          title="Streamlining success through proven"
-          titleAccent="process"
-          description="Our step-by-step approach ensures seamless project execution, from understanding your needs to delivering tailored IT solutions."
+          badge="HOW IT WORKS"
+          title="Driving results through a proven"
+          titleAccent="development process"
+          description="Our structured software development process ensures seamless project execution, high performance, and scalable digital solutions from concept to launch."
           buttonText="Get Free Quote"
           buttonLink="/contact"
           sections={[
             {
               step: "01",
-              title: "Understanding your needs",
-              description: "We start by listening to your challenges and goals to identify your unique IT requirements.",
-              additional: "Through detailed discussions and requirement analysis, we ensure we fully comprehend your business objectives and technical needs."
+              title: "Requirement Analysis & Planning",
+              description: "We begin by understanding your business goals, target audience, and technical requirements.",
+              additional: "Through detailed consultation and research, we define the project scope, features, timeline, and success strategy to build a strong foundation."
             },
             {
               step: "02", 
-              title: "Customized consultation",
-              description: "We provide tailored solutions after analyzing your requirements.",
-              additional: "Our experts design personalized strategies and technology stacks that align perfectly with your business goals and budget."
+              title: "UI/UX Design & System Architecture",
+              description: "We create modern, user-friendly designs and scalable technical architecture.",
+              additional: "Wireframes and prototypes ensure an intuitive user experience, responsive design, and a solution built for long-term growth."
             },
             {
               step: "03",
-              title: "Collaboration with stakeholders", 
-              description: "We collaborate closely with your team for seamless execution.",
-              additional: "Regular updates, transparent communication, and agile methodologies ensure your project stays on track and meets expectations."
+              title: "Development & Implementation",
+              description: "Our team develops secure, high-performance web and software solutions.",
+              additional: "Clean coding practices, responsive development, and optimized functionality ensure a fast and reliable digital product."
+            },
+            {
+              step: "04",
+              title: "Testing & Quality Assurance",
+              description: "We thoroughly test every feature to ensure performance, security, and stability.",
+              additional: "Functional testing, performance optimization, and bug fixing guarantee a smooth and reliable user experience."
+            },
+            {
+              step: "05",
+              title: "Deployment & Ongoing Maintenance",
+              description: "We launch your solution smoothly and ensure continuous support.",
+              additional: "Regular updates, monitoring, and performance improvements keep your digital platform secure, scalable, and optimized."
             }
           ]}
         />

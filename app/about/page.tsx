@@ -25,38 +25,40 @@ const About = () => {
     margin: "-100px 0px -100px 0px"
   });
 
-  const values = [
-    {
-      icon: Target,
-      title: "Mission-Driven",
-      description: "We focus on your success and growth.",
-    },
-    {
-      icon: Zap,
-      title: "Innovation First",
-      description: "Always exploring cutting-edge technologies to stay ahead.",
-    },
-    {
-      icon: Users,
-      title: "Collaboration",
-      description: "Your vision, our expertise — building together as partners.",
-    },
-    {
-      icon: Code2,
-      title: "Quality Code",
-      description: "Clean, maintainable, and scalable solutions built to last.",
-    },
-    {
-      icon: Shield,
-      title: "Integrity",
-      description: "We value honesty, transparency, and trust in every project.",
-    },
-    {
-      icon: Rocket,
-      title: "Continuous Growth",
-      description: "Constantly learning, improving, and evolving with technology.",
-    },
-  ]
+const values = [
+  {
+    icon: Target,
+    title: "Mission-Driven",
+    description: "Your success and growth are at the heart of everything we do.",
+  },
+  {
+    icon: Zap,
+    title: "Innovation First",
+    description: "We leverage cutting-edge technologies to deliver forward-thinking solutions.",
+  },
+  {
+    icon: Users,
+    title: "Collaboration",
+    description: "Your vision meets our expertise — we build solutions together.",
+  },
+  {
+    icon: Code2,
+    title: "Quality Code",
+    description: "Clean, maintainable, and scalable applications crafted to last.",
+  },
+  {
+    icon: Shield,
+    title: "Integrity",
+    description: "Honesty, transparency, and trust guide every project we undertake.",
+  },
+  {
+    icon: Rocket,
+    title: "Continuous Growth",
+    description: "We constantly learn, adapt, and evolve with the latest technologies.",
+  },
+];
+
+
 
   // Animation variants with proper typing
   const containerVariants: Variants = {
@@ -84,6 +86,16 @@ const About = () => {
         duration: 0.6,
         ease: [0.25, 0.46, 0.45, 0.94]
       }
+    },
+     hover: {
+      y: -8,
+      scale: 1.02,
+      borderColor: "#bff747",
+      boxShadow: "0 20px 40px -10px rgba(191, 247, 71, 0.15)",
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
     }
   };
 
@@ -102,18 +114,7 @@ const About = () => {
     }
   };
 
-  const cardHoverVariants: Variants = {
-    hover: {
-      y: -8,
-      scale: 1.02,
-      borderColor: "#bff747",
-      boxShadow: "0 20px 40px -10px rgba(191, 247, 71, 0.15)",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }
-  };
+ 
 
   const iconHoverVariants: Variants = {
     hover: {
@@ -148,29 +149,29 @@ const About = () => {
         badge="OUR JOURNEY"
         title="Innovating technology for your"
         titleAccent="success"
-        description="We specialize in delivering cutting-edge IT solutions that drive innovation, streamline operations, and empower businesses to achieve their goals."
+        description="We specialize in delivering cutting-edge digital solutions that drive innovation, streamline operations, and empower businesses to achieve their goals."
         buttonText="Get Free Quote"
         buttonLink="/contact"
-        sections={[
-          {
-            step: "01",
-            title: "Our Story & Mission",
-            description: "Jawumi Tech was founded with a simple mission: to help startups and businesses build their digital future.",
-            additional: "We believe that great technology should be accessible to everyone, regardless of size or budget."
-          },
-          {
-            step: "02", 
-            title: "Technical Excellence",
-            description: "With expertise in modern technologies, we build scalable, performant applications that drive business growth.",
-            additional: "Our team stays ahead of the curve with the most efficient and modern tools available."
-          },
-          {
-            step: "03",
-            title: "Why Choose JawumiTech", 
-            description: "We combine technical expertise with business understanding to deliver solutions that drive real results.",
-            additional: "Trusted by startups and established businesses alike."
-          }
-        ]}
+     sections={[
+      {
+        step: "01",
+        title: "Our Story & Mission",
+        description: "Jawumitech was founded to help startups and businesses build their digital future.",
+        additional: "We believe that top-tier technology and design should be accessible to every business, regardless of size or budget.",
+      },
+      {
+        step: "02",
+        title: "Technical Excellence",
+        description: "With expertise in modern technologies, we craft scalable web and mobile applications that fuel business growth.",
+        additional: "Our team leverages the most efficient tools and frameworks to deliver high-performance digital solutions."
+      },
+      {
+        step: "03",
+        title: "Why Choose Jawumitech",
+        description: "We combine technical expertise with business insight to deliver solutions that produce real results.",
+        additional: "Trusted by startups and established companies, we turn ideas into seamless digital experiences."
+      }
+    ]}
       />
 
       {/* Values Section */}
@@ -217,7 +218,6 @@ const About = () => {
                   className="group p-6 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-white/10 rounded-2xl backdrop-blur-sm"
                 >
                   <motion.div
-                    variants={cardHoverVariants}
                     className="w-full h-full"
                   >
                     <div className="flex items-start gap-4 mb-4">

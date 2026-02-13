@@ -146,15 +146,16 @@ export default function HeroSection() {
                 variants={itemVariants}
                 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
               >
-                We Help Startups & Businesses Build Their <span className="text-[#bff747]">Digital Future</span>
+                We Help Startups & Businesses Build Their <span className="text-[#bff747]">Digital Presence</span>
               </motion.h1>
               
-              <motion.p 
-                variants={itemVariants}
-                className="text-xl text-gray-300 max-w-2xl"
-              >
-                From concept to launch, we craft sleek, fast, and scalable web and mobile experiences that transform your ideas into reality.
-              </motion.p>
+           <motion.p 
+    variants={itemVariants}
+    className="text-xl text-gray-300 max-w-2xl"
+>
+    From concept to launch, we design and develop fast, responsive, and SEO-friendly websites and digital experiences that help businesses grow online.
+</motion.p>
+
             </motion.div>
 
             {/* CTA Buttons */}
@@ -193,7 +194,7 @@ export default function HeroSection() {
                 {/* Your Image */}
                 <Image
                   src="/Hero.jpg" 
-                  alt="Jawumi Tech - Digital Solutions"
+                  alt="Jawumitech Software Agency"
                   fill
                   className="object-cover"
                   priority

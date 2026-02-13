@@ -21,32 +21,33 @@ const Testimonials: React.FC = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
 
-  const testimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: "Muhammad Noman",
-      position: "Founder",
-      image: "/clients/noman.jpeg",
-      content: "“I'm not very technical, so managing an online store used to feel overwhelming. JawumiTech completely changed that for me. The admin panel they built is clean, simple, and handles everything — orders, stock, customer messages — all in one place. It saves me time every single day.”",
-      rating: 5
-    },
-    {
-      id: 2,
-      name: "Muhammad Ahmad",
-      position: "Founder",
-      image: "/clients/Ahmad.png",
-      content: "“Running a business that focuses on natural foods means I already have a lot on my plate. The website JawumiTech delivered made my life so much easier. Managing products, tracking orders, and updating content is now effortless. It feels like the tech finally supports the business — not the other way around.”",
-      rating: 5
-    },
-    {
-      id: 3,
-      name: "Sheraz Khan",
-      position: "Owner",
-      image: "/clients/khan.jpeg",
-      content: "“Switching from our old manual system was something I kept delaying, but I'm glad I trusted JawumiTech. The POS they built for our clothing store is fast, reliable, and gives us real insight into what's selling. Inventory management used to be a headache — now it's actually easy.”",
-      rating: 5
-    }
-  ];
+const testimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: "Muhammad Noman",
+  position: "Founder – Organic Skincare Brand",
+    image: "/clients/noman.jpeg",
+    content: "We developed a modern eCommerce platform tailored for this organic skincare brand. The system enables smooth product management, order tracking, and inventory control while maintaining a clean and premium user experience aligned with the brand’s identity.",
+    rating: 5
+  },
+  {
+    id: 2,
+    name: "Muhammad Ahmad",
+    position: "Founder – Natural Foods Brand",
+    image: "/clients/Ahmad.png",
+    content: "We built a modern, scalable website tailored to this natural foods business. The platform allows effortless product management, smooth order processing, and easy content updates, helping the brand focus more on growth and less on technical complexity.",
+    rating: 5
+  },
+  {
+    id: 3,
+    name: "Sheraz Khan",
+    position: "Owner – Retail Clothing Store",
+    image: "/clients/khan.jpeg",
+    content: "We developed a custom POS and inventory management system that replaced manual processes and improved sales tracking. The solution provides real-time insights into stock and performance, making store operations faster and more efficient.",
+    rating: 5
+  }
+];
+
 
   // Initialize component
   useEffect(() => {

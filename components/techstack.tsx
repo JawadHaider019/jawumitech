@@ -10,61 +10,38 @@ import {
   SiLaravel,
   SiMongodb,
   SiMysql,
-  SiPostgresql,
-  SiFlutter,
   SiVercel,
-  SiDocker,
-  SiGraphql,
   SiTailwindcss,
-  SiFramer,
-  SiThreedotjs,
   SiFirebase,
   SiStripe,
-  SiSocketdotio,
-  SiPrisma,
-  SiFastapi,
   SiExpress,
-  SiJavascript,
-  SiDotnet,
   SiPhp,
   SiFigma,
   SiAdobexd,
-  SiAmazon,
   SiCloudinary
 } from 'react-icons/si';
-import { TbBrandFramerMotion } from 'react-icons/tb';
-import { FaAws, FaGitAlt } from 'react-icons/fa';
-import { RiAiGenerate } from 'react-icons/ri';
+import { TbBrandFramerMotion,TbBrandJavascript} from 'react-icons/tb';
+import {  FaGitAlt} from 'react-icons/fa';
 
 // Updated tech stack with colored icons
 const techStack = [
   { name: "Next.js", icon: SiNextdotjs, color: "text-white hover:text-white" },
   { name: "React", icon: SiReact, color: "text-[#61DAFB] hover:text-[#61DAFB]" },
-  { name: "TypeScript", icon: SiTypescript, color: "text-[#3178C6] hover:text-[#3178C6]" },
+  { name: "JavaScript", icon: TbBrandJavascript, color: "text-[#FFCA28] hover:text-[#FFCA28]" },
   { name: "Node.js", icon: SiNodedotjs, color: "text-[#339933] hover:text-[#339933]" },
   { name: "Express", icon: SiExpress, color: "text-white hover:text-white" },
   { name: "Laravel", icon: SiLaravel, color: "text-[#FF2D20] hover:text-[#FF2D20]" },
   { name: "PHP", icon: SiPhp, color: "text-[#777BB4] hover:text-[#777BB4]" },
   { name: "MongoDB", icon: SiMongodb, color: "text-[#47A248] hover:text-[#47A248]" },
   { name: "MySQL", icon: SiMysql, color: "text-[#4479A1] hover:text-[#4479A1]" },
-  { name: "PostgreSQL", icon: SiPostgresql, color: "text-[#4169E1] hover:text-[#4169E1]" },
-  { name: "GraphQL", icon: SiGraphql, color: "text-[#E10098] hover:text-[#E10098]" },
-  { name: "REST APIs", icon: SiFastapi, color: "text-[#009688] hover:text-[#009688]" },
   { name: "Firebase", icon: SiFirebase, color: "text-[#FFCA28] hover:text-[#FFCA28]" },
-  { name: "Supabase", icon: SiPostgresql, color: "text-[#3ECF8E] hover:text-[#3ECF8E]" },
-  { name: "AWS", icon: SiAmazon, color: "text-[#FF9900] hover:text-[#FF9900]" },
-  { name: "Docker", icon: SiDocker, color: "text-[#2496ED] hover:text-[#2496ED]" },
   { name: "Vercel", icon: SiVercel, color: "text-white hover:text-white" },
-  { name: "React Native", icon: SiReact, color: "text-[#61DAFB] hover:text-[#61DAFB]" },
   { name: "Figma", icon: SiFigma, color: "text-[#F24E1E] hover:text-[#F24E1E]" },
   { name: "Adobe XD", icon: SiAdobexd, color: "text-[#FF61F6] hover:text-[#FF61F6]" },
   { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-[#06B6D4] hover:text-[#06B6D4]" },
   { name: "Framer Motion", icon: TbBrandFramerMotion, color: "text-[#FF69B4] hover:text-[#FF69B4]" },
-  { name: "GSAP", icon: SiFramer, color: "text-[#88CE02] hover:text-[#88CE02]" },
   { name: "Cloudinary", icon: SiCloudinary, color: "text-[#3448C5] hover:text-[#3448C5]" },
   { name: "Stripe", icon: SiStripe, color: "text-[#008CDD] hover:text-[#008CDD]" },
-  { name: "AI APIs", icon: RiAiGenerate, color: "text-[#10B981] hover:text-[#10B981]" },
-  { name: "WebSockets", icon: SiSocketdotio, color: "text-white hover:text-white" },
   { name: "GitHub", icon: FaGitAlt, color: "text-white hover:text-white" }
 ];
 
@@ -137,19 +114,7 @@ const TechStack: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Tech Categories */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex flex-wrap justify-center gap-4 text-sm text-gray-400">
-            <span className="px-3 py-1 border border-gray-700 rounded-full">Frontend</span>
-            <span className="px-3 py-1 border border-gray-700 rounded-full">Backend</span>
-            <span className="px-3 py-1 border border-gray-700 rounded-full">Mobile</span>
-            <span className="px-3 py-1 border border-gray-700 rounded-full">Database</span>
-            <span className="px-3 py-1 border border-gray-700 rounded-full">DevOps</span>
-            <span className="px-3 py-1 border border-gray-700 rounded-full">Design</span>
-            <span className="px-3 py-1 border border-gray-700 rounded-full">APIs</span>
-            <span className="px-3 py-1 border border-gray-700 rounded-full">Tools</span>
-          </div>
-        </div>
+    
       </div>
     </section>
   );

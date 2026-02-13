@@ -297,13 +297,12 @@ const Footer = () => {
                   <ul className="space-y-2 sm:space-y-3">
                     {[
                       'Web Development',
-                      'Mobile Applications', 
                       'UI/UX Design',
                       'Software Development',
                       'Maintenance Support'
                     ].map((service) => (
                       <li key={service}>
-                        <a href="#" className="text-gray-300 hover:text-[#bff747] transition-all duration-300 flex items-center gap-2 group hover:translate-x-1 text-sm sm:text-base">
+                        <a href="/services" className="text-gray-300 hover:text-[#bff747] transition-all duration-300 flex items-center gap-2 group hover:translate-x-1 text-sm sm:text-base">
                           {service}
                         </a>
                       </li>
@@ -318,14 +317,13 @@ const Footer = () => {
                   </h3>
                   <ul className="space-y-2 sm:space-y-3">
                     {[
-                      'About Us',
-                      'Our Team',
+                      'About',
+                      'Services',
+                      'Portfolio',
                       'Contact ',
-                      'Process',
-                      'Blog'
                     ].map((item) => (
                       <li key={item}>
-                        <a href="#" className="text-gray-300 hover:text-[#bff747] transition-all duration-300 flex items-center gap-2 group hover:translate-x-1 text-sm sm:text-base">
+                        <a href={`/${item.toLocaleLowerCase()}`} className="text-gray-300 hover:text-[#bff747] transition-all duration-300 flex items-center gap-2 group hover:translate-x-1 text-sm sm:text-base">
                           {item}
                         </a>
                       </li>

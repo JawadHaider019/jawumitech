@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { FaStar, FaArrowRight } from 'react-icons/fa';
+import { getAllProjects } from '../app/data/project'; 
 
 interface Testimonial {
   id: number;
@@ -21,33 +22,20 @@ const Testimonials: React.FC = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
 
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Muhammad Noman",
-  position: "Founder – Organic Skincare Brand",
-    image: "/clients/noman.jpeg",
-    content: "We developed a modern eCommerce platform tailored for this organic skincare brand. The system enables smooth product management, order tracking, and inventory control while maintaining a clean and premium user experience aligned with the brand’s identity.",
-    rating: 5
-  },
-  {
-    id: 2,
-    name: "Muhammad Ahmad",
-    position: "Founder – Natural Foods Brand",
-    image: "/clients/Ahmad.png",
-    content: "We built a modern, scalable website tailored to this natural foods business. The platform allows effortless product management, smooth order processing, and easy content updates, helping the brand focus more on growth and less on technical complexity.",
-    rating: 5
-  },
-  {
-    id: 3,
-    name: "Sheraz Khan",
-    position: "Owner – Retail Clothing Store",
-    image: "/clients/khan.jpeg",
-    content: "We developed a custom POS and inventory management system that replaced manual processes and improved sales tracking. The solution provides real-time insights into stock and performance, making store operations faster and more efficient.",
-    rating: 5
-  }
-];
-
+  // Get testimonials from project data
+  const testimonials: Testimonial[] = React.useMemo(() => {
+    const projects = getAllProjects();
+    return projects
+      .filter(project => project.testimonial) // Only include projects with testimonials
+      .map((project, index) => ({
+        id: project.id,
+        name: project.testimonial!.author,
+        position: project.testimonial!.position,
+        image: project.testimonial!.image || '', // Use empty string fallback for image
+        content: project.testimonial!.quote,
+        rating: 5 // Default rating to 5, you can add rating to your project data if needed
+      }));
+  }, []);
 
   // Initialize component
   useEffect(() => {
@@ -86,7 +74,7 @@ const testimonials: Testimonial[] = [
 
   // Auto-slide functionality
   useEffect(() => {
-    if (!isAutoPlaying || !isMounted) return;
+    if (!isAutoPlaying || !isMounted || testimonials.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % testimonials.length);
@@ -96,12 +84,14 @@ const testimonials: Testimonial[] = [
   }, [isAutoPlaying, testimonials.length, isMounted]);
 
   const nextSlide = useCallback(() => {
+    if (testimonials.length === 0) return;
     setIsAutoPlaying(false);
     setCurrentSlide((prev) => (prev + 1) % testimonials.length);
     setTimeout(() => setIsAutoPlaying(true), 10000);
   }, [testimonials.length]);
 
   const prevSlide = useCallback(() => {
+    if (testimonials.length === 0) return;
     setIsAutoPlaying(false);
     setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
     setTimeout(() => setIsAutoPlaying(true), 10000);
@@ -148,6 +138,10 @@ const testimonials: Testimonial[] = [
     );
   }
 
+  if (testimonials.length === 0) {
+    return null; // Don't render if no testimonials
+  }
+
   return (
     <section ref={sectionRef} className="relative py-12 sm:py-16 lg:py-20 bg-black text-white overflow-hidden">
       {/* Background Elements */}
@@ -166,12 +160,11 @@ const testimonials: Testimonial[] = [
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
             WHAT OUR <span className="text-[#bff747]">CLIENTS</span> SAY
           </h2>
-         
         </div>
 
         {/* Testimonials Container */}
         <div className="relative max-w-6xl mx-auto">
-          {/* Testimonial Cards - FIXED: Removed absolute positioning conflict */}
+          {/* Testimonial Cards */}
           <div className="relative min-h-[400px] sm:min-h-[450px] lg:min-h-[400px]">
             {testimonials.map((testimonial, index) => (
               <div 
@@ -203,14 +196,22 @@ const testimonials: Testimonial[] = [
                     <div className="flex items-center gap-4 mt-auto">
                       <div className="flex-shrink-0">
                         <div className="relative w-12 h-12 sm:w-14 sm:h-14">
-                          <Image
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                            fill
-                            className="rounded-full object-cover border-2 border-[#bff747]"
-                            sizes="(max-width: 640px) 48px, 56px"
-                            priority={index === 0}
-                          />
+                          {testimonial.image ? (
+                            <Image
+                              src={testimonial.image}
+                              alt={testimonial.name}
+                              fill
+                              className="rounded-full object-cover border-2 border-[#bff747]"
+                              sizes="(max-width: 640px) 48px, 56px"
+                              priority={index === 0}
+                            />
+                          ) : (
+                            <div className="w-full h-full rounded-full bg-gradient-to-br from-[#bff747] to-green-400 flex items-center justify-center border-2 border-[#bff747]">
+                              <span className="text-black text-xl font-bold">
+                                {testimonial.name.charAt(0)}
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="min-w-0 flex-1">
@@ -228,43 +229,45 @@ const testimonials: Testimonial[] = [
             ))}
           </div>
 
-          {/* Navigation Controls */}
-          <div className='flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 sm:mt-12'>
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 order-2 sm:order-1">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#bff747] focus:ring-offset-2 focus:ring-offset-black ${
-                    index === currentSlide 
-                      ? 'bg-[#bff747] scale-125 shadow-lg shadow-[#bff747]/40' 
-                      : 'bg-gray-600 hover:bg-gray-400 hover:scale-110'
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
-            </div>
-            
-            {/* Arrow Controls */}
-            <div className="flex justify-center sm:justify-end items-center gap-3 sm:gap-4 order-1 sm:order-2 w-full sm:w-auto">
-              <button
-                onClick={prevSlide}
-                className="w-10 h-10 sm:w-12 sm:h-12 bg-[#0b0b0b] border border-gray-800 hover:border-[#bff747] rounded-full flex items-center justify-center text-white hover:text-[#bff747] transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#bff747]/20 focus:outline-none focus:ring-2 focus:ring-[#bff747] focus:ring-offset-2 focus:ring-offset-black"
-                aria-label="Previous testimonial"
-              >
-                <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5 rotate-180" />
-              </button>
+          {/* Navigation Controls - Only show if there's more than one testimonial */}
+          {testimonials.length > 1 && (
+            <div className='flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 sm:mt-12'>
+              {/* Dots Indicator */}
+              <div className="flex justify-center gap-2 order-2 sm:order-1">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#bff747] focus:ring-offset-2 focus:ring-offset-black ${
+                      index === currentSlide 
+                        ? 'bg-[#bff747] scale-125 shadow-lg shadow-[#bff747]/40' 
+                        : 'bg-gray-600 hover:bg-gray-400 hover:scale-110'
+                    }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                  />
+                ))}
+              </div>
               
-              <button
-                onClick={nextSlide}
-                className="w-10 h-10 sm:w-12 sm:h-12 bg-[#0b0b0b] border border-gray-800 hover:border-[#bff747] rounded-full flex items-center justify-center text-white hover:text-[#bff747] transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#bff747]/20 focus:outline-none focus:ring-2 focus:ring-[#bff747] focus:ring-offset-2 focus:ring-offset-black"
-                aria-label="Next testimonial"
-              >
-                <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-              </button>
+              {/* Arrow Controls */}
+              <div className="flex justify-center sm:justify-end items-center gap-3 sm:gap-4 order-1 sm:order-2 w-full sm:w-auto">
+                <button
+                  onClick={prevSlide}
+                  className="w-10 h-10 sm:w-12 sm:h-12 bg-[#0b0b0b] border border-gray-800 hover:border-[#bff747] rounded-full flex items-center justify-center text-white hover:text-[#bff747] transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#bff747]/20 focus:outline-none focus:ring-2 focus:ring-[#bff747] focus:ring-offset-2 focus:ring-offset-black"
+                  aria-label="Previous testimonial"
+                >
+                  <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5 rotate-180" />
+                </button>
+                
+                <button
+                  onClick={nextSlide}
+                  className="w-10 h-10 sm:w-12 sm:h-12 bg-[#0b0b0b] border border-gray-800 hover:border-[#bff747] rounded-full flex items-center justify-center text-white hover:text-[#bff747] transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#bff747]/20 focus:outline-none focus:ring-2 focus:ring-[#bff747] focus:ring-offset-2 focus:ring-offset-black"
+                  aria-label="Next testimonial"
+                >
+                  <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 

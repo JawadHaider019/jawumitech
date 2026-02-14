@@ -2,11 +2,12 @@
 
 import { useRef } from "react"
 import { motion, useInView, Variants } from "framer-motion"
-import { ExternalLink, ArrowUpRight, Github } from "lucide-react"
+import { ExternalLink, ArrowUpRight } from "lucide-react"
 import Marquee from '@/components/Marquee';
 import Hero from '@/components/HeroSection';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getAllProjects } from '../data/project';
 
 export default function Portfolio() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -17,51 +18,7 @@ export default function Portfolio() {
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
   const isCardsContainerInView = useInView(cardsContainerRef, { once: true, margin: "-50px" });
 
-const projects = [
-  {
-    id: 1,
-    title: "Pure Clay – Organic Food",
-    description: "An online platform for organic wellness products featuring subscriptions, easy navigation, and storytelling to engage customers and boost online orders.",
-    image: "/Projects/pureclay.webp",
-    liveLink: "https://www.pureclay.org/"
-  },
-  {
-    id: 2,
-    title: "TimeXperts – IT Outsourcing",
-    description: "A corporate website showcasing IT outsourcing services, staffing solutions, and client partnerships, designed to enhance credibility and attract business inquiries.",
-    image: "/Projects/timeexpert.webp",
-    liveLink: "https://timexperts.com.pk/"
-  },
-  {
-    id: 3,
-    title: "Natura Bliss – Organic Skincare",
-    description: "A user-friendly e-commerce site for organic skincare products, highlighting the brand story, subscription options, and product offerings to increase customer engagement.",
-    image: "/Projects/naturabliss.webp",
-    liveLink: "https://naturablissorganics.com/"
-  },
-  {
-    id: 4,
-    title: "Gogency – Travel Agency Platform",
-    description: "A B2B travel management platform with automated client onboarding, bookings, and communication tools to streamline operations and improve customer satisfaction.",
-    image: "/Projects/gogency.webp",
-    liveLink: "https://www.gogency.com/"
-  },
-  {
-    id: 5,
-    title: "Xpert Advisers – Education Consultancy",
-    description: "A consultancy platform enabling lead management, real-time client communication, and automated branded websites to increase efficiency and client engagement.",
-    image: "/Projects/xpert-advisor.webp",
-    liveLink: "http://xpertadvisers.com/"
-  },
-  {
-    id: 6,
-    title: "SZ Naturals – Herbal Hair Care",
-    description: "An e-commerce site for herbal hair care products presenting brand philosophy, product focus, and testimonials to increase trust and online sales.",
-    image: "/Projects/sznaturals.webp",
-    liveLink: "https://sznaturals.com"
-  }
-]
-
+  const projects = getAllProjects();
 
   // Animation variants with proper typing
   const containerVariants: Variants = {
@@ -122,33 +79,11 @@ const projects = [
     }
   }
 
-  const cardHoverVariants: Variants = {
-    hover: {
-      y: -6,
-      scale: 1.01,
-      transition: {
-        duration: 0.2,
-        ease: "easeOut"
-      }
-    }
-  }
-
   const imageHoverVariants: Variants = {
     hover: {
       scale: 1.03,
       transition: {
         duration: 0.3,
-        ease: "easeOut"
-      }
-    }
-  }
-
-  const iconHoverVariants: Variants = {
-    hover: {
-      scale: 1.05,
-      rotate: 2,
-      transition: {
-        duration: 0.15,
         ease: "easeOut"
       }
     }
@@ -176,7 +111,7 @@ const projects = [
       {/* Portfolio Section */}
       <section 
         ref={sectionRef}
-        className="bg-black text-white  relative overflow-hidden py-12 sm:py-16 lg:py-20"
+        className="bg-black text-white relative overflow-hidden py-12 sm:py-16 lg:py-20"
       >
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -223,7 +158,6 @@ const projects = [
             >
               Featured <span className="text-[#bff747]">Projects</span>
             </motion.h2>
-           
           </motion.div>
 
           {/* Projects Grid */}
@@ -232,7 +166,7 @@ const projects = [
             variants={containerVariants}
             initial="hidden"
             animate={isCardsContainerInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 items-center"
+            className="grid grid-cols-1 sm:grid-cols-2  gap-4 sm:gap-6 lg:gap-8 items-center"
           >
             {projects.map((project, index) => (
               <motion.div
@@ -242,9 +176,9 @@ const projects = [
                 className="group h-full flex"
                 whileTap={{ scale: 0.98 }}
               >
-                {/* Card as Link */}
+                {/* Card as Link - Now linking to case study page */}
                 <Link 
-                  href={project.liveLink}
+                  href={`/portfolio/${project.slug}`}
                   className="relative bg-[#0b0b0b] backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 hover:border-[#bff747]/30 transition-all duration-200 overflow-hidden hover:shadow-lg sm:hover:shadow-xl hover:shadow-[#bff747]/15 flex flex-col w-full"
                 >
                   {/* Glow Effect */}
@@ -267,34 +201,35 @@ const projects = [
                     </motion.div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     
-                  
+                    {/* Category Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className="px-2 py-1 bg-[#bff747] text-black text-xs font-semibold rounded">
+                        {project.category}
+                      </span>
+                    </div>
                   </div>
                   
                   {/* Content Section */}
                   <div className="flex flex-col flex-grow gap-3 p-4 sm:p-6 lg:p-6">
-                    <h3 className="text-lg sm:text-xl lg:text-xl font-bold text-white group-hover:text-[#bff747] transition-colors duration-200 ">
+                    <h3 className="text-lg sm:text-xl lg:text-xl font-bold text-white group-hover:text-[#bff747] transition-colors duration-200">
                       {project.title}
                     </h3>
-                    <p className="text-gray-300 text-xs sm:text-sm lg:text-sm leading-relaxed  flex-grow group-hover:text-white/90 transition-colors duration-200">
+                    <p className="text-gray-300 text-xs sm:text-sm lg:text-sm leading-relaxed flex-grow group-hover:text-white/90 transition-colors duration-200">
                       {project.description}
                     </p>
 
-                   
 
-                    <div className="mt-auto">
+                    <div className="mt-auto pt-3 flex items-center justify-between">
                       <motion.div whileHover="hover">
-                        <button 
-                          onClick={(e) => e.preventDefault()} // Prevent double navigation
-                          className="group/btn inline-flex items-center gap-2 px-1 py-2 bg-transparent text-[#bff747] transition-all duration-200 hover:text-[#bff747]/90"
-                        >
-                          <span className="font-semibold text-xs sm:text-sm lg:text-sm">View</span>
+                        <div className="group/btn inline-flex items-center gap-2 px-1 py-2 bg-transparent text-[#bff747] transition-all duration-200 hover:text-[#bff747]/90">
+                          <span className="font-semibold text-xs sm:text-sm lg:text-sm">View Case Study</span>
                           <motion.span
                             variants={linkHoverVariants}
                             className="inline-flex"
                           >
                             <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />
                           </motion.span>
-                        </button>
+                        </div>
                       </motion.div>
                     </div>
                   </div>
@@ -302,7 +237,6 @@ const projects = [
               </motion.div>
             ))}
           </motion.div>
-
         </div>
       </section>
     </main>

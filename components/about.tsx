@@ -15,7 +15,7 @@ export function AboutSection() {
   })
 
   const stats = [
-    { number: "30+", label: "Projects Complete", icon: <Target className="w-5 h-5 sm:w-6 sm:h-6" /> },
+    { number: "20+", label: "Projects Complete", icon: <Target className="w-5 h-5 sm:w-6 sm:h-6" /> },
     { number: "100%", label: "Success Rate", icon: <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" /> },
     { number: "99%", label: "Satisfied Clients", icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" /> },
   ]

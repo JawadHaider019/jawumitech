@@ -403,17 +403,25 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
                     </div>
 
                     <div className="flex items-center gap-4 mt-auto">
-                      <div className="flex-shrink-0">
-                        <div className="relative w-12 h-12 sm:w-14 sm:h-14">
-                          <Image
-                            src={project.testimonial.image}
-                            alt={project.testimonial.author}
-                            fill
-                            className="rounded-full object-cover border-2 border-[#bff747]"
-                            sizes="(max-width: 640px) 48px, 56px"
-                          />
-                        </div>
-                      </div>
+                  <div className="flex-shrink-0">
+  <div className="relative w-12 h-12 sm:w-14 sm:h-14">
+    {project.testimonial.image ? (
+      <Image
+        src={project.testimonial.image}
+        alt={project.testimonial.author}
+        fill
+        className="rounded-full object-cover border-2 border-[#bff747]"
+        sizes="(max-width: 640px) 48px, 56px"
+      />
+    ) : (
+      <div className="w-full h-full rounded-full bg-gradient-to-br from-[#bff747] to-green-400 flex items-center justify-center border-2 border-[#bff747]">
+        <span className="text-black text-lg font-bold">
+          {project.testimonial.author.charAt(0)}
+        </span>
+      </div>
+    )}
+  </div>
+</div>
                       <div className="min-w-0 flex-1">
                         <div className="text-white font-bold text-lg sm:text-xl truncate">
                           {project.testimonial.author}

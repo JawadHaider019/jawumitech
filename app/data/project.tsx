@@ -246,7 +246,7 @@ testimonial: {
   ],
   testimonial: {
     quote: "We were overwhelmed managing WhatsApp orders manually. Now customers order directly on the website and we save hours every day. The platform perfectly reflects our herbal heritage.",
-    author: "Onwer",
+    author: "Muhammad Sheraz",
     position: "Owner, SZ Naturals",
     image: "/clients/unknow.jpg",
     rating: 5

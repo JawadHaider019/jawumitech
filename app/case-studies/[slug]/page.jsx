@@ -26,7 +26,7 @@ import {
   SiFirebase,
   SiVercel,
   SiFigma,
-  SiAdobexd,
+  SiAdobe,
   SiTailwindcss,
   SiCloudinary,
   SiStripe,
@@ -81,9 +81,9 @@ const techStack = [
     color: "text-[#F24E1E] hover:text-[#F24E1E]",
   },
   {
-    name: "Adobe XD",
-    icon: SiAdobexd,
-    color: "text-[#FF61F6] hover:text-[#FF61F6]",
+    name: "Adobe",
+    icon: SiAdobe,
+    color: "text-[#FF0000] hover:text-[#FF0000]",
   },
   {
     name: "Tailwind CSS",

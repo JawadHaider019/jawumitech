@@ -16,7 +16,7 @@ import {
   SiExpress,
   SiPhp,
   SiFigma,
-  SiAdobexd,
+  SiAdobe,
   SiCloudinary,
 } from "react-icons/si";
 import { TbBrandFramerMotion, TbBrandJavascript } from "react-icons/tb";
@@ -69,9 +69,9 @@ const techStack = [
     color: "text-[#F24E1E] hover:text-[#F24E1E]",
   },
   {
-    name: "Adobe XD",
-    icon: SiAdobexd,
-    color: "text-[#FF61F6] hover:text-[#FF61F6]",
+    name: "Adobe",
+    icon: SiAdobe,
+    color: "text-[#FF0000] hover:text-[#FF0000]",
   },
   {
     name: "Tailwind CSS",
@@ -141,15 +141,15 @@ const TechStack = () => {
                   animate={
                     isInView
                       ? {
-                          opacity: 1,
-                          scale: 1,
-                          y: 0,
-                        }
+                        opacity: 1,
+                        scale: 1,
+                        y: 0,
+                      }
                       : {
-                          opacity: 0,
-                          scale: 0.5,
-                          y: 40,
-                        }
+                        opacity: 0,
+                        scale: 0.5,
+                        y: 40,
+                      }
                   }
                   transition={{
                     duration: 0.6,

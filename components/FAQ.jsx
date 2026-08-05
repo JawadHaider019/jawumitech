@@ -200,7 +200,7 @@ const FAQSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-black text-white pb-12 md:pb-20 px-4 md:px-20 relative z-20 overflow-hidden"
+      className="w-full bg-black text-white pb-12 md:pb-20 px-4 md:px-8 lg:px-12 relative z-20 overflow-hidden"
       aria-label="Frequently Asked Questions"
     >
       {/* Background Dots UI (matching Services) */}
@@ -213,7 +213,8 @@ const FAQSection = () => {
       />
 
       {/* Section Header - Grid Style matching Services */}
-      <div ref={headerRef} className="grid lg:grid-cols-12 gap-8 mb-20 pt-16 relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div ref={headerRef} className="grid lg:grid-cols-12 gap-8 mb-20 pt-16">
         <div className="lg:col-span-5">
           <span className="text-8xl font-bold text-[#bff747] uppercase leading-none block">
             QUICK <br /> <span className="text-[#fff]/80 ">ANSWERS</span>
@@ -300,6 +301,7 @@ const FAQSection = () => {
           );
         })}
       </motion.div>
+      </div>
     </section>
   );
 };

@@ -1,149 +1,229 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
-import { Check, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { projects } from "@/app/data/project";
 
 export default function CaseStudies() {
-    const containerRef = useRef(null);
-    // Limit to 4 projects for the stack
-    const displayProjects = projects.slice(0, 4);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
+    const displayProjects = projects.slice(0, 5);
+    const total = displayProjects.length;
+
+    const nextSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % total);
+    };
+
+    const prevSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + total) % total);
+    };
+
+    // Auto-slide every 5 seconds, resetting interval on slide change
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % total);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [currentIndex, total]);
 
     return (
-        <section ref={containerRef} className="relative bg-white font-sans py-16">
-            <div className="max-w-8xl mx-auto px-6 lg:px-8 ">
+        <section className="relative bg-[#ffffff] py-16  overflow-hidden font-sans">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 relative">
+
                 {/* Top Section / Main Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     viewport={{ once: true }}
-                    className="text-center   max-w-4xl mx-auto"
+                    className="text-center max-w-7xl mx-auto "
                 >
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 sm:mb-6 text-black">
-                        OUR BEST <br />  WORK
-                    </h1>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 sm:mb-6 text-black">
+                        What We’ve Built
+                    </h2>
                     <p className="max-w-2xl mx-auto text-gray-600 text-lg">
                         We design high-converting digital experiences that help brands attract customers, build trust, and grow online.
                     </p>
                 </motion.div>
 
-                {/* Cards Container with Stack Animation */}
-                <div className="relative h-[300vh]">
-                    <div className="sticky top-0 h-screen overflow-hidden">
-                        {/* Visual Grid Background */}
-                        <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
-                            style={{
-                                backgroundImage: `radial-gradient(circle at 1px 1px, black 1px, transparent 0)`,
-                                backgroundSize: `40px 40px`
-                            }}
-                        />
+                {/* Main Carousel Stack Container */}
+                <div className="relative flex items-center justify-center min-h-[560px] md:min-h-[620px] max-w-5xl mx-auto">
 
-                        <div className="relative z-10 w-full h-full flex items-center justify-center">
-                            {displayProjects.map((project, i) => (
-                                <StudyCard
-                                    key={project.id}
-                                    project={project}
-                                    index={i}
-                                    total={displayProjects.length}
-                                    scrollYProgress={scrollYProgress}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-
-function StudyCard({ project, index, total, scrollYProgress }) {
-    const start = index / total;
-    const end = (index + 1) / total;
-
-    // Translation reveal
-    const y = useTransform(scrollYProgress, [start - 0.2, start], ["100vh", "0vh"]);
-
-    // Stacking offset
-    const topOffset = index * 40;
-
-    // Scaling
-    const scale = useTransform(scrollYProgress, [start, end], [1, 0.96]);
-
-    // Dimming
-    const brightness = useTransform(scrollYProgress, [start, end], ["100%", "85%"]);
-
-    return (
-        <motion.div
-            style={{
-                y,
-                scale,
-                filter: `brightness(${brightness})`,
-                marginTop: `${topOffset}px`,
-                zIndex: index + 10
-            }}
-            className="absolute inset-x-0 mx-auto w-full max-w-6xl bg-white rounded-[2.5rem] shadow-[0_-20px_50px_rgba(0,0,0,0.2)] border border-gray-100 overflow-hidden flex flex-col lg:flex-row h-[450px] lg:h-[500px]"
-        >
-            {/* Subtle Inner Grid */}
-            <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-                style={{
-                    backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`,
-                    backgroundSize: `30px 30px`
-                }}
-            />
-
-            {/* Content Side */}
-            <div className="flex p-8 lg:p-14 flex flex-col justify-center align-center relative z-10">
-                <div>
-
-                    <h3 className="text-4xl lg:text-7xl font-semibold text-black mb-6 tracking-tighter leading-[0.9]">
-                        {project.title}
-                    </h3>
-                    <p className="text-lg lg:text-xl text-gray-500  leading-relaxed max-w-md mb-8">
-                        {project.description}
-                    </p>
-
-                    <Link
-                        href={`/case-studies/${project.slug}`}
-                        className="inline-flex items-center gap-4 px-6 py-3 bg-[#bff747] text-black hover:bg-black hover:text-white font-bold rounded-full transition-all duration-500 group"
+                    {/* Left Navigation Arrow */}
+                    <button
+                        onClick={prevSlide}
+                        aria-label="Previous case study"
+                        className="absolute left-2 sm:left-4 md:left-6 z-40 w-11 h-11 md:w-12 md:h-12 rounded-full bg-black/90 text-white flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer border border-white/10"
                     >
-                        Read More
-                        <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-2" />
+                        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 stroke-[2.5]" />
+                    </button>
+
+                    {/* Right Navigation Arrow */}
+                    <button
+                        onClick={nextSlide}
+                        aria-label="Next case study"
+                        className="absolute right-2 sm:right-4 md:right-6 z-40 w-11 h-11 md:w-12 md:h-12 rounded-full bg-black/90 text-white flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer border border-white/10"
+                    >
+                        <ChevronRight className="w-5 h-5 md:w-6 md:h-6 stroke-[2.5]" />
+                    </button>
+
+                    {/* Animated 3D Carousel Cards Container */}
+                    <div className="relative w-full h-full flex items-center justify-center min-h-[540px]">
+                        {displayProjects.map((project, idx) => {
+                            // Calculate circular offset relative to active card
+                            let offset = idx - currentIndex;
+                            if (offset > Math.floor(total / 2)) {
+                                offset -= total;
+                            } else if (offset < -Math.floor(total / 2)) {
+                                offset += total;
+                            }
+
+                            const isActive = offset === 0;
+                            const isLeft = offset === -1;
+                            const isRight = offset === 1;
+
+                            // Determine card animation properties based on position
+                            let xPos = "0%";
+                            let scale = 1;
+                            let opacity = 1;
+                            let zIndex = 30;
+                            let rotateY = 0;
+
+                            if (isLeft) {
+                                xPos = "-60%";
+                                scale = 0.85;
+                                opacity = 0.6;
+                                zIndex = 10;
+                                rotateY = 5;
+                            } else if (isRight) {
+                                xPos = "60%";
+                                scale = 0.85;
+                                opacity = 0.6;
+                                zIndex = 10;
+                                rotateY = -5;
+                            } else if (offset < -1) {
+                                xPos = "-120%";
+                                scale = 0.7;
+                                opacity = 0;
+                                zIndex = 0;
+                            } else if (offset > 1) {
+                                xPos = "120%";
+                                scale = 0.7;
+                                opacity = 0;
+                                zIndex = 0;
+                            }
+
+                            return (
+                                <motion.div
+                                    key={project.id || idx}
+                                    initial={false}
+                                    animate={{
+                                        x: xPos,
+                                        scale: scale,
+                                        opacity: opacity,
+                                        zIndex: zIndex,
+                                        rotateY: rotateY,
+                                    }}
+                                    transition={{
+                                        duration: 0.55,
+                                        ease: [0.25, 1, 0.5, 1],
+                                    }}
+                                    onClick={() => {
+                                        if (isLeft) prevSlide();
+                                        if (isRight) nextSlide();
+                                    }}
+                                    className={`absolute w-full max-w-xl px-2 ${isActive
+                                        ? "cursor-default z-30"
+                                        : "cursor-pointer hover:opacity-85 transition-opacity"
+                                        }`}
+                                    style={{
+                                        transformPerspective: 1000,
+                                    }}
+                                >
+                                    <div className="bg-[#f2f2f4] border border-white/80 rounded-[2.5rem] md:rounded-[3rem] p-2 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.07)] flex flex-col gap-4 w-full">
+                                        {/* Image Container */}
+                                        <div className="w-full h-[240px] sm:h-[280px] md:h-[300px] rounded-[2rem] md:rounded-[2.3rem] relative overflow-hidden flex items-center justify-center group">
+                                            <div className="relative w-full h-full rounded-[2rem] md:rounded-[2.3rem] overflow-hidden flex items-center justify-center">
+                                                <Image
+                                                    src={project.image}
+                                                    alt={project.title}
+                                                    fill
+                                                    className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                                    priority={isActive}
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+                                            </div>
+                                        </div>
+
+                                        {/* Content Container */}
+                                        <div className="w-full flex flex-col justify-between px-4 sm:px-6 pb-2">
+                                            <div>
+                                                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 leading-[1.25] tracking-tight mb-2">
+                                                    {project.title}
+                                                </h3>
+                                                <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-4 max-w-xl line-clamp-2">
+                                                    {project.description}
+                                                </p>
+                                                <div className="mb-3">
+                                                    <Link
+                                                        href={`/case-studies/${project.slug}`}
+                                                        className="inline-flex items-center text-gray-900 font-semibold text-xs sm:text-sm group"
+                                                    >
+                                                        <span className="underline underline-offset-4 decoration-2 decoration-gray-900 group-hover:text-black transition-colors">
+                                                            Read More
+                                                        </span>
+                                                        <div className="w-6 h-6 rounded-full bg-gray-300/80 flex items-center justify-center text-gray-900 ml-2.5 transition-all duration-300 group-hover:bg-black group-hover:text-white group-hover:translate-x-1">
+                                                            <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+
+                </div>
+
+                {/* Carousel Pagination Indicator Dots */}
+                <div className="flex items-center justify-center gap-2 mt-10 mb-8">
+                    {displayProjects.map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => setCurrentIndex(idx)}
+                            aria-label={`Go to slide ${idx + 1}`}
+                            className="transition-all duration-300 focus:outline-none cursor-pointer"
+                        >
+                            {idx === currentIndex ? (
+                                <motion.div
+                                    layoutId="activeDot"
+                                    className="w-8 h-2.5 rounded-full bg-[#bff747] shadow-xs shadow-[#bff747]/40"
+                                />
+                            ) : (
+                                <div className="w-2.5 h-2.5 rounded-full bg-gray-300 hover:bg-gray-400 transition-colors" />
+                            )}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Bottom Action Button */}
+                <div className="flex justify-center mt-6">
+                    <Link
+                        href="/case-studies"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-[#bff747] hover:bg-black text-black hover:text-white font-bold rounded-full transition-all duration-300 group shadow-lg shadow-[#bff747]/20"
+                    >
+                        Explore All Case Studies
+                        <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
                     </Link>
                 </div>
 
-
             </div>
-
-            {/* Visual Side */}
-            <div className="flex-1 relative bg-gray-50 overflow-hidden group">
-                <div className="absolute inset-0">
-                    <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-all duration-1000 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/50" />
-                </div>
-                <div className=" absolute top-10 right-10 ">
-                    <span className="text-sm font-bold text-black bg-[#bff747] px-4 py-2 rounded-full uppercase tracking-widest">{project.category}</span>
-
-                </div>
-                <div className=" absolute bottom-10 right-10 ">
-                    <span className="text-gray-400 font-bold text-7xl  block  font-serif">0{index + 1}</span>
-                </div>
-
-            </div>
-        </motion.div>
+        </section>
     );
 }

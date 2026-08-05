@@ -4,7 +4,6 @@ export const metadata = {
     "We build custom e-commerce stores and web apps for furniture, beauty, and food brands. Full admin dashboards included. Starting from $999.",
 };
 
-
 import ProcessSection from "@/components/process";
 import ServicesSection from "@/components/servicessection";
 import FAQSection from "@/components/FAQ";
@@ -20,10 +19,8 @@ import ScrollToTop from "@/components/ScrollToTop";
 export default function Home() {
   return (
     <>
-      <div className="bg-white -mt-2">
-        <Hero />
-        <Partners />
-      </div>
+      <Hero />
+      <Partners />
       <AboutSection />
       <CaseStudies />
       <ServicesSection />

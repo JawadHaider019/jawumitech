@@ -27,7 +27,7 @@ export function AboutSection() {
       ref={containerRef}
       className="py-16 bg-white text-black overflow-hidden font-sans"
     >
-      <div className="max-w-8xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
         {/* Top Section */}
         <div className="grid lg:grid-cols-12 gap-8 mb-16">
           <div className="lg:col-span-3">

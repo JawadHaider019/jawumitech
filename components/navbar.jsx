@@ -9,26 +9,19 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     setIsMounted(true);
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsOpen(false);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -41,105 +34,6 @@ export function Navbar() {
     { href: "/contact", label: "Contact" },
   ];
 
-  // Animation variants with proper typing
-  const navVariants = {
-    hidden: { y: -100, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const mobileMenuVariants = {
-    closed: {
-      opacity: 0,
-      scale: 0.95,
-      transition: {
-        duration: 0.2,
-        ease: "easeIn",
-      },
-    },
-    open: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-        staggerChildren: 0.1,
-        when: "beforeChildren",
-      },
-    },
-  };
-
-  const mobileItemVariants = {
-    closed: {
-      opacity: 0,
-      x: -20,
-    },
-    open: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const overlayVariants = {
-    closed: {
-      opacity: 0,
-    },
-    open: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const logoVariants = {
-    hover: {
-      scale: 1.05,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const navLinkVariants = {
-    hover: {
-      color: "#ffffff",
-      transition: {
-        duration: 0.2,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const ctaButtonVariants = {
-    hover: {
-      backgroundColor: "#000000",
-      color: "#bff747",
-      scale: 1.05,
-      borderColor: "#bff747",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-    tap: {
-      scale: 0.95,
-    },
-  };
-
-  // Check if link is active
   const isActiveLink = (href) => {
     if (href === "/") {
       return pathname === "/";
@@ -147,169 +41,123 @@ export function Navbar() {
     return pathname.startsWith(href);
   };
 
+  if (pathname === "/") return null;
+
   const showMobileMenu = isMounted && isOpen;
 
   return (
-    <motion.nav
-      initial="hidden"
-      animate="visible"
-      variants={navVariants}
-      className={`fixed w-full z-50 transition-all duration-500 py-4 ${isScrolled
-        ? "bg-black/70 backdrop-blur-md border-b border-white/5"
-        : "bg-transparent"
-        }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
+    <header className="sticky top-0 z-50 bg-white transition-all duration-300">
+      <div className=" mx-auto px-4 sm:px-8 lg:px-12">
+        <div className="flex justify-between items-center h-16 sm:h-18">
+
           {/* Logo */}
-          <motion.div whileHover="hover" variants={logoVariants}>
-            <Link
-              href="/"
-              className="flex items-center gap-1 group"
-              onClick={() => setIsOpen(false)}
-            >
-              <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
-                <Image
-                  src="/iconjt.png"
-                  alt="Jawumitech Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <div className="hidden sm:block">
-                <h2 className="text-2xl font-bold text-white tracking-tight">
-                  Jawumitech<span className="text-[#bff747]">.</span>
-                </h2>
-              </div>
-            </Link>
-          </motion.div>
+          <Link
+            href="/"
+            className="flex items-center gap-2 group"
+            onClick={() => setIsOpen(false)}
+          >
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 transition-transform duration-300 group-hover:scale-105">
+              <Image
+                src="/iconjt.png"
+                alt="Jawumitech Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <span className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+              jawumitech<span className="text-[#bff747]">.</span>
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
               const isActive = isActiveLink(link.href);
               return (
-                <motion.div
+                <Link
                   key={link.href}
-                  whileHover="hover"
-                  variants={navLinkVariants}
+                  href={link.href}
+                  className={`relative py-1 text-sm font-semibold transition-colors duration-200 ${isActive
+                    ? "text-slate-900 font-bold"
+                    : "text-slate-600 hover:text-slate-900"
+                    }`}
                 >
-                  <Link
-                    href={link.href}
-                    className={`relative text-sm font-medium transition-colors duration-300 group/nav-link ${isActive
-                      ? "text-[#bff747] font-semibold"
-                      : "text-gray-300 hover:text-white"
-                      }`}
-                  >
-                    {link.label}
-                    <span
-                      className={`absolute -bottom-1 left-0 h-0.5 transition-all duration-300 ${isActive
-                        ? "w-full bg-[#bff747]"
-                        : "w-0 bg-[#bff747] group-hover/nav-link:w-full"
-                        }`}
+                  {/* Bottom indicator bar matching reference style with website theme */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNavIndicator"
+                      className="absolute -bottom-1 left-0 right-0 h-[3px] bg-[#bff747] rounded-full shadow-sm shadow-[#bff747]/50"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
-                  </Link>
-                </motion.div>
+                  )}
+                  {link.label}
+                </Link>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Desktop CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            <motion.a
+          {/* Desktop Right Action Button */}
+          <div className="hidden lg:flex items-center">
+            <Link
               href="/contact"
-              whileHover={{
-                scale: 1.05,
-                backgroundColor: "#ffffff",
-                color: "#000000"
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="group/cta px-6 py-3 bg-[#bff747] text-black font-bold rounded-full flex items-center gap-2 shadow-lg shadow-[#bff747]/20 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#bff747] hover:bg-black text-black hover:text-white font-bold text-xs uppercase tracking-wider rounded-full transition-all duration-300 group shadow-lg shadow-[#bff747]/20"
             >
-              Book a Free Call
-              <ArrowRight
-                size={18}
-                className="transition-transform duration-300 group-hover/cta:translate-x-1"
-              />
-            </motion.a>
+              <span>BOOK CALL</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
+          <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-lg transition-colors duration-300"
+            className="lg:hidden p-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors"
             aria-label="Toggle menu"
-            aria-expanded={isOpen}
-            whileTap={{ scale: 0.9 }}
           >
-            {isOpen ? (
-              <X size={24} className="text-[#bff747]" />
-            ) : (
-              <Menu size={24} className="text-gray-300" />
-            )}
-          </motion.button>
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation Menu */}
         <AnimatePresence>
           {showMobileMenu && (
             <motion.div
-              key="mobile-menu"
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={mobileMenuVariants}
-              className="lg:hidden mt-4 pb-4 space-y-3"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden overflow-hidden border-t border-slate-100 py-4 space-y-2"
             >
               {navLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
                 return (
-                  <motion.div key={link.href} variants={mobileItemVariants}>
-                    <Link
-                      href={link.href}
-                      className={`block px-4 py-3 rounded-xl transition-all duration-300 border ${isActive
-                        ? "text-[#bff747] font-semibold bg-[#bff747]/10 border-[#bff747]/30"
-                        : "text-gray-300 hover:text-white hover:bg-gray-800/50 border-transparent hover:border-gray-700"
-                        }`}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`block px-4 py-2.5 rounded-lg text-base font-semibold transition-all ${isActive
+                      ? "bg-[#bff747]/15 text-slate-900 font-bold"
+                      : "text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                      }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
                 );
               })}
 
-              {/* Mobile CTA Button */}
-              <motion.div variants={mobileItemVariants}>
+              <div className="pt-2 px-4">
                 <Link
                   href="/contact"
-                  className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-[#bff747] hover:bg-[#bff747]/90 text-black font-semibold rounded-xl transition-all duration-300 mt-4"
+                  className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-[#bff747] hover:bg-black text-black hover:text-white font-bold text-sm uppercase tracking-wider rounded-full transition-all duration-300 group shadow-lg shadow-[#bff747]/20"
                   onClick={() => setIsOpen(false)}
                 >
-                  Book a Free Call
-                  <ArrowRight size={18} />
+                  <span>BOOK CALL</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
-              </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-
-      {/* Overlay for mobile menu */}
-      <AnimatePresence>
-        {showMobileMenu && (
-          <motion.div
-            key="overlay"
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={overlayVariants}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] lg:hidden"
-            onClick={() => setIsOpen(false)}
-          />
-        )}
-      </AnimatePresence>
-    </motion.nav>
+    </header>
   );
 }

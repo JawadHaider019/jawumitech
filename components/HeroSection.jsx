@@ -78,16 +78,18 @@ const Hero = ({ title1, title2, image }) => {
       className="min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex items-center justify-center relative overflow-hidden py-16 sm:py-20 text-center"
     >
       {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src={image}
-          alt="Hero Background"
-          fill
-          className="object-cover"
-          priority
-          quality={75}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-        />
+      <div className="absolute inset-0 bg-neutral-950">
+        {image && (
+          <Image
+            src={image}
+            alt="Hero Background"
+            fill
+            className="object-cover"
+            priority
+            quality={75}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+          />
+        )}
 
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/40 md:bg-black/50"></div>

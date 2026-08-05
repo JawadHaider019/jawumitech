@@ -115,7 +115,7 @@ export default function ServicesSection() {
   }, [mounted]);
 
   return (
-    <section ref={sectionRef} className="w-full bg-black text-white py-24 px-6 md:px-20 overflow-hidden relative ">
+    <section ref={sectionRef} className="w-full bg-black text-white py-24 overflow-hidden relative">
       {/* Background Dots UI (matching Hero) */}
       <div
         className="absolute inset-0 z-0 opacity-10 pointer-events-none"
@@ -125,7 +125,7 @@ export default function ServicesSection() {
         }}
       />
 
-      <div className="max-w-8xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 relative z-10">
         {/* Sync Header STYLE (matching Case Studies/About but in Black) */}
         <div ref={headerRef} className="grid lg:grid-cols-12 gap-8 mb-20 ">
           <div className="lg:col-span-5">

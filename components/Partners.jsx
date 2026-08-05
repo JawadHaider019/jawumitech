@@ -23,7 +23,7 @@ export default function Partners() {
     ];
 
     return (
-        <section className="bg-white mt-2 py-4 overflow-hidden relative rounded-[3.5rem] border border-gray-100">
+        <section className="bg-white mt-2 mb-6 py-4 overflow-hidden relative rounded-3xl border border-gray-100 mx-3 sm:mx-6">
             <style>{`
         @keyframes marquee {
           0% { transform: translateX(0%); }

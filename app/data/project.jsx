@@ -202,6 +202,56 @@ export const projects = [
       rating: 5,
     },
   },
+  {
+    id: 5,
+    slug: "legacy-furniture",
+    title: "Legacy Furniture",
+    description:
+      "An e-commerce platform for furniture featuring ancient Ayurvedic ingredients, brand storytelling, and customer reviews.",
+    image: "/Projects/legacy.png",
+    liveLink: "https://sznaturals.com",
+    category: "E-commerce",
+    client: "SZ Naturals",
+    year: "2026",
+    challenge: [
+      "Manual order handling through WhatsApp was chaotic and difficult to manage",
+      "Outdated website design not reflecting ancient herbal wisdom brand identity",
+      "Poor product presentation making it hard for customers to browse herbal oils and shampoos",
+      "Needed to educate customers about Ayurvedic ingredients (Amla, Shikakai, Bhringraj) benefits",
+    ],
+    solution: [
+      "Built custom e-commerce platform with automated ordering replacing manual WhatsApp orders",
+      "Designed modern website reflecting ancient herbal wisdom with clean, natural aesthetic",
+      "Created intuitive product categories with Recently Added and Customers Favorites sections",
+      "Integrated educational content about herbal ingredients and their time-tested benefits",
+    ],
+    results: [
+      "Launched automated e-commerce platform eliminating manual WhatsApp order handling",
+      "Showcased 100% natural ingredients with clear chemical-free messaging",
+      "Streamlined operations with custom admin panel for product and content management",
+      "Built customer trust through authentic reviews and herbal heritage storytelling",
+    ],
+    technologies: ["React", "Node.js", "Express", "Tailwind CSS", "MongoDB"],
+    features: [
+      "Custom admin panel for product and order management",
+      "Automated ordering system replacing manual WhatsApp order handling",
+      "Product catalog with Recently Added and Customers Favorites sections",
+      "Customer review system with WhatsApp integration for social proof",
+      "Six pillars showcase (Pure Ingredients, Handmade with Care, Eco-Friendly)",
+      "Mobile-responsive design for all devices",
+      "Fast page loading with optimized product images",
+      "SEO-optimized content structure for better search rankings",
+      "Newsletter subscription for updates and offers",
+    ],
+    testimonial: {
+      quote:
+        "We were overwhelmed managing WhatsApp orders manually. Now customers order directly on the website and we save hours every day. The platform perfectly reflects our herbal heritage.",
+      author: "Qasim",
+      position: "Founder, Legacy Furniture",
+      image: "/clients/unknow.jpg",
+      rating: 5,
+    },
+  },
 ];
 
 // Helper functions

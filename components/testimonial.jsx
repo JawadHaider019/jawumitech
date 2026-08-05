@@ -159,7 +159,7 @@ const Testimonials = () => {
         <div className="absolute top-1/2 left-1/4 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/5 rounded-full blur-2xl sm:blur-3xl"></div>
       </div>
 
-      <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
         <div
           ref={headerRef}

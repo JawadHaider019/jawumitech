@@ -1,11 +1,11 @@
-import { Poppins } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 import Footer from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import GlowingCursor from "@/components/GlowingCursor";
 
-const poppins = Poppins({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
@@ -173,7 +173,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${poppins.className} antialiased bg-black text-white`}
+        className={`${plusJakartaSans.className} antialiased bg-white text-slate-900`}
         suppressHydrationWarning
       >
         <Navbar />

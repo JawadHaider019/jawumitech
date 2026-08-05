@@ -110,7 +110,7 @@ export default function WhyChooseUs() {
           }}
         />
 
-        <div className="relative z-10 max-w-8xl mx-auto px-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           {/* Split Header (matching site style) */}
           <div ref={headerRef} className="grid lg:grid-cols-12 gap-8 mb-20  ">
 

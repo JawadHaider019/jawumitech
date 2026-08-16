@@ -5,17 +5,17 @@ import React, { useState } from "react";
 const Marquee = () => {
   const [isPaused, setIsPaused] = useState(false);
   const techStack = [
-    "Custom Ecommerce ",
+    "Custom Software",
     "*",
-    "Multi-Vendor Platform ",
+    "Website Development",
     "*",
-    "Mobile App ",
+    "Mobile App Development",
     "*",
     "UI/UX Design",
     "*",
-    "Growth Strategy",
+    "E-Commerce Solutions",
     "*",
-    "User Experience",
+    "Growth Strategy",
   ];
 
   return (

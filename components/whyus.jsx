@@ -9,7 +9,7 @@ const REASONS = [
     number: "01",
     title: "Trusted Experts",
     description:
-      "Our team has years of hands-on experience in web development, UI/UX, and specialized e-commerce systems.",
+      "Our team has years of hands-on experience in software development, web design, and mobile app engineering.",
     rotate: "rotate-[-3deg]",
   },
   {
@@ -23,14 +23,14 @@ const REASONS = [
     number: "03",
     title: "Reliable Support",
     description:
-      "We provide ongoing support to ensure your websites, admin dashboards, and digital products run smoothly.",
+      "We provide ongoing support to ensure your software, websites, and apps run smoothly long after launch.",
     rotate: "rotate-[-2deg]",
   },
   {
     number: "04",
     title: "Custom Solutions",
     description:
-      "Tailored solutions designed for your business goals, performance, scalability, and measurable results.",
+      "Tailored solutions designed around your business goals, performance, scalability, and measurable results.",
     rotate: "rotate-[3deg]",
   },
 ];
@@ -55,7 +55,7 @@ export default function WhyChooseUs() {
     restDelta: 0.001
   });
 
-  const headerText = "We combine technical expertise with strategic insight to build high-performance e-commerce ecosystems that deliver real, scalable results for your brand.";
+  const headerText = "We combine technical expertise with strategic insight to build high-performance software, websites, and mobile apps that deliver real, scalable results for your brand.";
   const words = headerText.split(" ");
 
   // Animation variants
@@ -99,7 +99,7 @@ export default function WhyChooseUs() {
     <div className="bg-white">
       <section
         ref={sectionRef}
-        className="w-full bg-black  text-white pb-16  relative overflow-hidden z-10"
+        className="w-full bg-black  text-white py-16  relative overflow-hidden z-10"
       >
         {/* Background Dots UI (matching Hero/Services) */}
         <div
@@ -152,10 +152,10 @@ export default function WhyChooseUs() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-2xl mb-3 text-white">
+                    <h3 className="font-bold text-xl mb-2 text-white">
                       {item.title}
                     </h3>
-                    <p className="text-neutral-400 text-base leading-relaxed">
+                    <p className="text-gray-400 text-sm leading-relaxed">
                       {item.description}
                     </p>
                   </div>

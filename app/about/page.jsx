@@ -1,7 +1,5 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { Target, Zap, Users, Code2, Shield, Rocket } from "lucide-react";
 import { Team } from "@/components/team";
 import Hero from "@/components/HeroSection";
@@ -12,116 +10,6 @@ import TechStack from "@/components/techstack";
 import Marquee from "@/components/Marquee";
 
 const About = () => {
-  const valuesRef = useRef(null);
-  const isInView = useInView(valuesRef, {
-    once: true,
-    margin: "-100px 0px -100px 0px",
-  });
-
-  const values = [
-    {
-      icon: Target,
-      title: "Mission-Driven",
-      description:
-        "Your success and growth are at the heart of everything we do.",
-    },
-    {
-      icon: Zap,
-      title: "Innovation First",
-      description:
-        "We leverage cutting-edge technologies to deliver forward-thinking solutions.",
-    },
-    {
-      icon: Users,
-      title: "Collaboration",
-      description:
-        "Your vision meets our expertise — we build solutions together.",
-    },
-    {
-      icon: Code2,
-      title: "Quality Code",
-      description:
-        "Clean, maintainable, and scalable applications crafted to last.",
-    },
-    {
-      icon: Shield,
-      title: "Integrity",
-      description:
-        "Honesty, transparency, and trust guide every project we undertake.",
-    },
-    {
-      icon: Rocket,
-      title: "Continuous Growth",
-      description:
-        "We constantly learn, adapt, and evolve with the latest technologies.",
-    },
-  ];
-
-  // Animation variants with proper typing
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        when: "beforeChildren",
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-      scale: 0.9,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-    hover: {
-      y: -8,
-      scale: 1.02,
-      borderColor: "#bff747",
-      boxShadow: "0 20px 40px -10px rgba(191, 247, 71, 0.15)",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const headerVariants = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const iconHoverVariants = {
-    hover: {
-      scale: 1.1,
-      rotate: 5,
-      transition: {
-        duration: 0.2,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
     <main className="bg-black text-white relative">
       {/* Background circles */}
@@ -138,10 +26,14 @@ const About = () => {
       <AboutSection />
 
       <LeftRight
-        badge="OUR JOURNEY"
-        title="Innovating technology for your"
-        titleAccent="success"
-        description="We specialize in delivering cutting-edge digital solutions that drive innovation, streamline operations, and empower businesses to achieve their goals."
+        badge="OUR JOURNEY & VALUES"
+        title="Innovating cutting-edge technology and empowering modern businesses for sustainable digital success"
+        stats={[
+          { value: "100+", label: "Projects Delivered" },
+          { value: "100%", label: "Client Satisfaction" },
+          { value: "5+", label: "Years Excellence" },
+          { value: "24/7", label: "Expert Support" },
+        ]}
         buttonText="Get Free Quote"
         buttonLink="/contact"
         sections={[
@@ -149,99 +41,57 @@ const About = () => {
             step: "01",
             title: "Our Story & Mission",
             description:
-              "Jawumitech was founded to help businesses build their digital future.",
-            additional:
-              "We believe that top-tier technology and design should be accessible to every business, regardless of size or budget.",
+              "Jawumitech was founded to help businesses build their digital future with top-tier technology and modern design accessible to every business, regardless of size or budget.",
+            icon: Target,
+            image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=800",
           },
           {
             step: "02",
             title: "Technical Excellence",
             description:
-              "With expertise in modern technologies, we craft scalable web and mobile applications that fuel business growth.",
-            additional:
-              "Our team leverages the most efficient tools and frameworks to deliver high-performance digital solutions.",
+              "With deep expertise in modern tech stacks, we craft scalable web and mobile applications leveraging high-performance tools and cloud infrastructure to fuel long-term business growth.",
+            icon: Zap,
+            image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
           },
           {
             step: "03",
             title: "Why Choose Jawumitech",
             description:
-              "We combine technical expertise with business insight to deliver solutions that produce real results.",
-            additional:
-              "Trusted by growing and established companies, we turn ideas into seamless digital experiences.",
+              "We combine technical expertise with strategic business insight to turn ambitious ideas into seamless, high-converting digital experiences trusted by growing startups and established brands.",
+            icon: Rocket,
+            image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800",
+          },
+          {
+            step: "04",
+            title: "Innovation First",
+            description:
+              "We leverage cutting-edge frameworks, modern software architecture, and forward-thinking paradigms to deliver competitive, future-proof digital solutions that keep your business ahead of the curve.",
+            icon: Code2,
+            image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+          },
+          {
+            step: "05",
+            title: "Collaboration & Integrity",
+            description:
+              "Your vision meets our engineering expertise. We build solutions together through radical transparency, agile iteration, and deep collaborative partnership at every stage of development.",
+            icon: Users,
+            image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800",
+          },
+          {
+            step: "06",
+            title: "Continuous Growth",
+            description:
+              "We constantly learn, adapt, and evolve with the fast-moving technology landscape, ensuring that your digital platforms always incorporate the latest industry innovations and security best practices.",
+            icon: Shield,
+            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
           },
         ]}
       />
 
-      {/* Values Section */}
-      <section ref={valuesRef} className="py-20 px-4 sm:px-6 lg:px-8 relative">
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-[#bff747]/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-72 h-72 bg-[#bff747]/10 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            variants={headerVariants}
-            className="text-center mb-16"
-          >
-            <motion.h3
-              variants={headerVariants}
-              className="text-[#bff747] text-lg md:text-xl font-bold mb-4 uppercase tracking-wider"
-            >
-              OUR VALUES
-            </motion.h3>
-            <motion.h2
-              variants={headerVariants}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
-            >
-              What Drives <span className="text-[#bff747]">Us</span>
-            </motion.h2>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {values.map((value, index) => {
-              const Icon = value.icon;
-              return (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  whileHover="hover"
-                  className="group p-6 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A1A] border border-white/10 rounded-2xl backdrop-blur-sm"
-                >
-                  <motion.div className="w-full h-full">
-                    <div className="flex items-start gap-4 mb-4">
-                      <motion.div
-                        variants={iconHoverVariants}
-                        className="p-3 bg-[#bff747]/10 rounded-xl"
-                      >
-                        <Icon size={24} className="text-[#bff747]" />
-                      </motion.div>
-                      <h3 className="text-xl font-bold group-hover:text-[#bff747] transition-colors duration-300">
-                        {value.title}
-                      </h3>
-                    </div>
-                    <p className="text-gray-300 text-sm leading-relaxed group-hover:text-white/90 transition-colors duration-300">
-                      {value.description}
-                    </p>
-                  </motion.div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
       {/* Founder Section */}
       <FounderSection />
 
-      <Team />
+      {/* <Team /> */}
       <TechStack />
     </main>
   );

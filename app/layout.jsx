@@ -14,18 +14,18 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata = {
   metadataBase: new URL("https://Jawumitech.com"),
   title: {
-    default: "Jawumitech Software Agency",
+    default: "Custom Software, Web & Mobile App Development Company | Jawumitech",
     template: "%s | Jawumitech",
   },
   description:
-    "Jawumitech transforms ideas into exceptional digital experiences. We deliver professional web development, UI/UX design, software solutions, and ongoing support for businesses.",
+    "We design and build custom software, business websites, and mobile apps for growing companies. Reasonable pricing, clear timelines, dedicated developers.",
   keywords: [
     "software development",
     "web development",
+    "mobile app development",
     "UI/UX design",
-    "business automation",
-    "e-commerce solutions",
-    "digital transformation",
+    "custom software",
+    "business websites",
     "IT consulting",
   ],
   authors: [{ name: "Jawumitech" }],
@@ -47,9 +47,9 @@ export const metadata = {
     locale: "en_US",
     url: "https://Jawumitech.com",
     siteName: "Jawumitech",
-    title: "Jawumitech Software Agency",
+    title: "Custom Software, Web & Mobile App Development Company | Jawumitech",
     description:
-      "Professional IT services for businesses including web development, UI/UX design, software solutions, and ongoing support. Delivering projects with quality, performance, and efficiency.",
+      "We design and build custom software, business websites, and mobile apps for growing companies. Reasonable pricing, clear timelines, dedicated developers.",
     images: [
       {
         url: "/og-image.jpg",

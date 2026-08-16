@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
-const Hero = ({ title1, title2, image }) => {
+const Hero = ({ title1, title2, image, video = "/hero_bg.mp4" }) => {
   const heroRef = useRef(null);
   const isInView = useInView(heroRef, {
     once: true,
@@ -75,11 +75,21 @@ const Hero = ({ title1, title2, image }) => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
-      className="min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex items-center justify-center relative overflow-hidden py-16 sm:py-20 text-center"
+      className="min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex items-center justify-center relative overflow-hidden pt-28 sm:pt-36 pb-16 sm:pb-20 text-center"
     >
-      {/* Background Image */}
+      {/* Background Image / Video */}
       <div className="absolute inset-0 bg-neutral-950">
-        {image && (
+        {video ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-40 filter brightness-90 contrast-105"
+          >
+            <source src={video} type="video/mp4" />
+          </video>
+        ) : image ? (
           <Image
             src={image}
             alt="Hero Background"
@@ -89,10 +99,10 @@ const Hero = ({ title1, title2, image }) => {
             quality={75}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
           />
-        )}
+        ) : null}
 
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/40 md:bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/50 md:bg-black/60"></div>
       </div>
 
       {/* Background Elements */}

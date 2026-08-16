@@ -1,16 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, PhoneCall, ArrowUpRight } from "lucide-react";
-import Image from "next/image";
+import { PhoneCall, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 export default function HeroSection() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+
+  const words = ["Software", "Mobile App", "Website"];
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = words[wordIndex];
+    let timeout;
+
+    if (!isDeleting && displayedText === currentWord) {
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayedText === "") {
+      setIsDeleting(false);
+      setWordIndex((prev) => (prev + 1) % words.length);
+    } else {
+      const speed = isDeleting ? 40 : 90;
+      timeout = setTimeout(() => {
+        setDisplayedText((prev) =>
+          isDeleting
+            ? currentWord.substring(0, prev.length - 1)
+            : currentWord.substring(0, prev.length + 1)
+        );
+      }, speed);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, wordIndex]);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -20,14 +45,6 @@ export default function HeroSection() {
     });
   };
 
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/services", label: "Services" },
-    { href: "/case-studies", label: "Case Studies" },
-    { href: "/contact", label: "Contact" },
-  ];
-
   return (
     <section className="w-full bg-white pt-2 sm:pt-4 overflow-hidden font-sans">
       {/* Outer Rounded Black Hero Card */}
@@ -35,8 +52,23 @@ export default function HeroSection() {
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="relative min-h-[70vh] sm:min-h-[95vh] mx-3 sm:mx-6 rounded-3xl bg-[#050505] text-white border border-neutral-900 overflow-hidden flex flex-col justify-between px-6 py-6  sm:px-10"
+        className="relative min-h-[70vh] sm:min-h-[95vh] mx-3 sm:mx-6 rounded-3xl bg-[#050505] text-white border border-neutral-900 overflow-hidden flex flex-col justify-between px-6 pt-24 pb-12 sm:px-10 sm:pt-28 sm:pb-16"
       >
+
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-40 filter brightness-90 contrast-105 scale-105"
+          >
+            <source src="/hero_bg.mp4" type="video/mp4" />
+          </video>
+          {/* Dark Overlay Gradient for text legibility & modern blend */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70  mix-blend-multiply" />
+        </div>
 
         {/* Morphing Liquid Glow Orbs (Ambient Animations) */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-70">
@@ -116,133 +148,20 @@ export default function HeroSection() {
           )}
         </AnimatePresence>
 
-        {/* TOP NAVBAR AREA */}
-        <div className="flex items-center justify-between w-full z-20">
-          {/* Logo (Far Left) */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 transition-transform duration-300 group-hover:scale-105">
-              <Image
-                src="/iconjt.png"
-                alt="Jawumitech Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-
-          </Link>
-
-          {/* Right Action & Menu (Far Right) */}
-          <div className="flex items-center gap-4 sm:gap-6">
-            <Link
-              href="/contact"
-              className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border border-white/30 bg-black/40 hover:bg-white/10 text-white font-medium text-xs sm:text-sm transition-all flex items-center gap-2.5 backdrop-blur-sm"
-            >
-              <span>Book a call</span>
-            </Link>
-
-            {/* Hamburger Trigger */}
-            <button
-              onClick={() => setMenuOpen(true)}
-              className="flex flex-col justify-center items-center gap-1.5 w-10 h-10  transition-all cursor-pointer"
-              aria-label="Open Menu"
-            >
-              <span className="w-5 h-[2px] bg-white rounded-full" />
-              <span className="w-5 h-[2px] bg-white rounded-full" />
-              <span className="w-5 h-[2px] bg-white rounded-full" />
-            </button>
-          </div>
-        </div>
-
-        {/* SIDE DRAWER NAVIGATION */}
-        <AnimatePresence>
-          {menuOpen && (
-            <>
-              {/* Backdrop Blur Overlay */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setMenuOpen(false)}
-                className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 cursor-pointer"
-              />
-
-              {/* Slide-out Drawer */}
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 26, stiffness: 220 }}
-                className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-neutral-950 border-l border-neutral-900 z-50 p-6 sm:p-8 flex flex-col justify-between shadow-2xl text-white"
-              >
-                {/* Header of Drawer */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="relative w-10 h-10">
-                      <Image
-                        src="/iconjt.png"
-                        alt="Jawumitech Logo"
-                        fill
-                        className="object-contain"
-                        priority
-                      />
-                    </div>
-
-                  </div>
-                  <button
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center w-12 h-12  transition-colors cursor-pointer"
-                    aria-label="Close Menu"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-
-                {/* Vertical Navigation Links */}
-                <div className="flex flex-col gap-6 sm:gap-8 my-auto pt-8">
-                  {navLinks.map((link, idx) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setMenuOpen(false)}
-                        className="block text-3xl sm:text-4xl font-bold tracking-tight text-slate-100 hover:text-[#bff747] transition-all hover:translate-x-2 duration-300"
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Footer of Drawer */}
-                <div className="space-y-4 pt-8 border-t border-neutral-900">
-                  <Link
-                    href="/contact"
-                    onClick={() => setMenuOpen(false)}
-                    className="w-full py-3.5 rounded-full bg-[#bff747] text-black font-bold text-sm flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-md shadow-[#bff747]/20"
-                  >
-                    <span>Book a Call</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-
         {/* MAIN DISPLAY HEADLINE */}
         <div className="my-auto py-8 sm:py-12 md:py-16 text-center max-w-[92rem] mx-auto z-10 flex flex-col items-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.02] sm:leading-[1.01]"
+            className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] sm:leading-[1.02]"
           >
-            Custom <span className="text-[#bff747] italic">Software Solutions</span> <br className="hidden sm:block" /> That Help Modern Businesses <br className="hidden sm:block" /> <span className="text-[#bff747] italic">Scale and Grow</span>
+            Custom{" "}
+            <span className="inline-flex items-center text-[#bff747] italic whitespace-nowrap min-h-[1em]">
+              <span>{displayedText || "\u00A0"}</span>
+              <span className="inline-block w-[3px] h-[0.8em] bg-[#bff747] ml-1 animate-pulse align-middle" />
+            </span>{" "}
+            Solutions <br className="hidden sm:block" /> That Help Modern Businesses <br className="hidden sm:block" /> <span className="text-[#bff747] italic">Scale and Grow</span>
           </motion.h1>
 
           <motion.p
@@ -251,8 +170,8 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
             className="text-slate-200 text-sm sm:text-base md:text-lg max-w-3xl mx-auto mt-6  leading-relaxed"
           >
-            We build custom software, web and mobile apps, AI solutions, and intuitive user experiences that help businesses grow.   </motion.p>
-
+            From idea to launch, we build reliable digital products custom software, websites, mobile apps, and AI-powered solutions  for companies that need technology that actually works
+          </motion.p>
           {/* Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Custom E-commerce Development | Jawumitech",
+  title: "Custom Software, Web & Mobile App Development Company | Jawumitech",
   description:
-    "We build custom e-commerce stores and web apps for furniture, beauty, and food brands. Full admin dashboards included. Starting from $999.",
+    "We design and build custom software, business websites, and mobile apps for growing companies. Reasonable pricing, clear timelines, dedicated developers.",
 };
 
 import ProcessSection from "@/components/process";
@@ -24,8 +24,8 @@ export default function Home() {
       <AboutSection />
       <CaseStudies />
       <ServicesSection />
-      <WhyChooseUs />
       <ProcessSection />
+      <WhyChooseUs />
       <Testimonials />
       <Marquee />
       <FAQSection />

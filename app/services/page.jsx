@@ -7,7 +7,7 @@ export const metadata = {
 import Hero from "@/components/HeroSection";
 import Testimonials from "@/components/testimonial";
 import FAQSection from "@/components/FAQ";
-import ServicesSection from "@/components/services";
+import ServicesSection from "@/components/servicessection";
 
 export default function Services() {
   return (

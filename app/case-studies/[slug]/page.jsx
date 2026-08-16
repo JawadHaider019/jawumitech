@@ -179,7 +179,7 @@ export default async function CaseStudyPage({ params }) {
   return (
     <main className="bg-black min-h-screen text-white">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 overflow-hidden">
+      <section className="relative pt-28 sm:pt-32 pb-16 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-10 right-10 sm:top-20 sm:right-20 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/10 rounded-full blur-2xl sm:blur-3xl" />

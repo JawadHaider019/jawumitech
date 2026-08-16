@@ -50,7 +50,7 @@ export default function CaseStudies() {
                 </motion.div>
 
                 {/* Main Carousel Stack Container */}
-                <div className="relative flex items-center justify-center min-h-[560px] md:min-h-[620px] max-w-5xl mx-auto">
+                <div className="relative flex items-center justify-center min-h-[550px] md:min-h-[580px] max-w-5xl mx-auto ">
 
                     {/* Left Navigation Arrow */}
                     <button
@@ -192,7 +192,7 @@ export default function CaseStudies() {
                 </div>
 
                 {/* Carousel Pagination Indicator Dots */}
-                <div className="flex items-center justify-center gap-2 mt-10 mb-8">
+                <div className="flex items-center justify-center gap-2 mb-6">
                     {displayProjects.map((_, idx) => (
                         <button
                             key={idx}
@@ -213,10 +213,10 @@ export default function CaseStudies() {
                 </div>
 
                 {/* Bottom Action Button */}
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center mt-4">
                     <Link
                         href="/case-studies"
-                        className="inline-flex items-center gap-2 px-8 py-4 bg-[#bff747] hover:bg-black text-black hover:text-white font-bold rounded-full transition-all duration-300 group shadow-lg shadow-[#bff747]/20"
+                        className="inline-flex items-center gap-2 px-6 py-3 text-sm bg-[#bff747] hover:bg-black text-black hover:text-white font-bold rounded-full transition-all duration-300 group shadow-lg shadow-[#bff747]/20"
                     >
                         Explore All Case Studies
                         <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />

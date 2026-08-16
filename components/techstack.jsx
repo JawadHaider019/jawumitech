@@ -116,14 +116,19 @@ const TechStack = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h3 className="text-[#bff747] text-lg md:text-xl font-bold mb-4 uppercase tracking-wider">
-            TECHNOLOGIES
-          </h3>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Our Tech <span className="text-[#bff747]">Stack</span>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 sm:mb-6 text-white">
+            Our Tech Stack
           </h2>
-        </div>
+          <p className="max-w-2xl mx-auto text-gray-400 text-lg">
+            We leverage modern, scalable, and high-performance tools to build robust digital solutions.
+          </p>
+        </motion.div>
 
         {/* Icons Grid */}
         <div className="flex justify-center">

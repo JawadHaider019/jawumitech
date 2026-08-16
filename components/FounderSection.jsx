@@ -26,32 +26,17 @@ const FounderSection = () => {
       <div className="max-w-7xl mx-auto w-full relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12 sm:mb-16 lg:mb-20"
+          className="text-center mb-12 sm:mb-16"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#bff747] uppercase mb-4 lg:mb-6">
-              The Visionary
-            </h1>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-          >
-            Meet The{" "}
-            <span className="bg-gradient-to-r from-[#bff747] to-[#8BC400] bg-clip-text text-transparent">
-              Architect
-            </span>
-          </motion.h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 sm:mb-6 text-white">
+            Meet The Architect
+          </h2>
+          <p className="max-w-2xl mx-auto text-gray-400 text-lg">
+            Driven by passion for innovation, technical excellence, and transforming complex challenges into elegant solutions.
+          </p>
         </motion.div>
 
         {/* Main Content Grid */}

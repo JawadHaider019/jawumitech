@@ -38,7 +38,7 @@ const SERVICES = [
   }
 ];
 
-export default function Services() {
+export default function Services({ isLight = false }) {
   const [expanded, setExpanded] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -108,12 +108,12 @@ export default function Services() {
   }, [mounted]);
 
   return (
-    <section ref={sectionRef} className="w-full bg-black text-white py-24 overflow-hidden relative">
+    <section ref={sectionRef} className={`w-full py-24 overflow-hidden relative ${isLight ? "bg-white text-black" : "bg-black text-white"}`}>
       {/* Background Dots UI (matching Hero) */}
       <div
         className="absolute inset-0 z-0 opacity-10 pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, ${isLight ? "#000000" : "white"} 1px, transparent 0)`,
           backgroundSize: `40px 40px`
         }}
       />
@@ -123,13 +123,13 @@ export default function Services() {
         <div ref={headerRef} className="grid lg:grid-cols-12 gap-8 mb-20 ">
           <div className="lg:col-span-5">
             <span className="text-8xl font-bold text-[#bff747] uppercase leading-none block">
-              What <br /> <span className="text-[#fff]/80">We Do</span>
+              What <br /> <span className={isLight ? "text-black/80" : "text-[#fff]/80"}>We Do</span>
             </span>
           </div>
           <div className="lg:col-span-7 pt-4">
             <h2 className="text-2xl md:text-3xl  font-medium leading-[1.3] tracking-tight flex flex-wrap gap-x-[0.25em] gap-y-1">
               {words.map((word, i) => (
-                <Word key={i} word={word} progress={smoothHeaderProgress} index={i} total={words.length} />
+                <Word key={i} word={word} progress={smoothHeaderProgress} index={i} total={words.length} isLight={isLight} />
               ))}
             </h2>
           </div>
@@ -145,7 +145,7 @@ export default function Services() {
               <div
                 key={idx}
                 ref={el => serviceItemsRef.current[idx] = el}
-                className={`group relative flex flex-col lg:flex-row items-start lg:items-center px-0 transition-all duration-500 cursor-pointer border-t border-gray-800/50 ${isOpen ? "bg-white/5 px-4 md:px-8 py-7 md:py-10" : "hover:bg-white/5 hover:px-2 md:hover:px-4 py-5 md:py-8"}`}
+                className={`group relative flex flex-col lg:flex-row items-start lg:items-center px-0 transition-all duration-500 cursor-pointer ${isLight ? "border-t border-gray-200" : "border-t border-gray-800/50"} ${isOpen ? (isLight ? "bg-gray-100/80 px-4 md:px-8 py-7 md:py-10" : "bg-white/5 px-4 md:px-8 py-7 md:py-10") : (isLight ? "hover:bg-gray-50 hover:px-2 md:hover:px-4 py-5 md:py-8" : "hover:bg-white/5 hover:px-2 md:hover:px-4 py-5 md:py-8")}`}
                 onMouseEnter={() => isDesktop && handleMouseEnter(idx)}
                 onMouseLeave={() => isDesktop && handleMouseLeave()}
                 onClick={() => {
@@ -158,14 +158,14 @@ export default function Services() {
                 <div className="flex w-full items-center justify-between lg:contents">
                   <div className="flex items-center gap-4 lg:contents">
                     <div className="lg:w-1/12 flex items-center">
-                      <span className={`text-2xl md:text-3xl lg:text-4xl font-bold transition-all duration-500 ${isOpen ? "text-[#bff747] -translate-x-4 text-4xl md:text-5xl lg:text-7xl -rotate-90" : "text-neutral-800"}`}>
+                      <span className={`text-2xl md:text-3xl lg:text-4xl font-bold transition-all duration-500 ${isOpen ? "text-[#bff747] -translate-x-4 text-4xl md:text-5xl lg:text-7xl -rotate-90" : (isLight ? "text-gray-300" : "text-neutral-800")}`}>
                         {String(idx + 1).padStart(2, "0")}
                       </span>
                     </div>
 
                     {/* Title - Column 2 Part 1 */}
                     <div className="lg:w-7/12 flex flex-col items-start justify-center">
-                      <h3 className={`text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-500 ${isOpen ? "text-white" : "text-neutral-500"}`}>
+                      <h3 className={`text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-500 ${isOpen ? (isLight ? "text-black" : "text-white") : (isLight ? "text-gray-600" : "text-neutral-500")}`}>
                         {service.title}
                       </h3>
 
@@ -173,7 +173,7 @@ export default function Services() {
                       <div className={`hidden lg:block transition-all duration-700 overflow-hidden ${isOpen ? 'opacity-100 max-h-60 mt-2' : 'opacity-0 max-h-0'}`}>
                         <div className="flex flex-col gap-1">
                           {service.description.map((desc, i) => (
-                            <p key={i} className="text-gray-400 lg:text-md leading-relaxed max-w-xl">
+                            <p key={i} className={`lg:text-md leading-relaxed max-w-xl ${isLight ? "text-gray-600" : "text-gray-400"}`}>
                               {desc}
                             </p>
                           ))}
@@ -185,7 +185,7 @@ export default function Services() {
                   {/* Arrow Indicator (Mobile) - Always visible */}
                   <div className="lg:hidden">
                     <ArrowUpRight
-                      className={`w-5 h-5 transition-all duration-300 ${isOpen ? "text-[#bff747]" : "text-gray-600"
+                      className={`w-5 h-5 transition-all duration-300 ${isOpen ? (isLight ? "text-black" : "text-[#bff747]") : (isLight ? "text-gray-400" : "text-gray-600")
                         } ${isHovered ? "rotate-12 scale-110 text-[#bff747]" : "rotate-0"
                         }`}
                     />
@@ -196,7 +196,7 @@ export default function Services() {
                 <div className={`lg:hidden w-full transition-all duration-700 overflow-hidden ${isOpen ? 'opacity-100 max-h-96 mt-4' : 'opacity-0 max-h-0'}`}>
                   <div className="flex flex-col gap-2 pl-12 md:pl-16">
                     {service.description.map((desc, i) => (
-                      <p key={i} className="text-gray-400 text-sm md:text-base leading-relaxed">
+                      <p key={i} className={`text-sm md:text-base leading-relaxed ${isLight ? "text-gray-600" : "text-gray-400"}`}>
                         {desc}
                       </p>
                     ))}
@@ -220,7 +220,7 @@ export default function Services() {
                   onClick={(e) => e.stopPropagation()}
                 >
                   <ArrowUpRight
-                    className={`w-10 h-10 transition-all duration-300 ${isOpen ? "text-white" : "text-gray-600"
+                    className={`w-10 h-10 transition-all duration-300 ${isOpen ? (isLight ? "text-black" : "text-white") : (isLight ? "text-gray-400" : "text-gray-600")
                       } ${isHovered ? "rotate-90 scale-110 text-[#bff747]" : "rotate-0"
                       }`}
                   />
@@ -231,7 +231,7 @@ export default function Services() {
         </div>
 
         {/* Animated Stats Section */}
-        <div className=" pt-16 border-t border-gray-800/50">
+        <div className={`pt-16 border-t ${isLight ? "border-gray-200" : "border-gray-800/50"}`}>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 lg:gap-12">
             {[
               { label: "Projects Delivered", value: "100+" },
@@ -246,10 +246,10 @@ export default function Services() {
                 viewport={{ once: true }}
                 className="text-center group"
               >
-                <div className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#bff747] mb-2 group-hover:scale-110 transition-transform duration-500">
+                <div className={`text-4xl md:text-5xl lg:text-7xl font-bold mb-2 group-hover:scale-110 transition-transform duration-500 ${isLight ? "text-[#bff747]" : "text-[#bff747]"}`}>
                   {stat.value}
                 </div>
-                <div className="text-gray-500 font-bold uppercase tracking-widest text-xs md:text-sm">
+                <div className={`font-bold uppercase tracking-widest text-xs md:text-sm ${isLight ? "text-gray-600" : "text-gray-500"}`}>
                   {stat.label}
                 </div>
               </motion.div>
@@ -263,12 +263,15 @@ export default function Services() {
   );
 }
 
-function Word({ word, progress, index, total }) {
+function Word({ word, progress, index, total, isLight }) {
   const start = index / total;
   const end = Math.min(1, (index + 4) / total);
 
-  // Transitions from neutral-700 to white
-  const color = useTransform(progress, [start, end], ["#404040", "#ffffff"]);
+  const startColor = isLight ? "#d1d5db" : "#404040";
+  const endColor = isLight ? "#000000" : "#ffffff";
+
+  // Transitions from startColor to endColor
+  const color = useTransform(progress, [start, end], [startColor, endColor]);
   const opacity = useTransform(progress, [start, end], [0.4, 1]);
 
   return (

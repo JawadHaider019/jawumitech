@@ -5,6 +5,7 @@ export const metadata = {
 };
 
 import Hero from "@/components/HeroSection";
+import Marquee from "@/components/Marquee";
 import Testimonials from "@/components/testimonial";
 import FAQSection from "@/components/FAQ";
 import ServicesSection from "@/components/servicessection";
@@ -13,8 +14,8 @@ export default function Services() {
   return (
     <>
       <Hero title1="OUR" title2="SERVICES" image="/HeroImage.webp" />
-
-      <ServicesSection />
+      <Marquee />
+      <ServicesSection isLight={true} />
       <Testimonials />
       <FAQSection />
     </>

@@ -72,22 +72,7 @@ const Testimonials = () => {
     };
   }, [testimonials]);
 
-  // Observer for header fade-in
-  useEffect(() => {
-    if (!isMounted) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up");
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    );
-    if (headerRef.current) observer.observe(headerRef.current);
-    return () => observer.disconnect();
-  }, [isMounted]);
+
 
   const handlePause = () => {
     if (!isMobile) isPausedRef.current = true;
@@ -152,25 +137,24 @@ const Testimonials = () => {
       ref={sectionRef}
       className="relative py-12 sm:py-16  bg-white text-black overflow-hidden"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 right-10 sm:top-20 sm:right-20 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/10 rounded-full blur-2xl sm:blur-3xl"></div>
-        <div className="absolute bottom-10 left-10 sm:bottom-20 sm:left-20 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/10 rounded-full blur-2xl sm:blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-48 h-48 sm:w-72 sm:h-72 bg-[#bff747]/5 rounded-full blur-2xl sm:blur-3xl"></div>
-      </div>
+
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
-        <div
-          ref={headerRef}
-          className="text-center mb-12 sm:mb-16 opacity-0 transition-opacity duration-500"
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="text-center mb-12 sm:mb-16"
         >
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 sm:mb-6 text-black">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 sm:mb-6 text-black">
             Real People, Real <br /> Results Feedback
-          </h1>
-          <p className="max-w-2xl mx-auto text-gray-600 text-lg">See what our users are truly accomplishing with honest, and project-based reviews</p>
-        </div>
+          </h2>
+          <p className="max-w-2xl mx-auto text-gray-600 text-lg">
+            See what our users are truly accomplishing with honest, and project-based reviews
+          </p>
+        </motion.div>
 
         {/* Running Carousel Container */}
         <div className="mt-16 relative">
@@ -266,9 +250,7 @@ const Testimonials = () => {
         </div>
       </div>
 
-      {/* Background Animated Elements */}
-      <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-16 h-16 sm:w-24 sm:h-24 bg-[#bff747]/10 rounded-full rotate-12 animate-float blur-xl sm:blur-2xl pointer-events-none"></div>
-      <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-14 h-14 sm:w-20 sm:h-20 bg-[#bff747]/10 rounded-full -rotate-12 animate-float-delayed blur-lg sm:blur-xl pointer-events-none"></div>
+
 
       {/* Custom Styles */}
       <style jsx>{`

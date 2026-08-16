@@ -192,7 +192,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="bg-black">
+    <main className="bg-white text-black min-h-screen">
       <Hero title1="LET'S" title2="TALK" image="/HeroImage.webp" />
 
       <Marquee />
@@ -203,9 +203,9 @@ export default function Contact() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
-        className="py-16  px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
+        className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
       >
-        <div className="grid lg:grid-cols-2 gap-12 ">
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* Calendly Column */}
           <motion.div variants={itemVariants} className="h-[600px] lg:h-full">
             <iframe
@@ -213,19 +213,19 @@ export default function Contact() {
               width="100%"
               height="100%"
               frameBorder="0"
-              className="rounded-xl border border-[#1A1A1A]"
+              className="rounded-xl border border-gray-200 shadow-sm"
             ></iframe>
           </motion.div>
 
           {/* Contact Form */}
           <motion.div
             variants={formVariants}
-            className="p-6 sm:p-8 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl"
+            className="p-6 sm:p-8 bg-gray-50 border border-gray-200 rounded-xl shadow-sm"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
 
               <motion.div variants={itemVariants}>
-                <label className="block text-sm font-semibold mb-3 text-white">
+                <label className="block text-sm font-semibold mb-3 text-gray-900">
                   Name
                 </label>
                 <input
@@ -234,13 +234,13 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded-lg focus:border-[#bff747] focus:outline-none transition-colors text-white placeholder-gray-500"
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900 placeholder-gray-400"
                   placeholder="Your name"
                 />
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <label className="block text-sm font-semibold mb-3 text-white">
+                <label className="block text-sm font-semibold mb-3 text-gray-900">
                   Email
                 </label>
                 <input
@@ -249,14 +249,14 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded-lg focus:border-[#bff747] focus:outline-none transition-colors text-white placeholder-gray-500"
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900 placeholder-gray-400"
                   placeholder="your@email.com"
                 />
               </motion.div>
 
 
               <motion.div variants={itemVariants}>
-                <label className="block text-sm font-semibold mb-3 text-white">
+                <label className="block text-sm font-semibold mb-3 text-gray-900">
                   Project Type
                 </label>
                 <select
@@ -264,7 +264,7 @@ export default function Contact() {
                   value={formData.projectType}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded-lg focus:border-[#bff747] focus:outline-none transition-colors text-white placeholder-gray-500 appearance-none"
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900 placeholder-gray-400 appearance-none"
                 >
                   <option value="" disabled>Select Project Type</option>
                   <option value="Web Development">Web Development</option>
@@ -277,7 +277,7 @@ export default function Contact() {
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <label className="block text-sm font-semibold mb-3 text-white">
+                <label className="block text-sm font-semibold mb-3 text-gray-900">
                   Budget Range
                 </label>
                 <select
@@ -285,7 +285,7 @@ export default function Contact() {
                   value={formData.budgetRange}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded-lg focus:border-[#bff747] focus:outline-none transition-colors text-white placeholder-gray-500 appearance-none"
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900 placeholder-gray-400 appearance-none"
                 >
                   <option value="" disabled>Select Budget Range</option>
                   <option value="<$1k">{"< $1k"}</option>
@@ -297,7 +297,7 @@ export default function Contact() {
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <label className="block text-sm font-semibold mb-3 text-white">
+                <label className="block text-sm font-semibold mb-3 text-gray-900">
                   Message
                 </label>
                 <textarea
@@ -306,7 +306,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-black border border-[#1A1A1A] rounded-lg focus:border-[#bff747] focus:outline-none transition-colors text-white placeholder-gray-500 resize-none"
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900 placeholder-gray-400 resize-none"
                   placeholder="Tell us about your project..."
                 />
               </motion.div>
@@ -315,7 +315,7 @@ export default function Contact() {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-center"
+                  className="p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-600 text-center text-sm font-medium"
                 >
                   {error}
                 </motion.div>
@@ -327,7 +327,7 @@ export default function Contact() {
                 whileTap="tap"
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 bg-[#bff747] text-black font-bold rounded-lg transition-all flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                className="w-full py-4 bg-[#bff747] text-black font-bold rounded-lg transition-all flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base border border-[#bff747] hover:bg-black hover:text-white"
               >
                 {loading ? (
                   <>
@@ -349,7 +349,7 @@ export default function Contact() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="p-4 bg-[#bff747]/10 border border-[#bff747] rounded-lg text-[#bff747] text-center"
+                  className="p-4 bg-green-50 border border-green-300 rounded-lg text-green-800 text-center font-medium text-sm"
                 >
                   ✅ Thanks for reaching out! We'll get back to you soon.
                 </motion.div>
@@ -358,13 +358,13 @@ export default function Contact() {
 
             <motion.div
               variants={itemVariants}
-              className="mt-6 p-4 bg-black border border-[#1A1A1A] rounded-lg text-center"
+              className="mt-6 p-4 bg-white border border-gray-200 rounded-lg text-center"
             >
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-600">
                 Form not working?{" "}
                 <a
                   href="mailto:support@jawumitech.com"
-                  className="text-[#bff747] hover:underline transition-colors"
+                  className="text-black font-bold hover:underline transition-colors"
                 >
                   Click here to email us directly
                 </a>
@@ -383,19 +383,19 @@ export default function Contact() {
             <motion.div
               variants={cardVariants}
               whileHover="hover"
-              className="p-6 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl hover:border-[#bff747]/30 transition-all duration-300"
+              className="p-6 bg-gray-50 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <motion.div
                   variants={iconVariants}
                   whileHover="hover"
-                  className="p-3 bg-[#bff747]/10 rounded-lg flex-shrink-0"
+                  className="p-3 bg-[#bff747]/30 rounded-lg flex-shrink-0"
                 >
-                  <Mail size={24} className="text-[#bff747]" />
+                  <Mail size={24} className="text-black" />
                 </motion.div>
                 <div>
-                  <h3 className="font-semibold mb-2 text-white">Email</h3>
-                  <p className="text-gray-400 text-sm">support@jawumitech.com</p>
+                  <h3 className="font-semibold mb-2 text-gray-900">Email</h3>
+                  <p className="text-gray-600 text-sm">support@jawumitech.com</p>
                 </div>
               </div>
             </motion.div>
@@ -404,19 +404,19 @@ export default function Contact() {
             <motion.div
               variants={cardVariants}
               whileHover="hover"
-              className="p-6 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl hover:border-[#bff747]/30 transition-all duration-300"
+              className="p-6 bg-gray-50 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <motion.div
                   variants={iconVariants}
                   whileHover="hover"
-                  className="p-3 bg-[#bff747]/10 rounded-lg flex-shrink-0"
+                  className="p-3 bg-[#bff747]/30 rounded-lg flex-shrink-0"
                 >
-                  <Phone size={24} className="text-[#bff747]" />
+                  <Phone size={24} className="text-black" />
                 </motion.div>
                 <div>
-                  <h3 className="font-semibold mb-2 text-white">Phone</h3>
-                  <p className="text-gray-400 text-sm">+92 329 1927168</p>
+                  <h3 className="font-semibold mb-2 text-gray-900">Phone</h3>
+                  <p className="text-gray-600 text-sm">+92 329 1927168</p>
                 </div>
               </div>
             </motion.div>
@@ -425,19 +425,19 @@ export default function Contact() {
             <motion.div
               variants={cardVariants}
               whileHover="hover"
-              className="p-6 bg-[#0A0A0A] border border-[#1A1A1A] rounded-xl hover:border-[#bff747]/30 transition-all duration-300"
+              className="p-6 bg-gray-50 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <motion.div
                   variants={iconVariants}
                   whileHover="hover"
-                  className="p-3 bg-[#bff747]/10 rounded-lg flex-shrink-0"
+                  className="p-3 bg-[#bff747]/30 rounded-lg flex-shrink-0"
                 >
-                  <MapPin size={24} className="text-[#bff747]" />
+                  <MapPin size={24} className="text-black" />
                 </motion.div>
                 <div>
-                  <h3 className="font-semibold mb-2 text-white">Location</h3>
-                  <p className="text-gray-400 text-sm">
+                  <h3 className="font-semibold mb-2 text-gray-900">Location</h3>
+                  <p className="text-gray-600 text-sm">
                     Remote - Serving Global Clients
                   </p>
                 </div>

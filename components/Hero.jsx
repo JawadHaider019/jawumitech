@@ -11,7 +11,7 @@ export default function HeroSection() {
 
   const words = ["Software", "Mobile App", "Website"];
   const [wordIndex, setWordIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
+  const [displayedText, setDisplayedText] = useState("Software");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {

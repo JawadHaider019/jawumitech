@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
-const Hero = ({ title1, title2, image, video = "/hero_bg.mp4" }) => {
+const Hero = ({ title1, title2, image = "/HeroImage.webp" }) => {
   const heroRef = useRef(null);
   const isInView = useInView(heroRef, {
     once: true,
@@ -73,36 +73,23 @@ const Hero = ({ title1, title2, image, video = "/hero_bg.mp4" }) => {
     <motion.section
       ref={heroRef}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate="visible"
       variants={containerVariants}
-      className="min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex items-center justify-center relative overflow-hidden pt-28 sm:pt-36 pb-16 sm:pb-20 text-center"
+      className="min-h-[50vh] h-[50vh] flex items-center justify-center relative overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-12 text-center"
     >
-      {/* Background Image / Video */}
+      {/* Background Image */}
       <div className="absolute inset-0 bg-neutral-950">
-        {video ? (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover opacity-40 filter brightness-90 contrast-105"
-          >
-            <source src={video} type="video/mp4" />
-          </video>
-        ) : image ? (
-          <Image
-            src={image}
-            alt="Hero Background"
-            fill
-            className="object-cover"
-            priority
-            quality={75}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-          />
-        ) : null}
+        <Image
+          src={image || "/HeroImage.webp"}
+          alt="Hero Background"
+          fill
+          className="object-cover opacity-70 filter brightness-95 contrast-105"
+          priority
+          quality={85}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+        />
 
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/50 md:bg-black/60"></div>
+
       </div>
 
       {/* Background Elements */}
@@ -124,7 +111,7 @@ const Hero = ({ title1, title2, image, video = "/hero_bg.mp4" }) => {
           {/* Title */}
           <motion.h1
             variants={titleVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 leading-tight text-white"
           >
             {title1}{" "}
             <span className="text-[#bff747] block sm:inline">{title2}</span>

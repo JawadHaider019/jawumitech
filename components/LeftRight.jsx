@@ -196,7 +196,7 @@ const LeftRight = ({
           {/* Right Side - Content Sections */}
           <motion.div
             variants={containerVariants}
-            className="lg:w-3/5 flex flex-col gap-6 sm:gap-8 border-l border-white/10 lg:pl-8"
+            className={`lg:w-3/5 flex flex-col gap-6 sm:gap-8 border-l ${isLight ? "border-black/10" : "border-white/10"} lg:pl-8`}
           >
             {sections.map((section, index) => {
               const Icon = section.icon;
@@ -204,7 +204,7 @@ const LeftRight = ({
                 <motion.div
                   key={index}
                   variants={rightItemVariants}
-                  className="flex items-center py-6 sm:py-8 border-b border-white/5 last:border-b-0"
+                  className={`flex items-center py-6 sm:py-8 border-b ${isLight ? "border-black/10" : "border-white/5"} last:border-b-0`}
                 >
                   <div className="w-full space-y-3 sm:space-y-4 text-center lg:text-left">
                   
@@ -219,7 +219,7 @@ const LeftRight = ({
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
-                        className="relative aspect-video w-full h-70 overflow-hidden rounded-3xl border border-gray-100/10 group"
+                        className={`relative aspect-video w-full h-70 overflow-hidden rounded-3xl border ${isLight ? "border-gray-200" : "border-gray-100/10"} group`}
                       >
                         <img
                           src={section.image}

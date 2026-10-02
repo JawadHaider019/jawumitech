@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 import Marquee from "@/components/Marquee";
 import Hero from "@/components/HeroSection";
@@ -377,13 +378,14 @@ export default function Contact() {
         <div className="mt-16 md:mt-24">
           <motion.div
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {/* Email Card */}
-            <motion.div
+            <motion.a
+              href="mailto:support@jawumitech.com"
               variants={cardVariants}
               whileHover="hover"
-              className="p-6 bg-gray-50 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all duration-300"
+              className="p-6 bg-gray-50 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all duration-300 block cursor-pointer"
             >
               <div className="flex items-start gap-4">
                 <motion.div
@@ -395,16 +397,17 @@ export default function Contact() {
                 </motion.div>
                 <div>
                   <h3 className="font-semibold mb-2 text-gray-900">Email</h3>
-                  <p className="text-gray-600 text-sm">support@jawumitech.com</p>
+                  <p className="text-gray-600 hover:text-black transition-colors text-sm">support@jawumitech.com</p>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
 
             {/* Phone Card */}
-            <motion.div
+            <motion.a
+              href="tel:+923291927168"
               variants={cardVariants}
               whileHover="hover"
-              className="p-6 bg-gray-50 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all duration-300"
+              className="p-6 bg-gray-50 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all duration-300 block cursor-pointer"
             >
               <div className="flex items-start gap-4">
                 <motion.div
@@ -416,10 +419,34 @@ export default function Contact() {
                 </motion.div>
                 <div>
                   <h3 className="font-semibold mb-2 text-gray-900">Phone</h3>
-                  <p className="text-gray-600 text-sm">+92 329 1927168</p>
+                  <p className="text-gray-600 hover:text-black transition-colors text-sm">+92 329 1927168</p>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
+
+            {/* WhatsApp Card */}
+            <motion.a
+              href="https://wa.me/923291927168"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={cardVariants}
+              whileHover="hover"
+              className="p-6 bg-gray-50 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all duration-300 block cursor-pointer"
+            >
+              <div className="flex items-start gap-4">
+                <motion.div
+                  variants={iconVariants}
+                  whileHover="hover"
+                  className="p-3 bg-[#bff747]/30 rounded-lg flex-shrink-0"
+                >
+                  <FaWhatsapp size={24} className="text-black" />
+                </motion.div>
+                <div>
+                  <h3 className="font-semibold mb-2 text-gray-900">WhatsApp</h3>
+                  <p className="text-gray-600 hover:text-black transition-colors text-sm">+92 329 1927168</p>
+                </div>
+              </div>
+            </motion.a>
 
             {/* Location Card */}
             <motion.div

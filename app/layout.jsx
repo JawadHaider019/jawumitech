@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import GlowingCursor from "@/components/GlowingCursor";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -179,6 +180,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <GlowingCursor />
+        <FloatingWhatsApp />
         <Footer />
       </body>
     </html>

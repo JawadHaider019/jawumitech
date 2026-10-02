@@ -2,7 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { FaEnvelope, FaPhone, FaCalendarAlt } from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaCalendarAlt, FaWhatsapp } from "react-icons/fa";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
@@ -201,17 +201,54 @@ const Footer = () => {
 
               {/* Contact Info */}
               <div className="space-y-3 sm:space-y-4">
-                <div className="flex items-center gap-3 sm:gap-4 group cursor-pointer">
+                <a
+                  href="mailto:team@jawumitech.com"
+                  className="flex items-center gap-3 sm:gap-4 group cursor-pointer"
+                >
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#bff747] rounded-full flex items-center justify-center group-hover:bg-transparent transition-all duration-300 border border-transparent group-hover:border-[#bff747] group-hover:scale-110">
                     <FaEnvelope className="text-black group-hover:text-[#bff747] text-base sm:text-lg transition-all duration-300" />
                   </div>
                   <div>
                     <p className="text-gray-400 text-xs sm:text-sm">Email us</p>
-                    <p className="text-white font-medium text-sm sm:text-base">
+                    <p className="text-white font-medium text-sm sm:text-base group-hover:text-[#bff747] transition-colors">
                       team@jawumitech.com
                     </p>
                   </div>
-                </div>
+                </a>
+
+                {/* Phone Link */}
+                <a
+                  href="tel:+923291927168"
+                  className="flex items-center gap-3 sm:gap-4 group cursor-pointer"
+                >
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#bff747] rounded-full flex items-center justify-center group-hover:bg-transparent transition-all duration-300 border border-transparent group-hover:border-[#bff747] group-hover:scale-110">
+                    <FaPhone className="text-black group-hover:text-[#bff747] text-base sm:text-lg transition-all duration-300" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-xs sm:text-sm">Call us</p>
+                    <p className="text-white font-medium text-sm sm:text-base group-hover:text-[#bff747] transition-colors">
+                      +92 329 1927168
+                    </p>
+                  </div>
+                </a>
+
+                {/* WhatsApp Link */}
+                <a
+                  href="https://wa.me/923291927168"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 sm:gap-4 group cursor-pointer"
+                >
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#bff747] rounded-full flex items-center justify-center group-hover:bg-transparent transition-all duration-300 border border-transparent group-hover:border-[#bff747] group-hover:scale-110">
+                    <FaWhatsapp className="text-black group-hover:text-[#bff747] text-base sm:text-lg transition-all duration-300" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-xs sm:text-sm">WhatsApp</p>
+                    <p className="text-white font-medium text-sm sm:text-base group-hover:text-[#bff747] transition-colors">
+                      +92 329 1927168
+                    </p>
+                  </div>
+                </a>
 
                 {/* Contact Page Link */}
                 <a
@@ -225,7 +262,7 @@ const Footer = () => {
                     <p className="text-gray-400 text-xs sm:text-sm">
                       Book a Call
                     </p>
-                    <p className="text-white font-medium text-sm sm:text-base">
+                    <p className="text-white font-medium text-sm sm:text-base group-hover:text-[#bff747] transition-colors">
                       Schedule Now
                     </p>
                   </div>
@@ -288,11 +325,21 @@ const Footer = () => {
                 {/* Follow */}
                 <div className="pb-6 sm:pb-8 md:pb-0">
                   <h3 className="text-white font-semibold text-lg sm:text-xl mb-4 sm:mb-6 pb-2 inline-block">
-                    Follow
+                    Connect
                   </h3>
                   <div className="flex gap-2 sm:gap-3">
                     <a
+                      href="https://wa.me/923291927168"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Chat on WhatsApp"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-[#bff747] hover:bg-transparent rounded-full flex items-center justify-center text-black hover:text-[#bff747] border border-transparent hover:border-[#bff747] transition-all duration-300 hover:scale-110"
+                    >
+                      <FaWhatsapp size={18} className="sm:w-5 sm:h-5" />
+                    </a>
+                    <a
                       href={contactLink}
+                      aria-label="Book a Call"
                       className="w-10 h-10 sm:w-12 sm:h-12 bg-[#bff747] hover:bg-transparent rounded-full flex items-center justify-center text-black hover:text-[#bff747] border border-transparent hover:border-[#bff747] transition-all duration-300 hover:scale-110"
                     >
                       <FaCalendarAlt size={18} className="sm:w-5 sm:h-5" />
